@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# File Structure: 
+----------- 
+/app
+│── /(dashboard)
+│   │── page.tsx  →  "/dashboard"
+│── /(products)
+│   │── add/page.tsx  →  "/add"
+│   │── add-model/page.tsx  →  "/add-model"
+│   │── bulk-entry/page.tsx  →  "/bulk-entry"
+│   │── one-by-one/page.tsx  →  "/one-by-one"
+│   │── model-wise/page.tsx  →  "/model-wise"
+│── /(lost-damage)
+│   │── add-damage-loss/page.tsx  →  "/add-damage-loss"
+│   │── add-repair/page.tsx  →  "/add-repair"
+│   │── in-repair/page.tsx  →  "/in-repair"
+│   │── lost-damage-products/page.tsx  →  "/lost-damage-products"
+│── /(orders)
+│   │── all-orders/page.tsx  →  "/all-orders"
+│   │── product-wise/page.tsx  →  "/product-wise"
+│   │── add-orders/page.tsx  →  "/add-orders"
+│   │── add-accessories-orders/page.tsx  →  "/add-accessories-orders"
+│── /(assigned-terminals)
+│   │── page.tsx  →  "/assigned-terminals"
+│── /(live-base)
+│   │── page.tsx  →  "/live-base"
+│── /(businesses)
+│   │── page.tsx  →  "/businesses"
+│── /(role-permissions)
+│   │── add-user/page.tsx  →  "/add-user"
+│   │── users/page.tsx  →  "/users"
+│   │── roles/page.tsx  →  "/roles"
+│── /(account)
+│   │── page.tsx  →  "/account"
+│── /(settings)
+│   │── page.tsx  →  "/settings"
+-----------
 
-## Getting Started
+# Project Name
+.
+[Brief project description]
 
-First, run the development server:
+## Development Guidelines
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js 15
+- React 19
+- Tailwind CSS
+- Shadcn UI
+- Zustand (state management)
+- Zod (data validation)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Key Principles
 
-## Learn More
+- Write concise, technical Javascript code with accurate examples
+- Prefer iteration and modularization over code duplication
+- Use descriptive variable names
 
-To learn more about Next.js, take a look at the following resources:
+### Naming Conventions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Use lowercase with dashes for directories (e.g., `components/auth-wizard`)
+- Favor named exports for components
+- Use camelCase for variables and functions
+- Use PascalCase for component names
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Syntax and Formatting
 
-## Deploy on Vercel
+- Use the "function" keyword for pure functions
+- Avoid unnecessary curly braces in conditionals
+- Use declarative JSX
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### UI and Styling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Use Shadcn UI, Radix, and Tailwind for components and styling
+- Implement responsive design with Tailwind CSS (mobile-first approach)
+- Use colors from the global.css file
+
+### Performance Optimization
+
+- Minimize 'use client', 'useEffect', and 'setState'
+- Favor React Server Components (RSC)
+- Fetch data on the server side
+- Use Server Actions for Post, Put, Delete requests
+- Use Nextjs SSR and SSG if possible
+- Wrap client components in Suspense with fallback
+- Use dynamic loading for non-critical components
+- Implement Blur Data URL for images
+- Use loading skeletons where needed
+- Use Next.js Streaming where necessary
+- Optimize images:
+  - Use WebP format
+  - Include accurate size data
+
+- Prefer Tailwind/CSS over JavaScript for styling and animations
+
+### State Management
+
+- Use Zustand for state management
+
+### Key Conventions
+
+- Optimize Web Vitals (LCP, CLS, FID)
+- Limit 'use client' usage:
+  - Use in child components when necessary
+  - Favor server components and Next.js SSR
+  - Avoid for data fetching or state management
+
+For more details on data fetching, rendering, and routing, refer to the [Next.js documentation](https://nextjs.org/docs).
