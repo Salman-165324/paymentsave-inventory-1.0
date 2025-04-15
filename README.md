@@ -1,39 +1,6 @@
 # File Structure: 
 ----------- 
-/app
-│── /(dashboard)
-│   │── page.tsx  →  "/dashboard"
-│── /(products)
-│   │── add/page.tsx  →  "/add"
-│   │── add-model/page.tsx  →  "/add-model"
-│   │── bulk-entry/page.tsx  →  "/bulk-entry"
-│   │── one-by-one/page.tsx  →  "/one-by-one"
-│   │── model-wise/page.tsx  →  "/model-wise"
-│── /(lost-damage)
-│   │── add-damage-loss/page.tsx  →  "/add-damage-loss"
-│   │── add-repair/page.tsx  →  "/add-repair"
-│   │── in-repair/page.tsx  →  "/in-repair"
-│   │── lost-damage-products/page.tsx  →  "/lost-damage-products"
-│── /(orders)
-│   │── all-orders/page.tsx  →  "/all-orders"
-│   │── product-wise/page.tsx  →  "/product-wise"
-│   │── add-orders/page.tsx  →  "/add-orders"
-│   │── add-accessories-orders/page.tsx  →  "/add-accessories-orders"
-│── /(assigned-terminals)
-│   │── page.tsx  →  "/assigned-terminals"
-│── /(live-base)
-│   │── page.tsx  →  "/live-base"
-│── /(businesses)
-│   │── page.tsx  →  "/businesses"
-│── /(role-permissions)
-│   │── add-user/page.tsx  →  "/add-user"
-│   │── users/page.tsx  →  "/users"
-│   │── roles/page.tsx  →  "/roles"
-│── /(account)
-│   │── page.tsx  →  "/account"
-│── /(settings)
-│   │── page.tsx  →  "/settings"
------------
+
 
 # Project Name
 .
