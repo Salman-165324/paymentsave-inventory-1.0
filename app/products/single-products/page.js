@@ -1,13 +1,13 @@
 'use client';
 
 import AdminLayout from '@/components/layout/AdminLayout';
-import ProductList from '@/components/product/ProductList';
+import SingleProductList from '@/components/product/single-products/SingleProductList';
 
 export default function ProductsPage() {
   return (
     <AdminLayout>
       <div className="p-0 md:p-2">
-        <ProductList />
+        <SingleProductList />
       
       </div>
     </AdminLayout>

@@ -37,6 +37,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-table-header: var(--table-header);
+  --color-table-cell: var(--table-cell);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -76,6 +78,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --table-header: #667085;
+  --table-cell: #48505E;
 }
 
 .dark {
@@ -110,6 +114,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --table-header: #A0ABBB;
+  --table-cell: #E4E7ED;
 }
 
 @layer base {
@@ -118,5 +124,17 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Table styles */
+  table th {
+    color: var(--table-header);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  table td {
+    color: var(--table-cell);
+    font-size: 14px;
   }
 }

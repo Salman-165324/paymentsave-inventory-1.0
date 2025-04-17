@@ -15,6 +15,10 @@ const menuItems = [
         href: "/products",
       },
       {
+        title: "Single Products",
+        href: "/products/single-products",
+      },
+      {
         title: "Add Product",
         href: "/products/new",
       },
