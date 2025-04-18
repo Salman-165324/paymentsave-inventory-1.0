@@ -23,6 +23,10 @@ const menuItems = [
         href: "/products/new",
       },
       {
+        title: "Bulk Product Entry",
+        href: "/products/bulk-product",
+      },
+      {
         title: "Categories",
         href: "/products/categories",
       }

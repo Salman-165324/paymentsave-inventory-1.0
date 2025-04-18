@@ -4,6 +4,7 @@ import { useState } from "react";
 import Pagination from "@/components/ui/Pagination";
 import ProductTable from "./ProductTable";
 import DateRangePicker from "../ui/DateRangePicker";
+import Link from "next/link";
 // import ProductTable from '@/components/ui/ProductTable';
 
 export default function ProductList() {
@@ -129,9 +130,11 @@ export default function ProductList() {
         </h1>
 
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-          <button className="px-4 text-sm py-2 bg-[#1366D9] text-white rounded w-full sm:w-auto">
-            Add Product
-          </button>
+          <Link href={"/products/new"}>
+            <button className="px-4 text-sm py-2 bg-[#1366D9] text-white rounded w-full sm:w-auto cursor-pointer">
+              Add Product
+            </button>
+          </Link>
 
           {/* Search Input */}
           <div className="relative w-full sm:w-52 md:w-56">
