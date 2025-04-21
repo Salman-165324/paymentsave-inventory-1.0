@@ -8,7 +8,7 @@ export default function AddProductForm() {
 
   return (
     <div className="max-w-3xl mx-auto bg-[#F9F9F9] p-8 rounded-xl shadow border mt-6">
-      <h2 className="text-xl font-semibold text-[#1D2630] mb-6">Add Product</h2>
+      <h2 className="text-xl font-semibold text-primary mb-6">Add Product</h2>
 
       <form className="space-y-4 text-sm">
         {/* Row Group */}
@@ -27,7 +27,8 @@ export default function AddProductForm() {
           },
         ].map(({ label, required, placeholder, hasIcon }, i) => (
           <div key={i} className="flex items-center gap-4">
-            <label className="min-w-[160px] text-[#1D2630] font-medium">
+            <label className="min-w-[160px] text-primary font-medium">
+            {/* <label className="min-w-[160px] text-primary font-medium"> */}
               {label}
               {required && <span className="text-red-500 ml-0.5">*</span>}
             </label>
@@ -35,7 +36,7 @@ export default function AddProductForm() {
               <input
                 type="text"
                 placeholder={placeholder}
-                className={`w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500`}
+                className={`text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500`}
               />
               {hasIcon && (
                 <ChevronRight
@@ -49,7 +50,7 @@ export default function AddProductForm() {
 
         {/* Serial Toggle */}
         <div className="flex items-center justify-between">
-          <label className="min-w-[160px] text-[#1D2630] font-medium">
+          <label className="min-w-[160px] text-primary font-medium">
             Serial Number or Not<span className="text-red-500 ml-0.5">*</span>
           </label>
           <div className="flex-1 flex justify-start ml-4">
@@ -72,14 +73,14 @@ export default function AddProductForm() {
         {/* Serial Input */}
         {hasSerial && (
           <div className="flex items-center gap-4">
-            <label className="min-w-[160px] text-[#1D2630] font-medium">
+            <label className="min-w-[160px] text-primary font-medium">
               Product Serial Number (if)
             </label>
             <div className="relative w-full">
               <input
                 type="text"
                 placeholder="Type Serial Number"
-                className="w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <ChevronRight
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -91,14 +92,14 @@ export default function AddProductForm() {
 
         {/* Product Condition */}
         <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-[#1D2630] font-medium">
+          <label className="min-w-[160px] text-primary font-medium">
             Product Condition<span className="text-red-500 ml-0.5">*</span>
           </label>
           <div className="relative w-full">
             <input
               type="text"
               placeholder="Enter product condition"
-              className="w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="text-secondary  w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <ChevronRight
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -109,37 +110,37 @@ export default function AddProductForm() {
 
         {/* Supplier name */}
         <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-[#1D2630] font-medium">
+          <label className="min-w-[160px] text-primary font-medium">
             Supplier name (if)
           </label>
           <input
             type="text"
             placeholder="Enter supplier name"
-            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="text-secondary w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
         {/* Invoice No */}
         <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-[#1D2630] font-medium">
+          <label className="min-w-[160px] text-primary font-medium">
             Invoice No (if)
           </label>
           <input
             type="text"
             placeholder="Type Invoice No"
-            className="w-full border bg-white rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="text-secondary w-full border bg-white rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
         {/* Price */}
         <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-[#1D2630] font-medium">
+          <label className="min-w-[160px] text-primary font-medium">
             Price (if)
           </label>
           <input
             type="number"
             placeholder="0.00"
-            className="bg-white w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="text-secondary bg-white w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 

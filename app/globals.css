@@ -39,10 +39,13 @@
   --color-card: var(--card);
   --color-table-header: var(--table-header);
   --color-table-cell: var(--table-cell);
+  /* //tanni */
+  --color-text-title: var(--color-text-title);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
 }
 
 :root {
@@ -80,6 +83,8 @@
   --sidebar-ring: oklch(0.708 0 0);
   --table-header: #667085;
   --table-cell: #48505E;
+  --text-primary: #48505E;
+  --text-title: #383E49;
 }
 
 .dark {
@@ -137,4 +142,14 @@
     color: var(--table-cell);
     font-size: 14px;
   }
+   /* Primary text color */
+   .text-primary {
+    color: #48505E !important;
+  }
+   .text-secondary {
+    color: #858D9D !important;
+  }
+   /* .text {
+    color: var(--text-title) ;
+  } */
 }

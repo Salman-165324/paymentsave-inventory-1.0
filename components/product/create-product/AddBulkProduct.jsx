@@ -1,10 +1,13 @@
 'use client'
 import { useState } from 'react';
 import Head from 'next/head';
+import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 export default function BulkAddProduct() {
   const [files, setFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [previewData, setPreviewData] = useState([]);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -27,7 +30,6 @@ export default function BulkAddProduct() {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
-
     const droppedFiles = Array.from(e.dataTransfer.files);
     setFiles(droppedFiles);
   };
@@ -38,35 +40,61 @@ export default function BulkAddProduct() {
   };
 
   const handleDownloadTemplate = () => {
-    // Logic to download CSV template
     console.log('Downloading CSV template');
   };
 
   const handlePreview = () => {
-    // Logic to preview uploaded files
-    console.log('Previewing files:', files);
+    const file = files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    reader.onload = (e) => {
+      const content = e.target.result;
+
+      if (extension === 'csv') {
+        const result = Papa.parse(content, { header: true });
+        setPreviewData(result.data);
+      } else if (extension === 'xlsx' || extension === 'xls') {
+        const workbook = XLSX.read(content, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const data = XLSX.utils.sheet_to_json(sheet);
+        setPreviewData(data);
+      } else {
+        alert('Unsupported file type');
+      }
+    };
+
+    if (extension === 'csv') {
+      reader.readAsText(file);
+    } else if (extension === 'xlsx' || extension === 'xls') {
+      reader.readAsBinaryString(file);
+    } else {
+      alert('Unsupported file type');
+    }
   };
 
   const handleSubmit = () => {
-    // Logic to submit files
     console.log('Submitting files:', files);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <Head>
-        <title>Bulk Add Product</title>
+        <title className='text-text-title'>Bulk Add Product</title>
       </Head>
 
       <div className="max-w-3xl mx-auto bg-white p-8 rounded shadow-sm">
         <h1 className="text-xl font-medium text-gray-800 mb-6">Bulk Add Product</h1>
         
         <div className="flex justify-end mb-6">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600 text-sm">Don't have the template? Click Here*</span>
+          <div className="flex items-center gap-3">
+            <span className="text-primary text-[18px]">Don't have the template? Click Here*</span>
             <button 
               onClick={handleDownloadTemplate}
-              className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded"
+              className="bg-[#1366D9] hover:bg-blue-600 text-white text-sm py-2 px-3 rounded"
             >
               Download CSV Template
             </button>
@@ -74,7 +102,7 @@ export default function BulkAddProduct() {
         </div>
         
         <div 
-          className={`border-2 border-dashed rounded p-10 flex flex-col items-center justify-center cursor-pointer ${
+          className={`border-2 border-[#A0A0A0] border-dashed rounded p-10 flex flex-col items-center justify-center cursor-pointer ${
             isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
           }`}
           onDragEnter={handleDragEnter}
@@ -86,6 +114,7 @@ export default function BulkAddProduct() {
           <input
             id="fileInput"
             type="file"
+            accept=".csv, .xlsx, .xls"
             multiple
             className="hidden"
             onChange={handleFileSelect}
@@ -93,32 +122,55 @@ export default function BulkAddProduct() {
           
           <div className="text-center">
             <div className="mb-3">
-              <svg className="w-12 h-12 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-12 h-12 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
               </svg>
             </div>
-            <p className="text-gray-500 text-sm">Drag & drop files or browse</p>
+            <p className="text-[#616262] text-[18px]">Drag & drop files or browse</p>
           </div>
         </div>
+
+        {files.length > 0 && (
+          <div className="mt-4 text-sm text-gray-600">
+            <p>{files.length} file(s) selected: {files.map(f => f.name).join(', ')}</p>
+          </div>
+        )}
         
         <div className="flex justify-end mt-6 gap-2">
           <button 
             onClick={handlePreview}
-            className="border border-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-50"
+            className="border bg-[#F0F1F3] border-[#F0F1F3] text-[#858D9D] py-2 px-4 rounded hover:bg-gray-50"
           >
             Preview
           </button>
           <button 
             onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+            className="bg-[#1366D9] hover:bg-blue-600 text-white py-2 px-4 rounded"
           >
             Submit
           </button>
         </div>
 
-        {files.length > 0 && (
-          <div className="mt-4">
-            <p className="text-sm text-gray-600">{files.length} file(s) selected</p>
+        {previewData.length > 0 && (
+          <div className="mt-6 overflow-x-auto border rounded">
+            <table className="min-w-full table-auto text-sm">
+              <thead className="bg-gray-100">
+                <tr>
+                  {Object.keys(previewData[0]).map((key, index) => (
+                    <th key={index} className="px-4 py-2 border">{key}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {previewData.map((row, i) => (
+                  <tr key={i} className="odd:bg-white even:bg-gray-50">
+                    {Object.values(row).map((val, j) => (
+                      <td key={j} className="px-4 py-2 border">{val}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

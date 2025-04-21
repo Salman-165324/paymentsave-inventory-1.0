@@ -15,6 +15,10 @@ const menuItems = [
         href: "/products",
       },
       {
+        title: "Product Model Entry",
+        href: "/products/product-model-entry",
+      },
+      {
         title: "Single Products",
         href: "/products/single-products",
       },
@@ -25,6 +29,10 @@ const menuItems = [
       {
         title: "Bulk Product Entry",
         href: "/products/bulk-product",
+      },
+      {
+        title: "Add Damage/Loss Products",
+        href: "/products/add-damage-loss-products",
       },
       {
         title: "Categories",
