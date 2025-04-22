@@ -4,6 +4,7 @@ import { useState } from "react";
 import Pagination from "@/components/ui/Pagination";
 import ProductTable from "./SingleProductTable";
 import DateRangePicker from "../../ui/DateRangePicker";
+import MainCard from "@/components/ui/MainCard";
 // import ProductTable from '@/components/ui/ProductTable';
 
 export default function ProductList() {
@@ -158,7 +159,7 @@ export default function ProductList() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
+    <MainCard title="" className="bg-white ">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h1 className="text-xl font-semibold text-[#383E49]">
           Single Products 
@@ -214,6 +215,6 @@ export default function ProductList() {
         itemsPerPage={limit}
         onPageChange={handlePageChange}
       />
-    </div>
+    </MainCard>
   );
 }

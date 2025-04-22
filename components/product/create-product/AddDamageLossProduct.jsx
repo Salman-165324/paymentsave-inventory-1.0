@@ -1,126 +1,144 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import MainCard from "@/components/ui/MainCard";
-import CustomCard from "@/components/ui/CustomCard";
+import { useState } from 'react';
+import MainCard from '@/components/ui/MainCard';
+import CustomCard from '@/components/ui/CustomCard';
+import AppButton from '@/components/ui/AppButton';
+import SearchableDropdown from '@/components/ui/SearchableDropdown'; // use the fixed version
+import { Save, Trash2 } from 'lucide-react';
 
 export default function AddDamageLossProduct() {
-  const [hasSerial, setHasSerial] = useState(false);
+  const [serial, setSerial] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [reason, setReason] = useState(null);
+  const [comment, setComment] = useState('');
+
+  const serialOptions = [
+    { value: '1234565475', label: '1234565475' },
+    { value: '1234565474', label: '1234565474' },
+    { value: '1234565477', label: '1234565477' },
+  ];
+
+  const statusOptions = [
+    { value: 'damaged', label: 'Damaged' },
+    { value: 'lost', label: 'Lost' },
+  ];
+
+  const reasonOptions = [
+    { value: 'shipping', label: 'Shipping Issue' },
+    { value: 'handling', label: 'Improper Handling' },
+    { value: 'returned', label: 'Customer Return' },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const payload = {
+      serial,
+      status,
+      reason,
+      comment,
+    };
+    console.log('Submitting:', payload);
+  };
 
   return (
-    <MainCard
-      title="Add Damage/Loss Product"
-      className="max-w-5xl mx-auto mt-6"
-    >
-      <div className="flex flex-col md:flex-row gap-6 mt-6">
+    <MainCard title="Add Damage/Loss Product" className="max-w-5xl mx-auto mt-6">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-6 ">
         {/* Left Form */}
-        <form className="flex-1 space-y-4 text-sm">
-          {/* Input Fields */}
-          {[
-            {
-              label: "Product Serial",
-              required: true,
-              placeholder: "Product Serial, Model",
-              hasIcon: true,
-            },
-            {
-              label: "Status (Lost/ Damaged)",
-              required: true,
-              placeholder: "Select Status",
-              hasIcon: true,
-            },
-            {
-              label: "Reason",
-              required: true,
-              placeholder: "Select or Add a new Reason",
-              hasIcon: true,
-            },
-          ].map(({ label, required, placeholder, hasIcon }, i) => (
-            <div key={i} className="flex items-center gap-4 relative mt-8">
-              <label className="min-w-[160px] text-primary font-medium">
-                {label}
-                {required && <span className="text-red-500 ml-0.5">*</span>}
-              </label>
-              <div className="relative w-full">
-                <input
-                  type="text"
-                  placeholder={placeholder}
-                  className="text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                />
-                {hasIcon && (
-                  <ChevronRight
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    size={16}
-                  />
-                )}
-              </div>
-            </div>
-          ))}
+        <div className="flex-1 space-y-6 mt-8 text-sm ">
+          <SearchableDropdown
+            label="Product Serial"
+            required
+            options={serialOptions}
+            selected={serial}
+            onChange={setSerial}
+            placeholder="Product Serial"
+          />
+
+          <SearchableDropdown
+            label="Status (Lost/ Damaged)"
+            required
+            options={statusOptions}
+            selected={status}
+            onChange={setStatus}
+            placeholder="Select Status"
+          />
+
+          <SearchableDropdown
+            label="Reason"
+            required
+            options={reasonOptions}
+            selected={reason}
+            onChange={setReason}
+            placeholder="Select or Add a new Reason"
+          />
 
           {/* Comment */}
           <div className="flex items-start gap-4">
-            <label className="min-w-[160px] pt-2 text-primary font-medium">
-              Comment (if)
-            </label>
+            <label className="w-full md:w-[160px] pt-2 text-primary font-medium">Comment (if)</label>
             <textarea
               placeholder="Comment here"
               rows={3}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               className="text-secondary w-full border bg-white rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
             ></textarea>
           </div>
-        </form>
+        </div>
 
         {/* Right Overview */}
         <div className="flex-1">
-          {/* Title above the card */}
-          <h3 className="text-sm font-medium text-[#616262] mb-3 ml-1">
-            Product Overview
-          </h3>
-
-          <CustomCard className="bg-white border border-gray-200 text-[20px] px-5 py-4 ">
-            <div className="grid grid-cols-2 gap-y-4 gap-x-6">
+          <h3 className="text-sm font-medium text-[#616262] mb-3 ml-1">Product Overview</h3>
+          <CustomCard className="bg-white border border-gray-200 text-sm px-5 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-12">
               <div>
                 <div className="text-primary">MID</div>
-                <div className="text-secondary ">18142542351335</div>
+                <div className="text-secondary break-words">18142542351335</div>
               </div>
               <div>
                 <div className="text-primary">Trading Name</div>
-                <div className="text-secondary ">Devsstream Store</div>
+                <div className="text-secondary break-words">Devsstream Store</div>
               </div>
-
               <div>
                 <div className="text-primary">Product Model</div>
-                <div className="text-secondary ">A920 PRO</div>
+                <div className="text-secondary break-words">A920 PRO</div>
               </div>
               <div>
                 <div className="text-primary">BDM Email</div>
-                <div className="text-secondary ">zakaria@gmail.com</div>
+                <div className="text-secondary break-words">zakaria@gmail.com</div>
               </div>
-
               <div>
                 <div className="text-primary">Product Category</div>
-                <div className="text-secondary ">SIM</div>
+                <div className="text-secondary break-words">SIM</div>
               </div>
             </div>
           </CustomCard>
         </div>
-      </div>
+      </form>
 
-      {/* Bottom Buttons */}
+      {/* Bottom Action Buttons */}
       <div className="flex justify-end gap-2 mt-8">
-        <button
-          type="button"
-          className="px-4 py-2 text-sm border border-white rounded bg-white hover:bg-gray-200"
-        >
-          Discard
-        </button>
-        <button
+        <AppButton
+          text="Discard"
+     
+          onClick={() => {
+            setSerial(null);
+            setStatus(null);
+            setReason(null);
+            setComment('');
+          }}
+          bg="bg-white"
+          color="text-black"
+          className="border border-white hover:bg-gray-200"
+        />
+        <AppButton
           type="submit"
-          className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Update Status
-        </button>
+          text="Update Status"
+       
+          bg="bg-blue-600"
+          color="text-white"
+          className="hover:bg-blue-700"
+        />
       </div>
     </MainCard>
   );

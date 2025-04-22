@@ -1,52 +1,50 @@
 "use client";
 
+import AppButton from "@/components/ui/AppButton";
+import InputField from "@/components/ui/InputField";
+import MainCard from "@/components/ui/MainCard";
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
 
 export default function AddProductForm() {
   const [hasSerial, setHasSerial] = useState(false);
+  const [formData, setFormData] = useState({
+    category: "",
+    model: "",
+    serial: "",
+    condition: "",
+    supplier: "",
+    invoice: "",
+    price: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
-    <div className="max-w-3xl mx-auto bg-[#F9F9F9] p-8 rounded-xl shadow border mt-6">
-      <h2 className="text-xl font-semibold text-primary mb-6">Add Product</h2>
+    <MainCard title='Add Product' >
+     
 
-      <form className="space-y-4 text-sm">
-        {/* Row Group */}
-        {[
-          {
-            label: "Product Category",
-            required: true,
-            placeholder: "Enter product category",
-            hasIcon: true,
-          },
-          {
-            label: "Product Model",
-            required: true,
-            placeholder: "Enter product model",
-            hasIcon: true,
-          },
-        ].map(({ label, required, placeholder, hasIcon }, i) => (
-          <div key={i} className="flex items-center gap-4">
-            <label className="min-w-[160px] text-primary font-medium">
-            {/* <label className="min-w-[160px] text-primary font-medium"> */}
-              {label}
-              {required && <span className="text-red-500 ml-0.5">*</span>}
-            </label>
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder={placeholder}
-                className={`text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500`}
-              />
-              {hasIcon && (
-                <ChevronRight
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                  size={16}
-                />
-              )}
-            </div>
-          </div>
-        ))}
+      <form className="space-y-4 text-sm max-w-[500px]">
+        {/* Category & Model */}
+        <InputField
+          label="Product Category"
+          name="category"
+          required
+          value={formData.category}
+          onChange={handleChange}
+          placeholder="Enter product category"
+          showIcon
+        />
+        <InputField
+          label="Product Model"
+          name="model"
+          required
+          value={formData.model}
+          onChange={handleChange}
+          placeholder="Enter product model"
+          showIcon
+        />
 
         {/* Serial Toggle */}
         <div className="flex items-center justify-between">
@@ -72,94 +70,76 @@ export default function AddProductForm() {
 
         {/* Serial Input */}
         {hasSerial && (
-          <div className="flex items-center gap-4">
-            <label className="min-w-[160px] text-primary font-medium">
-              Product Serial Number (if)
-            </label>
-            <div className="relative w-full">
-              <input
-                type="text"
-                placeholder="Type Serial Number"
-                className="text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              />
-              <ChevronRight
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                size={16}
-              />
-            </div>
-          </div>
+          <InputField
+            label="Product Serial Number (if)"
+            name="serial"
+            placeholder="Type Serial Number"
+            value={formData.serial}
+            onChange={handleChange}
+            showIcon
+          />
         )}
 
         {/* Product Condition */}
-        <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-primary font-medium">
-            Product Condition<span className="text-red-500 ml-0.5">*</span>
-          </label>
-          <div className="relative w-full">
-            <input
-              type="text"
-              placeholder="Enter product condition"
-              className="text-secondary  w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            <ChevronRight
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-              size={16}
-            />
-          </div>
-        </div>
+        <InputField
+          label="Product Condition"
+          name="condition"
+          required
+          placeholder="Enter product condition"
+          value={formData.condition}
+          onChange={handleChange}
+          showIcon
+        />
 
-        {/* Supplier name */}
-        <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-primary font-medium">
-            Supplier name (if)
-          </label>
-          <input
-            type="text"
-            placeholder="Enter supplier name"
-            className="text-secondary w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        {/* Supplier */}
+        <InputField
+          label="Supplier name (if)"
+          name="supplier"
+          placeholder="Enter supplier name"
+          value={formData.supplier}
+          onChange={handleChange}
+        />
 
         {/* Invoice No */}
-        <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-primary font-medium">
-            Invoice No (if)
-          </label>
-          <input
-            type="text"
-            placeholder="Type Invoice No"
-            className="text-secondary w-full border bg-white rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        <InputField
+          label="Invoice No (if)"
+          name="invoice"
+          placeholder="Type Invoice No"
+          value={formData.invoice}
+          onChange={handleChange}
+        />
 
         {/* Price */}
-        <div className="flex items-center gap-4">
-          <label className="min-w-[160px] text-primary font-medium">
-            Price (if)
-          </label>
-          <input
-            type="number"
-            placeholder="0.00"
-            className="text-secondary bg-white w-full border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-        </div>
+        <InputField
+          label="Price (if)"
+          name="price"
+          type="number"
+          placeholder="0.00"
+          value={formData.price}
+          onChange={handleChange}
+        />
 
         {/* Action Buttons */}
         <div className="flex justify-end gap-2 pt-4">
-          <button
-            type="button"
-            className="px-4 py-2 text-sm border border-gray-300 rounded bg-gray-100 hover:bg-gray-200"
-          >
-            Discard
-          </button>
-          <button
+          <AppButton
+            text="Discard"
+        
+            bg="bg-[#F0F1F3]"
+            color="text-black"
+            onClick={() => console.log("Discard clicked")}
+            className="border border-[#F0F1F3] hover:bg-gray-200"
+          />
+
+          <AppButton
             type="submit"
-            className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Add Product
-          </button>
+            text="Add Product"
+           
+            bg="bg-[#1366D9]"
+            color="text-white"
+            className="hover:bg-blue-700"
+          />
         </div>
       </form>
-    </div>
+    </MainCard>
   );
 }
