@@ -5,6 +5,7 @@ import Pagination from "@/components/ui/Pagination";
 import ProductTable from "./ProductTable";
 import DateRangePicker from "../ui/DateRangePicker";
 import Link from "next/link";
+import MainCard from "../ui/MainCard";
 // import ProductTable from '@/components/ui/ProductTable';
 
 export default function ProductList() {
@@ -123,7 +124,7 @@ export default function ProductList() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
+    <MainCard title={""} className="bg-white ">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h1 className="text-xl font-semibold text-[#383E49]">
           All Products (Model Wise)
@@ -200,6 +201,6 @@ export default function ProductList() {
         itemsPerPage={limit}
         onPageChange={handlePageChange}
       />
-    </div>
+    </MainCard>
   );
 }

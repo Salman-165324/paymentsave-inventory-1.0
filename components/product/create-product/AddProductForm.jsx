@@ -1,10 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import AppButton from "@/components/ui/AppButton";
 import InputField from "@/components/ui/InputField";
 import MainCard from "@/components/ui/MainCard";
-import { useState } from "react";
-
+import SearchableDropdown from "@/components/ui/SearchableDropdown";
+// import SearchableDropdown from '@/components/ui/SearchableDropdown'; // optional
+const serialOptions = [
+  { value: "1234565475", label: "SIM" },
+  { value: "1234565474", label: "Live Base" },
+  { value: "1234565477", label: "Terminal" },
+];
 export default function AddProductForm() {
   const [hasSerial, setHasSerial] = useState(false);
   const [formData, setFormData] = useState({
@@ -18,38 +24,53 @@ export default function AddProductForm() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting form data:", formData);
+    // Handle API submission here
   };
 
   return (
-    <MainCard title='Add Product' >
-     
-
-      <form className="space-y-4 text-sm max-w-[500px]">
-        {/* Category & Model */}
-        <InputField
+    <MainCard title="Add Product" className="max-w-4xl mx-auto">
+      <form className="space-y-4 text-sm max-w-[500px]" onSubmit={handleSubmit}>
+        {/* Category - dropdown or text */}
+        <SearchableDropdown
           label="Product Category"
           name="category"
+          options={serialOptions}
+          selected={formData.category}
+          onChange={(val) => setFormData({ ...formData, category: val })}
           required
+        />
+        {/* <InputField
+          label="Product Category"
+          name="category"
           value={formData.category}
           onChange={handleChange}
           placeholder="Enter product category"
+          required
           showIcon
-        />
+        /> */}
+
+        {/* Product Model */}
         <InputField
           label="Product Model"
           name="model"
-          required
           value={formData.model}
           onChange={handleChange}
           placeholder="Enter product model"
+          required
           showIcon
         />
 
-        {/* Serial Toggle */}
+        {/* Toggle for serial number */}
         <div className="flex items-center justify-between">
           <label className="min-w-[160px] text-primary font-medium">
-            Serial Number or Not<span className="text-red-500 ml-0.5">*</span>
+            Serial Number or Not <span className="text-red-500 ml-0.5">*</span>
           </label>
           <div className="flex-1 flex justify-start ml-4">
             <button
@@ -68,72 +89,81 @@ export default function AddProductForm() {
           </div>
         </div>
 
-        {/* Serial Input */}
+        {/* Serial Field (conditionally shown) */}
         {hasSerial && (
           <InputField
-            label="Product Serial Number (if)"
+            label="Product Serial Number"
             name="serial"
-            placeholder="Type Serial Number"
             value={formData.serial}
             onChange={handleChange}
+            placeholder="Type Serial Number"
             showIcon
           />
         )}
 
-        {/* Product Condition */}
+        {/* Condition */}
         <InputField
           label="Product Condition"
           name="condition"
-          required
-          placeholder="Enter product condition"
           value={formData.condition}
           onChange={handleChange}
+          placeholder="Enter product condition"
+          required
           showIcon
         />
 
-        {/* Supplier */}
+        {/* Supplier (optional) */}
         <InputField
-          label="Supplier name (if)"
+          label="Supplier Name (optional)"
           name="supplier"
-          placeholder="Enter supplier name"
           value={formData.supplier}
           onChange={handleChange}
+          placeholder="Enter supplier name"
         />
 
-        {/* Invoice No */}
+        {/* Invoice (optional) */}
         <InputField
-          label="Invoice No (if)"
+          label="Invoice No (optional)"
           name="invoice"
-          placeholder="Type Invoice No"
           value={formData.invoice}
           onChange={handleChange}
+          placeholder="Enter invoice number"
         />
 
         {/* Price */}
         <InputField
-          label="Price (if)"
+          label="Price (optional)"
           name="price"
           type="number"
-          placeholder="0.00"
           value={formData.price}
           onChange={handleChange}
+          placeholder="0.00"
         />
 
-        {/* Action Buttons */}
+        {/* Buttons */}
         <div className="flex justify-end gap-2 pt-4">
           <AppButton
+            type="button"
             text="Discard"
-        
+            onClick={() =>
+              setFormData({
+                category: "",
+                model: "",
+                serial: "",
+                condition: "",
+                supplier: "",
+                invoice: "",
+                price: "",
+              })
+            }
             bg="bg-[#F0F1F3]"
             color="text-black"
-            onClick={() => console.log("Discard clicked")}
             className="border border-[#F0F1F3] hover:bg-gray-200"
           />
 
           <AppButton
             type="submit"
             text="Add Product"
-           
             bg="bg-[#1366D9]"
             color="text-white"
             className="hover:bg-blue-700"

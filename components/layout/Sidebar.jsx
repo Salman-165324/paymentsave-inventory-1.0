@@ -94,13 +94,13 @@ export default function Sidebar({ className }) {
     <div className={cn('w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto', className)}>
       <div className="flex flex-col h-full p-4">
         {/* Logo Section */}
-        <div className="flex items-center px-4 py-4 space-x-3">
-          <img src="/logo.svg" alt="Paymentsave" className="h-6 w-auto" />
-          <div className="text-white font-bold text-sm">Paymentsave</div>
+        <div className="flex items-center px-4 py-5 justify-center ">
+          <img src="/image/logo.png" alt="Paymentsave" className="h-10 w-auto" />
+          {/* <div className="text-white font-bold text-sm">Paymentsave</div> */}
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 mt-4">
+        <nav className="flex-1 mt-3">
           <ul className="space-y-1">
             {menuItems.map((item, index) => (
               <li key={index}>

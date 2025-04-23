@@ -82,7 +82,7 @@ export default function BulkAddProduct() {
   };
 
   return (
-    <MainCard title={"Bulk Add Product"} className="max-w-3xl mx-auto ">
+    <MainCard title={"Bulk Add Product"} className="max-w-4xl mx-auto ">
       <div>
         <div className="flex justify-end mb-6">
           <div className="flex items-center gap-3">

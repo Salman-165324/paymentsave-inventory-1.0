@@ -40,7 +40,7 @@ export default function AddRepairProduct() {
   };
 
   return (
-    <MainCard title="Add in Repair" className="max-w-5xl mx-auto mt-6">
+    <MainCard title="Add in Repair" className="max-w-4xl mx-auto ">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col md:flex-row gap-6 mt-6"

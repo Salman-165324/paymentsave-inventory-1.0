@@ -27,7 +27,7 @@ const ProductModelEntry = () => {
 
   return (
     <MainCard title="Product Model Entry">
-      <form onSubmit={handleSubmit} className="flex-1 space-y-4 text-sm max-w-[500px]">
+      <form onSubmit={handleSubmit} className="flex-1 space-y-4 text-sm max-w-4xl mx-auto">
         <InputField
           label="Model Name"
           name="modelName"

@@ -52,7 +52,7 @@ export default function SearchableDropdown({
       className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full"
     >
       {label && (
-        <label className="w-full md:w-[160px] text-primary font-medium text-sm">
+        <label className="w-full md:min-w-[160px]  md:w-[160px] text-primary font-medium text-sm">
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
@@ -81,7 +81,7 @@ export default function SearchableDropdown({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search"
-                className="w-full rounded-md border border-gray-200 px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="text-secondary w-full border bg-white rounded px-3 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               {query && (
                 <button
