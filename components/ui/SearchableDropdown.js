@@ -65,7 +65,7 @@ export default function SearchableDropdown({
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex items-center justify-between rounded-md border border-gray-200 bg-white py-2 px-3 text-sm text-gray-900  focus:outline-none"
         >
-          <span className="truncate">{selected?.label || placeholder}</span>
+          <span className="truncate text-secondary">{selected?.label || placeholder}</span>
           <ChevronRight size={16} className="text-gray-400 rotate-90" />
         </button>
 

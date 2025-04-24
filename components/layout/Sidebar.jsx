@@ -32,9 +32,11 @@ const menuItems = [
       { title: 'Single Products', href: '/products/single-products' },
       { title: 'Add Product', href: '/products/new' },
       { title: 'Bulk Product Entry', href: '/products/bulk-product' },
-      { title: 'Add Damage/Loss Products', href: '/products/add-damage-loss-products' },
+      { title: 'Add Damage/Lost Products', href: '/products/add-damage-lost-products' },
       { title: 'Add In Repair', href: '/products/add-in-repair' },
       { title: 'Categories', href: '/products/categories' },
+      { title: 'Add Category', href: '/products/add-catagory' },
+      { title: 'Add Supplier ', href: '/products/add-supplier ' },
     ],
   },
   {

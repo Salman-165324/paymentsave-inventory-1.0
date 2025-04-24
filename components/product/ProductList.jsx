@@ -159,27 +159,8 @@ export default function ProductList() {
           </div>
 
           {/* Date Range Picker */}
-          {/* <div className="relative w-full sm:w-52 md:w-56">
-            <input
-              type="text"
-              value={dateRange}
-              className="w-full pl-3 pr-10 py-2 border border-[#A0A0A0] rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-              // readOnly
-            />
-            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-calendar"
-                viewBox="0 0 16 16"
-              >
-                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-              </svg>
-            </div>
-          </div> */}
-          <DateRangePicker
+          
+          {/* <DateRangePicker
             initialRange={{
               startDate: null,
               endDate: null,
@@ -188,7 +169,7 @@ export default function ProductList() {
               setDateRange(formatted);
               // Optional: setStartDate/startDate, setEndDate/endDate
             }}
-          />
+          /> */}
         </div>
       </div>
 

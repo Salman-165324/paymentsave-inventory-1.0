@@ -42,7 +42,7 @@ export default function AddDamageLossProduct() {
   };
 
   return (
-    <MainCard title="Add Damage/Loss Product" className="max-w-4xl mx-auto mt-6">
+    <MainCard title="Add Damage/Lost Product" className="max-w-4xl mx-auto mt-6">
       <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-6 ">
         {/* Left Form */}
         <div className="flex-1 space-y-6 mt-8 text-sm ">
@@ -90,7 +90,7 @@ export default function AddDamageLossProduct() {
         <div className="flex-1">
           <h3 className="text-sm font-medium text-[#616262] mb-3 ml-1">Product Overview</h3>
           <CustomCard className="bg-white border border-gray-200 text-sm px-5 py-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-12 text-sm">
               <div>
                 <div className="text-primary">MID</div>
                 <div className="text-secondary break-words">18142542351335</div>

@@ -88,47 +88,48 @@ export default function ProductTable({ products }) {
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Serial Number <SortIcon />
+              Entry Date <SortIcon />
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Model <SortIcon />
+              Serial Number 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Status <SortIcon />
+              Model 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Supplier <SortIcon />
+              Status 
+            </div>
+          </TableHead>
+         
+          <TableHead className="text-center">
+            <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
+              TID 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              TID <SortIcon />
+              Product Condition 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Product Condition <SortIcon />
+              Product Category 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Product Category <SortIcon />
+              MID 
             </div>
           </TableHead>
           <TableHead className="text-center">
             <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              MID <SortIcon />
-            </div>
-          </TableHead>
-          <TableHead className="text-center">
-            <div className="flex justify-center items-center gap-x-1 whitespace-nowrap">
-              Price <SortIcon />
+              Supplier 
             </div>
           </TableHead>
         </TableRow>
@@ -142,6 +143,7 @@ export default function ProductTable({ products }) {
                 <EllipsisVertical color="white" size={14} />
               </div>
             </TableCell>
+            <TableCell className="text-center">{product.price}</TableCell>
             <TableCell className="text-center">
               {product.serialNumber}
             </TableCell>
@@ -151,14 +153,14 @@ export default function ProductTable({ products }) {
                 {product.status}
               </span>
             </TableCell>
-            <TableCell className="text-center">{product.supplier}</TableCell>
+          
             <TableCell className="text-center">{product.tid}</TableCell>
             <TableCell className="text-center">
               {getConditionBadge(product.condition)}
             </TableCell>
             <TableCell className="text-center">{product.category}</TableCell>
             <TableCell className="text-center">{product.mid}</TableCell>
-            <TableCell className="text-center">{product.price}</TableCell>
+            <TableCell className="text-center">{product.supplier}</TableCell>
           </TableRow>
         ))}
       </TableBody>

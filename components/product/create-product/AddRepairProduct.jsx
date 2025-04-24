@@ -7,6 +7,7 @@ import AppSelect from "@/components/ui/AppSelect";
 import AppButton from "@/components/ui/AppButton";
 import { Trash2, Save } from "lucide-react";
 import SearchableDropdown from "@/components/ui/SearchableDropdown";
+import TextArea from "@/components/ui/TextArea";
 
 export default function AddRepairProduct() {
   const [serial, setSerial] = useState(null);
@@ -74,18 +75,13 @@ export default function AddRepairProduct() {
             placeholder="Repair Status"
           />
 
-          <div className="flex items-start gap-4">
-            <label className="w-full md:w-[160px] pt-2 text-primary font-medium">
-              Comment (if)
-            </label>
-            <textarea
-              rows={3}
-              placeholder="Comment here"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className="text-secondary w-full border bg-white rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            ></textarea>
-          </div>
+          <TextArea
+            label="Comment (optional)"
+            name="comment"
+            placeholder="Comment here"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
         </div>
 
         {/* Right Product Overview */}
@@ -122,7 +118,7 @@ export default function AddRepairProduct() {
       <div className="flex justify-end gap-2 mt-8">
         <AppButton
           text="Discard"
-        //   icon={<Trash2 size={16} />}
+          //   icon={<Trash2 size={16} />}
           onClick={() => {
             setSerial(null);
             setModel(null);
@@ -136,7 +132,7 @@ export default function AddRepairProduct() {
         <AppButton
           type="submit"
           text="Save"
-        //   icon={<Save size={16} />}
+          //   icon={<Save size={16} />}
           bg="bg-blue-600"
           color="text-white"
           className="hover:bg-blue-700"

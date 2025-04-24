@@ -5,6 +5,7 @@ import AppButton from "@/components/ui/AppButton";
 import InputField from "@/components/ui/InputField";
 import MainCard from "@/components/ui/MainCard";
 import SearchableDropdown from "@/components/ui/SearchableDropdown";
+import TextArea from "@/components/ui/TextArea";
 // import SearchableDropdown from '@/components/ui/SearchableDropdown'; // optional
 const serialOptions = [
   { value: "1234565475", label: "SIM" },
@@ -21,6 +22,7 @@ export default function AddProductForm() {
     supplier: "",
     invoice: "",
     price: "",
+    modelDescription: "",
   });
 
   const handleChange = (e) => {
@@ -46,15 +48,6 @@ export default function AddProductForm() {
           onChange={(val) => setFormData({ ...formData, category: val })}
           required
         />
-        {/* <InputField
-          label="Product Category"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          placeholder="Enter product category"
-          required
-          showIcon
-        /> */}
 
         {/* Product Model */}
         <InputField
@@ -138,6 +131,13 @@ export default function AddProductForm() {
           value={formData.price}
           onChange={handleChange}
           placeholder="0.00"
+        />
+        <TextArea
+          label="Model description (optional)"
+          name="modelDescription"
+          placeholder="Model description"
+          value={formData.modelDescription}
+          onChange={handleChange}
         />
 
         {/* Buttons */}
