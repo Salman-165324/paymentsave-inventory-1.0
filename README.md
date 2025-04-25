@@ -4,7 +4,7 @@
 
 # Project Name
 .
-[Brief project description]
+[Paymentsave Inventory
 
 ## Development Guidelines
 
@@ -74,3 +74,43 @@
   - Avoid for data fetching or state management
 
 For more details on data fetching, rendering, and routing, refer to the [Next.js documentation](https://nextjs.org/docs).
+
+
+## Folder and Routing Conventions: 
+
+
+## 🔧 Branch Name Conventions
+
+| Type      | Purpose                          | Example                                      |
+|-----------|----------------------------------|----------------------------------------------|
+| `feature` | New feature                      | `feature/shaima-user-dashboard`              |
+| `bugfix`  | Fixing a bug                     | `bugfix/shaima-fix-login-error`              |
+| `hotfix`  | Urgent fix on production         | `hotfix/shaima-fix-payment-crash`            |
+| `release` | Preparing a release version      | `release/v1.2.0`                             |
+| `chore`   | Cleanup, config, or refactoring  | `chore/shaima-update-eslint-config`          |
+| `docs`    | Documentation changes            | `docs/shaima-api-guide-update`               |
+| `test`    | Adding or editing tests          | `test/shaima-auth-flow-tests`                |
+
+## ✅ Naming Tips
+
+- Always use **lowercase** letters.
+- Use **hyphens** (`-`) to separate words.
+- Keep branch names **concise and descriptive**.
+- **Prefix** with the branch type.
+- Add **your name** for tracking ownership in team environments.
+
+## 📌 Real-World Examples
+
+| Task                                   | Branch Name                             |
+|----------------------------------------|------------------------------------------|
+| Add new subscription page              | `feature/shaima-subscription-page`       |
+| Fix invoice date issue                 | `bugfix/shaima-fix-invoice-date`         |
+| Prepare version 2.0 release            | `release/v2.0.0`                          |
+| Update ESLint configuration            | `chore/shaima-update-eslint-config`      |
+| Add unit tests for auth flow           | `test/shaima-auth-flow-tests`            |
+
+## 🧹 After Merging
+
+- ✅ Once your pull request is **merged**, **delete the branch** to keep your repository clean and prevent confusion.
+- Most platforms like GitHub, GitLab, and Bitbucket offer a **"Delete branch"** button after merging — use it!
+
