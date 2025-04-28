@@ -5,7 +5,7 @@ export default function AdminLayout({ children }) {
   return (
     <div className="min-h-screen flex">
       {/* Fixed Sidebar */}
-      <div className="hidden md:block fixed top-0 left-0 h-screen w-64 z-30 bg-[#0F3B69] text-white">
+      <div className="hidden md:block fixed top-0 left-0 h-screen w-64 z-30 bg-primary text-primary-foreground">
         <Sidebar />
       </div>
 

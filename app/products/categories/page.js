@@ -1,11 +1,9 @@
-import AdminLayout from '@/components/layout/AdminLayout';
+import AdminLayout from "@/components/layout/AdminLayout";
+import { getCategoryData } from "@/lib/apiRequests/getCategoryData";
 
-export default function CategoriesPage() {
-  const categories = [
-    { id: 1, name: 'Category A', products: 12 },
-    { id: 2, name: 'Category B', products: 8 },
-    { id: 3, name: 'Category C', products: 5 },
-  ];
+export default async function CategoriesPage() {
+  const data = await getCategoryData();
+  const categories = data?.results || [];
 
   return (
     <AdminLayout>
@@ -16,7 +14,7 @@ export default function CategoriesPage() {
             Add Category
           </button>
         </div>
-        
+
         <div className="rounded-md border">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -24,7 +22,7 @@ export default function CategoriesPage() {
                 <tr className="border-b bg-muted/50">
                   <th className="text-left p-4 font-medium">ID</th>
                   <th className="text-left p-4 font-medium">Name</th>
-                  <th className="text-left p-4 font-medium">Products</th>
+                  <th className="text-left p-4 font-medium">Description</th>
                   <th className="text-left p-4 font-medium">Actions</th>
                 </tr>
               </thead>
@@ -32,8 +30,8 @@ export default function CategoriesPage() {
                 {categories.map((category) => (
                   <tr key={category.id} className="border-b hover:bg-muted/50">
                     <td className="p-4">{category.id}</td>
-                    <td className="p-4">{category.name}</td>
-                    <td className="p-4">{category.products}</td>
+                    <td className="p-4">{category.title}</td>
+                    <td className="p-4">{category.description}</td>
                     <td className="p-4">
                       <div className="flex items-center space-x-2">
                         <button className="p-1 text-blue-600 hover:text-blue-800">
