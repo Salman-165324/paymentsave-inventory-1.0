@@ -1,9 +1,8 @@
 import { cookies } from 'next/headers';
-
+import { encryptToken } from '@/lib/encrypt';
 export async function POST(request) {
   const { email, password } = await request.json();
 
-  // Simulate external API call
   const res = await fetch(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/v1/auth/web/token/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -16,15 +15,18 @@ export async function POST(request) {
 
   const data = await res.json();
 
-  // Set HttpOnly cookies
-  cookies().set('access_token', data.data.access_token, {
+  const encodedAccessToken = await encryptToken(data.data.access_token);
+  const encodedRefreshToken = await encryptToken(data.data.refresh_token);
+  // console.log(encodedAccessToken, '============', data.data.access_token, 'encodedAccessToken')
+
+  cookies().set('access_token', encodedAccessToken, {
     httpOnly: true,
     path: '/',
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
   });
 
-  cookies().set('refresh_token', data.data.refresh_token, {
+  cookies().set('refresh_token', encodedRefreshToken, {
     httpOnly: true,
     path: '/',
     secure: process.env.NODE_ENV === 'production',
