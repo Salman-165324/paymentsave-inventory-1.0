@@ -1,55 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
-function redirectToLogin(request) {
-  const loginUrl = new URL('/login', request.url)
-  // Preserve the original path for redirect after login
-  if (request.nextUrl.pathname !== '/') {
-    loginUrl.searchParams.set('redirect', request.nextUrl.pathname)
+export function middleware(request) {
+  const accessToken = request.cookies.get('access_token')?.value;
+  const { pathname } = request.nextUrl;
+
+  // If user tries to go to dashboard without being logged in
+  if (!accessToken && pathname.startsWith('/dashboard')) {
+    const loginUrl = new URL('/login', request.url);
+    loginUrl.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(loginUrl);
   }
-  return NextResponse.redirect(loginUrl)
+
+  // If logged in user tries to visit login page
+  if (accessToken && pathname.startsWith('/login')) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
+
+  return NextResponse.next();
 }
-export async function middleware(request) {
-  const path = request.nextUrl.pathname
-  const isPublic = ['/login', '/signup'].includes(path)
 
-  // Skip middleware for API routes and public paths
-  if (path.startsWith('/api') || isPublic) {
-    return NextResponse.next()
-  }
-
-  // Check for tokens
-  const accessToken = request.cookies.get('accessToken')?.value
-  const refreshToken = request.cookies.get('refreshToken')?.value
-
-  // If no tokens at all, redirect to login
-  if (!accessToken && !refreshToken) {
-    console.log('No tokens at all, redirecting to login')
-    return redirectToLogin(request)
-  }
-
-  // Validate access token
-  if (accessToken && await isValidToken(accessToken)) {
-    return NextResponse.next()
-  }
-
-  // Attempt refresh if possible
-  if (refreshToken) {
-    try {
-      const { accessToken: newAccessToken } = await refreshTokens(refreshToken)
-      
-      const response = NextResponse.next()
-      response.cookies.set('accessToken', newAccessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 15,
-        path: '/',
-      })
-      
-      return response
-    } catch (error) {
-      return redirectToLogin(request)
-    }
-  }
-
-  return redirectToLogin(request)
-}
+export const config = {
+  matcher: ['/dashboard/:path*', '/login'],
+};

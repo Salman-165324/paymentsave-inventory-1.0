@@ -1,42 +1,35 @@
-import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function POST(request) {
-  try {
-    const { email, password } = await request.json();
-    
-    // Call external API
-    const res = await fetch(`${process.env.BASE_API_URL}/api/v1/auth/web/token/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+  const { email, password } = await request.json();
 
-    if (!res.ok) throw new Error('Authentication failed');
+  // Simulate external API call
+  const res = await fetch(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/v1/auth/web/token/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  });
 
-    const { accessToken, refreshToken } = await res.json();
-
-    // Set cookies
-    cookies().set('accessToken', accessToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 15, // 15 minutes
-      path: '/',
-    });
-
-    cookies().set('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24, // 1 day
-      path: '/',
-    });
-
-    return NextResponse.json({ success: true });
-
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Authentication failed' },
-      { status: 401 }
-    );
+  if (!res.ok) {
+    return new Response('Login failed', { status: 401 });
   }
+
+  const data = await res.json();
+
+  // Set HttpOnly cookies
+  cookies().set('access_token', data.data.access_token, {
+    httpOnly: true,
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  });
+
+  cookies().set('refresh_token', data.data.refresh_token, {
+    httpOnly: true,
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+  });
+
+  return new Response(JSON.stringify({ success: true }), { status: 200 });
 }
