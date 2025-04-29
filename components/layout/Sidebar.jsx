@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   LayoutDashboard,
   Package,
@@ -13,75 +13,107 @@ import {
   FileText,
   Briefcase,
   Server,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-
+} from "lucide-react";
+// import { cn } from "@/lib/utils";
+import {cn} from '../../lib/utils'
 const menuItems = [
   {
-    title: 'Dashboard',
-    href: '/dashboard',
+    title: "Dashboard",
+    href: "/dashboard",
     icon: <LayoutDashboard className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Products',
-    href: '/products',
+    title: "Products",
+    href: "/products",
     icon: <Package className="h-4 w-4 mr-2" />,
     submenu: [
-      { title: 'All Products', href: '/products' },
-      { title: 'Product Model Entry', href: '/products/product-model-entry' },
-      { title: 'Single Products', href: '/products/single-products' },
-      { title: 'Add Product', href: '/products/new' },
-      { title: 'Bulk Product Entry', href: '/products/bulk-product' },
-      { title: 'Add Damage/Lost Products', href: '/products/add-damage-lost-products' },
-      { title: 'Add In Repair', href: '/products/add-in-repair' },
-      { title: 'Categories', href: '/products/categories' },
-      { title: 'Add Category', href: '/products/add-catagory' },
-      { title: 'Add Supplier ', href: '/products/add-supplier ' },
+      { title: "Add Product", href: "/add" },
+      { title: "All Products", href: "/model-wise" },
+      { title: "Product Model Entry", href: "/add-model" },
+      { title: "Single Products", href: "/single-products" },
+
+      { title: "Bulk Product Entry", href: "/bulk-entry" },
+      { title: "Add Damage/Lost Products", href: "/add-damage-lost-products" },
+      { title: "Add In Repair", href: "/add-in-repair" },
+      { title: "Categories", href: "/categories" },
+      { title: "Add Category", href: "/add-catagory" },
+      { title: "Add Supplier ", href: "/add-supplier " },
     ],
   },
   {
-    title: 'Orders',
-    href: '/orders',
+    title: "Categories",
+    href: "/list",
     icon: <ShoppingCart className="h-4 w-4 mr-2" />,
     submenu: [
-      { title: 'All Orders', href: '/orders' },
-      { title: 'Processing', href: '/orders/processing' },
-      { title: 'Completed', href: '/orders/completed' },
+      { title: "All Category", href: "/list" },
+      { title: "Add Category", href: "/add-category" },
+      // { title: 'Completed', href: '/orders/completed' },
     ],
   },
   {
-    title: 'Live Base',
-    href: '/live-base',
+    title: "Lost/Damage products",
+    href: "/lost-damage-products",
+    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    submenu: [
+      { title: "Add Damage/Lost Products", href: "/add-damage-lost" },
+      { title: "Add Repair Products", href: "/add-repair" },
+      { title: "Repair Products", href: "/in-repair" },
+      { title: "Damage Products", href: "/lost-damage-products" },
+    ],
+  },
+  {
+    title: "Orders",
+    href: "/orders",
+    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    submenu: [
+      { title: "All Orders", href: "/orders" },
+      { title: "Processing", href: "/orders/processing" },
+      { title: "Completed", href: "/orders/completed" },
+    ],
+  },
+  {
+    title: "Supplier",
+    href: "/suppliers",
+    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    submenu: [
+      { title: "Suppliers", href: "/suppliers" },
+      { title: "Add Supplier", href: "/add-supplier" },
+      // { title: "Completed", href: "/completed" },
+    ],
+  },
+  {
+    title: "Live Base",
+    href: "/live-base",
     icon: <Server className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Businesses',
-    href: '/businesses',
+    title: "Businesses",
+    href: "/businesses",
     icon: <Briefcase className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Orders to Supplier',
-    href: '/orders-to-supplier',
+    title: "Orders to Supplier",
+    href: "/orders-to-supplier",
     icon: <ShoppingCart className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Invoice',
-    href: '/invoice',
+    title: "Invoice",
+    href: "/invoice",
     icon: <FileText className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Users',
-    href: '/users',
+    title: "Users",
+    href: "/users",
     icon: <Users className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Account',
-    href: '/account',
+    title: "Account",
+    href: "/account",
     icon: <Users className="h-4 w-4 mr-2" />,
   },
   {
-    title: 'Settings',
-    href: '/settings',
+    title: "Settings",
+    href: "/settings",
     icon: <Settings className="h-4 w-4 mr-2" />,
   },
 ];
@@ -93,11 +125,20 @@ export default function Sidebar({ className }) {
   const isActive = (href) => pathname.startsWith(href);
 
   return (
-    <div className={cn('w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto', className)}>
+    <div
+      className={cn(
+        "w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto",
+        className
+      )}
+    >
       <div className="flex flex-col h-full p-4">
         {/* Logo Section */}
         <div className="flex items-center px-4 py-5 justify-center ">
-          <img src="/image/logo.png" alt="Paymentsave" className="h-10 w-auto" />
+          <img
+            src="/image/logo.png"
+            alt="Paymentsave"
+            className="h-10 w-auto"
+          />
           {/* <div className="text-white font-bold text-sm">Paymentsave</div> */}
         </div>
 
@@ -107,10 +148,14 @@ export default function Sidebar({ className }) {
             {menuItems.map((item, index) => (
               <li key={index}>
                 <div
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  onClick={() =>
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
                   className={cn(
-                    'flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors',
-                    isActive(item.href) ? 'bg-white/10 font-semibold' : 'hover:bg-white/10'
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors",
+                    isActive(item.href)
+                      ? "bg-white/10 font-semibold"
+                      : "hover:bg-white/10"
                   )}
                 >
                   {item.icon}
@@ -125,8 +170,10 @@ export default function Sidebar({ className }) {
                         <Link
                           href={subItem.href}
                           className={cn(
-                            'block py-1 transition-colors hover:text-white',
-                            isActive(subItem.href) ? 'text-white font-medium' : 'text-gray-300'
+                            "block py-1 transition-colors hover:text-white",
+                            isActive(subItem.href)
+                              ? "text-white font-medium"
+                              : "text-gray-300"
                           )}
                         >
                           {subItem.title}

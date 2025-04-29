@@ -131,7 +131,7 @@ export default function ProductList() {
         </h1>
 
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-          <Link href={"/products/new"}>
+          <Link href={"/add"}>
             <button className="px-4 text-sm py-2 bg-[#1366D9] text-white rounded w-full sm:w-auto cursor-pointer">
               Add Product
             </button>
