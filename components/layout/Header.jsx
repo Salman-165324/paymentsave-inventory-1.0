@@ -1,13 +1,33 @@
-'use client'
-import { useState } from 'react';
+"use client";
+import { useState, useRef, useEffect } from "react";
+import ChevronDown from "../ui/icon/ChevronDown";
 
 export default function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
+  const profileRef = useRef(null);
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(event.target)
+    ) {
+      setShowProfile(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+
   return (
-    <header className="border-b bg-background">
-      <div className="flex h-16 items-center justify-between px-6">
+    <header className="border-b bg-[#f9f9f9]">
+      <div className="flex h-16 items-center justify-between px-6 shadow-[0px_4px_10px_#00000040]">
         <div className="flex items-center gap-4">
           <div className="md:hidden">
             <button className="p-2 text-muted-foreground hover:text-foreground">
@@ -31,9 +51,9 @@ export default function Header() {
             </button>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-4">
-          <button 
+          <button
             className="p-2 text-muted-foreground hover:text-foreground relative"
             onClick={() => setShowNotifications(!showNotifications)}
           >
@@ -44,7 +64,7 @@ export default function Header() {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#5D6679"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -54,7 +74,7 @@ export default function Header() {
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
-            
+
             {showNotifications && (
               <div className="absolute right-0 top-full z-50 mt-1 w-80 rounded-md border bg-background shadow-lg">
                 <div className="p-4">
@@ -62,27 +82,33 @@ export default function Header() {
                   <div className="mt-2 space-y-2">
                     <div className="rounded-md bg-background p-2 hover:bg-muted">
                       <p className="text-sm">New order received</p>
-                      <p className="text-xs text-muted-foreground">5 minutes ago</p>
+                      <p className="text-xs text-muted-foreground">
+                        5 minutes ago
+                      </p>
                     </div>
                     <div className="rounded-md bg-background p-2 hover:bg-muted">
                       <p className="text-sm">Product stock low</p>
-                      <p className="text-xs text-muted-foreground">1 hour ago</p>
+                      <p className="text-xs text-muted-foreground">
+                        1 hour ago
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             )}
           </button>
-          
-          <button 
-            className="flex items-center gap-2 text-sm font-medium"
-            onClick={() => setShowProfile(!showProfile)}
-          >
-            <span className="hidden md:inline-block">Admin User</span>
-            <div className="h-8 w-8 rounded-full bg-primary text-white grid place-items-center">
-              A
-            </div>
-            
+          <div className="h-6 w-px bg-gray-300" />
+          <div className="relative" ref={profileRef}>
+            <button
+              className="flex items-center gap-2 text-sm font-medium"
+              onClick={() => setShowProfile(!showProfile)}
+            >
+              <div className="h-8 w-8 rounded-full bg-primary text-white grid place-items-center">
+                A
+              </div>
+              <span className="hidden md:inline-block">Admin User</span>
+              <ChevronDown />
+            </button>
             {showProfile && (
               <div className="absolute right-4 top-full z-50 mt-1 w-56 rounded-md border bg-background shadow-lg">
                 <div className="p-2">
@@ -98,7 +124,7 @@ export default function Header() {
                 </div>
               </div>
             )}
-          </button>
+          </div>
         </div>
       </div>
     </header>

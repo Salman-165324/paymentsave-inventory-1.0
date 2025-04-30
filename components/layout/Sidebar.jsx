@@ -93,7 +93,7 @@ export default function Sidebar({ className }) {
   const isActive = (href) => pathname.startsWith(href);
 
   return (
-    <div className={cn('w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto', className)}>
+    <div className={cn('w-64 bg-[hsl(218,72%,35%)] text-white h-screen overflow-y-auto', className)}>
       <div className="flex flex-col h-full p-4">
         {/* Logo Section */}
         <div className="flex items-center px-4 py-5 justify-center ">
@@ -109,7 +109,7 @@ export default function Sidebar({ className }) {
                 <div
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                   className={cn(
-                    'flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors',
+                    'flex items-center px-3 py-2 text-[16px] font-normal rounded-md cursor-pointer transition-colors',
                     isActive(item.href) ? 'bg-white/10 font-semibold' : 'hover:bg-white/10'
                   )}
                 >
@@ -141,12 +141,12 @@ export default function Sidebar({ className }) {
         </nav>
 
         {/* Logout */}
-        <div className="mt-auto pt-4 border-t border-white/10">
+        {/* <div className="mt-auto pt-4 border-t border-white/10">
           <div className="flex items-center px-3 py-2 text-sm font-medium cursor-pointer hover:bg-white/10 rounded-md transition-colors">
             <LogOut className="h-4 w-4 mr-2" />
             Logout
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
