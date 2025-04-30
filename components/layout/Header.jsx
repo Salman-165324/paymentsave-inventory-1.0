@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 export default function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -31,9 +31,9 @@ export default function Header() {
             </button>
           </div>
         </div>
-        
+
         <div className="flex items-center gap-4">
-          <button 
+          <button
             className="p-2 text-muted-foreground hover:text-foreground relative"
             onClick={() => setShowNotifications(!showNotifications)}
           >
@@ -54,7 +54,7 @@ export default function Header() {
               <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
             </svg>
             <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
-            
+
             {showNotifications && (
               <div className="absolute right-0 top-full z-50 mt-1 w-80 rounded-md border bg-background shadow-lg">
                 <div className="p-4">
@@ -62,19 +62,23 @@ export default function Header() {
                   <div className="mt-2 space-y-2">
                     <div className="rounded-md bg-background p-2 hover:bg-muted">
                       <p className="text-sm">New order received</p>
-                      <p className="text-xs text-muted-foreground">5 minutes ago</p>
+                      <p className="text-xs text-muted-foreground">
+                        5 minutes ago
+                      </p>
                     </div>
                     <div className="rounded-md bg-background p-2 hover:bg-muted">
                       <p className="text-sm">Product stock low</p>
-                      <p className="text-xs text-muted-foreground">1 hour ago</p>
+                      <p className="text-xs text-muted-foreground">
+                        1 hour ago
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             )}
           </button>
-          
-          <button 
+
+          <button
             className="flex items-center gap-2 text-sm font-medium"
             onClick={() => setShowProfile(!showProfile)}
           >
@@ -82,7 +86,7 @@ export default function Header() {
             <div className="h-8 w-8 rounded-full bg-primary text-white grid place-items-center">
               A
             </div>
-            
+
             {showProfile && (
               <div className="absolute right-4 top-full z-50 mt-1 w-56 rounded-md border bg-background shadow-lg">
                 <div className="p-2">
