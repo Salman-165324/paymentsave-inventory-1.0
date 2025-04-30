@@ -63,8 +63,10 @@ export async function POST(request) {
         maxAge: remember ? 30 * 24 * 60 * 60 : 24 * 60 * 60, // 30 days if remember, 1 day otherwise
       };
 
-      cookies().set("access_token", encryptedAccessToken, cookieOptions);
-      cookies().set("refresh_token", encryptedRefreshToken, cookieOptions);
+      // Get the cookie store and await it before using set
+      const cookieStore = await cookies();
+      cookieStore.set("access_token", encryptedAccessToken, cookieOptions);
+      cookieStore.set("refresh_token", encryptedRefreshToken, cookieOptions);
 
       return Response.json({ success: true }, { status: 200 });
     } catch (apiError) {
