@@ -3,84 +3,81 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { Eye, EyeOff } from "lucide-react";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import { loginSchema } from "@/app/schemas/auth";
 
-// Logo component to match the Paymentsave logo in the image
-const PaymentsaveLogo = () => (
-  <div className="flex items-center">
-    <div className="text-[#0096D1] font-bold text-2xl flex items-center">
-      <span className="relative mr-2">
-        <svg
-          width="48"
-          height="48"
-          viewBox="0 0 48 48"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="24" cy="24" r="24" fill="#0096D1" fillOpacity="0.1" />
-          <path
-            d="M24 10C16.268 10 10 16.268 10 24C10 31.732 16.268 38 24 38C31.732 38 38 31.732 38 24C38 16.268 31.732 10 24 10ZM24 14C29.523 14 34 18.477 34 24C34 29.523 29.523 34 24 34C18.477 34 14 29.523 14 24C14 18.477 18.477 14 24 14Z"
-            fill="#0096D1"
-          />
-          <path
-            d="M20 20L24 26L28 20"
-            stroke="#0096D1"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-      <span>
-        Payment<span className="text-[#18387B]">save</span>
-      </span>
-    </div>
-  </div>
-);
 
-// Small logo icon for the header
-const SmallLogoIcon = () => (
-  <div className="w-8 h-8 bg-[#0096D1] bg-opacity-10 rounded-full flex items-center justify-center">
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2ZM10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16C6.68629 16 4 13.3137 4 10C4 6.68629 6.68629 4 10 4Z"
-        fill="#0096D1"
-      />
-      <path
-        d="M8 8L10 12L12 8"
-        stroke="#0096D1"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </div>
-);
+
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const [serverError, setServerError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  // Initialize form with Conform
+  const [form, fields] = useForm({
+    id: "login-form",
+    onValidate: ({ formData }) => {
+      return parseWithZod(formData, { schema: loginSchema });
+    },
+    shouldValidate: "onBlur",
+    shouldRevalidate: "onInput",
+  });
+
+  // Show/hide password state
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setServerError("");
 
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, remember }),
-    });
+    // Get form data and validate
+    const formData = new FormData(e.currentTarget);
+    const submission = parseWithZod(formData, { schema: loginSchema });
 
-    if (res.ok) {
-      router.push("/dashboard");
-    } else {
-      alert("Login failed");
+    // If client-side validation fails, don't proceed
+    if (submission.status !== "success") {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submission.value),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Handle server validation errors from Zod
+        if (response.status === 400 && data.errors) {
+          // Update form with server validation errors
+          form.update({
+            id: form.id,
+            errors: data.errors,
+            status: "error",
+          });
+          setServerError(data.message || "Validation failed");
+        } else {
+          // Handle API errors
+          setServerError(data.message || "Authentication failed");
+        }
+      } else {
+        // Successful login
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login request failed:", error);
+      setServerError(
+        "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -117,35 +114,99 @@ export default function LoginPage() {
             Welcome back! Please enter your details.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          {serverError && (
+            <div className="mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+              {serverError}
+            </div>
+          )}
+
+          <form
+            id={form.id}
+            onSubmit={handleSubmit}
+            className="mt-6 space-y-4"
+            noValidate
+          >
             <div>
-              <label className="block text-sm mb-1">Email</label>
+              <label htmlFor={fields.email.id} className="block text-sm mb-1">
+                Email
+              </label>
               <input
+                id={fields.email.id}
                 type="email"
-                className="w-full border rounded-md p-2"
+                name={fields.email.name}
+                className={`w-full border rounded-md p-2 ${
+                  fields.email.errors ? "border-red-500" : "border-gray-300"
+                }`}
                 placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                aria-invalid={Boolean(fields.email.errors)}
+                aria-describedby={fields.email.errorId}
               />
+              {fields.email.errors?.length > 0 && (
+                <div
+                  id={fields.email.errorId}
+                  className="mt-1 text-sm text-red-600"
+                >
+                  {fields.email.errors.map((error) => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div>
-              <label className="block text-sm mb-1">Password</label>
-              <input
-                type="password"
-                className="w-full border rounded-md p-2"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <label
+                htmlFor={fields.password.id}
+                className="block text-sm mb-1"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id={fields.password.id}
+                  type={showPassword ? "text" : "password"}
+                  name={fields.password.name}
+                  className={`w-full border rounded-md p-2 pr-10 ${
+                    fields.password.errors
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                  placeholder="Enter your password"
+                  aria-invalid={Boolean(fields.password.errors)}
+                  aria-describedby={fields.password.errorId}
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              {fields.password.errors?.length > 0 && (
+                <div
+                  id={fields.password.errorId}
+                  className="mt-1 text-sm text-red-600"
+                >
+                  {fields.password.errors.map((error) => (
+                    <p key={error}>{error}</p>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center space-x-2">
-                <input type="checkbox" className="border" />
-                <span>Remember</span>
+                <input
+                  type="checkbox"
+                  name={fields.remember.name}
+                  className="border rounded"
+                />
+                <span>Remember me</span>
               </label>
               <a href="#" className="text-blue-600 hover:underline">
                 Forgot password
@@ -154,9 +215,36 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full bg-blue-700 hover:bg-blue-800 text-white py-2 rounded-md mt-2"
+              className="w-full bg-blue-700 hover:bg-blue-800 text-white py-2 rounded-md mt-2 flex justify-center"
+              disabled={isLoading}
             >
-              Sign in
+              {isLoading ? (
+                <div className="flex items-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Signing in...
+                </div>
+              ) : (
+                "Sign in"
+              )}
             </button>
           </form>
         </div>
