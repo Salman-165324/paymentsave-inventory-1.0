@@ -17,18 +17,18 @@ export async function POST(request) {
 
   console.log("Data from the API", data); 
 
-  const encodedAccessToken = await encryptToken(data.data.access_token);
-  const encodedRefreshToken = await encryptToken(data.data.refresh_token);
-  // console.log(encodedAccessToken, '============', data.data.access_token, 'encodedAccessToken')
+  const encryptedAccessToken = await encryptToken(data.data.access_token);
+  const encryptedRefreshToken = await encryptToken(data.data.refresh_token);
+  // console.log(encryptedAccessToken, '============', data.data.access_token, 'encryptedAccessToken')
 
-  cookies().set('access_token', encodedAccessToken, {
+  cookies().set('access_token', encryptedAccessToken, {
     httpOnly: true,
     path: '/',
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
   });
 
-  cookies().set('refresh_token', encodedRefreshToken, {
+  cookies().set('refresh_token', encryptedRefreshToken, {
     httpOnly: true,
     path: '/',
     secure: process.env.NODE_ENV === 'production',
