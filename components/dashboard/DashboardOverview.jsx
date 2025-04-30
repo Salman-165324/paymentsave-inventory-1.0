@@ -4,20 +4,22 @@ import Delivered from "../ui/icon/Delivered";
 import AwaitReturn from "../ui/icon/AwaitReturn";
 import Returned from "../ui/icon/Returned";
 import { Calendar, PackageOpen, CirclePause, Radio } from "lucide-react";
+import DateRangePicker from "../ui/DateRangePicker";
 
 export default function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* date box */}
       <div className="flex justify-end mb-4">
-        <div className="bg-white shadow rounded p-4 w-auto max-w-sm flex items-center justify-between">
+        {/* <div className="bg-white shadow rounded p-4 w-auto max-w-sm flex items-center justify-between">
           <span className="text-[#616262] font-medium mr-4">
             01/08/2024 - 10/09/2024
           </span>
           <button className="text-gray-500 hover:text-[#616262]">
             <Calendar />
           </button>
-        </div>
+        </div> */}
+        <DateRangePicker />
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card

@@ -4,13 +4,13 @@ import AdminLayout from "@/components/layout/AdminLayout";
 import { Calendar, Search, Filter } from "lucide-react";
 import DamageLostProductsTable from "@/components/product/damage-lost-products-table/DamageLostProductsTable";
 import FilterButton from "@/components/ui/FilterButton";
-
+import DateRangePicker from "@/components/ui/DateRangePicker";
 export default function DamageLostProducts() {
   return (
     <AdminLayout>
       <div className="bg-white p-6 rounded-xl shadow-xl max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+          <h2 className="text-xl font-semibold text-[#383E49] mb-4">
             Lost/Damage
           </h2>
           {/* Filters */}
@@ -29,15 +29,15 @@ export default function DamageLostProducts() {
                 </div>
               </div>
               <div className="relative w-full md:w-64">
-                <input
+                {/* <input
                   type="text"
                   placeholder="01/08/2024 - 10/09/2024"
                   className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                {/* 📅 Calendar Icon Placeholder */}
                 <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
                   <Calendar width={20} height={20} color="#C4C4C4" />
-                </div>
+                </div> */}
+                <DateRangePicker />
               </div>
             </div>
             <FilterButton
@@ -56,7 +56,7 @@ export default function DamageLostProducts() {
           <div className="flex items-center gap-1">
             {/* ⬅ Previous Page Icon Placeholder */}
             <button className="px-2 py-1 rounded hover:bg-gray-100">[←]</button>
-            <button className="w-8 h-8 rounded-full bg-blue-600 text-white">
+            <button className="w-8 h-8 rounded-full bg-[#0C99D5] text-white">
               1
             </button>
             <button className="w-8 h-8 rounded-full hover:bg-gray-100">
