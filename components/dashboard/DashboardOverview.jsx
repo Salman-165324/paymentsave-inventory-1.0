@@ -1,3 +1,4 @@
+'use client'
 import Processing from "../ui/icon/Processing";
 import Shipped from "../ui/icon/Shipped";
 import Delivered from "../ui/icon/Delivered";
@@ -7,6 +8,9 @@ import { Calendar, PackageOpen, CirclePause, Radio } from "lucide-react";
 import DateRangePicker from "../ui/DateRangePicker";
 
 export default function DashboardOverview() {
+  const handleRangeChange = (formatted, startDate, endDate) => {
+    console.log(formatted, startDate, endDate);
+  };
   return (
     <div className="space-y-6">
       {/* date box */}
@@ -19,7 +23,7 @@ export default function DashboardOverview() {
             <Calendar />
           </button>
         </div> */}
-        <DateRangePicker />
+        <DateRangePicker onRangeChange={handleRangeChange} />
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card
@@ -123,7 +127,7 @@ export default function DashboardOverview() {
 
 function Card({ icon, title, value, circleColor }) {
   return (
-    <div class="max-w-sm mx-auto bg-white rounded-xl overflow-hidden p-6 shadow-[0px_0px_14px_0px_#00000040] w-56">
+    <div className="max-w-sm mx-auto bg-white rounded-xl overflow-hidden p-6 shadow-[0px_0px_14px_0px_#00000040] w-56">
       <div className="text-center">
         <div
           className={`relative mx-auto mb-4 w-15 h-15 rounded-full flex items-center justify-center ${circleColor}`}

@@ -25,8 +25,13 @@ export default function DateRangePicker({ onRangeChange }) {
 
     const formatted = `${format(startDate, "dd/MM/yyyy")} - ${format(endDate, "dd/MM/yyyy")}`;
     setSelectedRangeText(formatted); // Set visual text
-    onRangeChange(formatted, startDate, endDate);
-    setShowPicker(false);
+    
+    // Only close the picker and trigger onChange when both dates are different
+    // This ensures picker stays open while selecting the range
+    if (startDate.getTime() !== endDate.getTime()) {
+      onRangeChange(formatted, startDate, endDate);
+      setShowPicker(false);
+    }
   };
 
   useEffect(() => {

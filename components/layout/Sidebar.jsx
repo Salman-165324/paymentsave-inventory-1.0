@@ -25,6 +25,11 @@ const menuItems = [
     icon: <LayoutDashboard className="h-4 w-4 mr-2" />,
   },
   {
+    title: "My Terminal",
+    href: "/my-terminal",
+    icon: <Package className="h-4 w-4 mr-2" />,
+  },
+  {
     title: "Products",
     href: "/products",
     icon: <Package className="h-4 w-4 mr-2" />,

@@ -14,7 +14,7 @@ const data = [
   { id: 5, name: "Charlie White", email: "charlie@example.com" },
 ];
 
-function DamageLostProductsTable() {
+function MyTerminalTable() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const handleToggleDropdown = (id) => {
@@ -33,7 +33,7 @@ function DamageLostProductsTable() {
     <>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-[#383E49] mb-4">
-          Lost/Damage
+          My Terminal
         </h2>
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
@@ -130,4 +130,4 @@ function DamageLostProductsTable() {
   );
 }
 
-export default DamageLostProductsTable;
+export default MyTerminalTable;
