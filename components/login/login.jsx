@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "@conform-to/react";
@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [serverError, setServerError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Initialize form with Conform
   const [form, fields] = useForm({
@@ -66,7 +67,8 @@ export default function LoginPage() {
         }
       } else {
         // Successful login
-        router.push("/dashboard");
+        const redirectPath = searchParams.get("redirect");
+        router.push(redirectPath || "/dashboard");
       }
     } catch (error) {
       console.error("Login request failed:", error);

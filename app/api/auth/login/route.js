@@ -54,8 +54,16 @@ export async function POST(request) {
       const encryptedAccessToken = await encryptToken(data.data.access_token);
       const encryptedRefreshToken = await encryptToken(data.data.refresh_token);
 
-      // Set cookie options
-      const cookieOptions = {
+      // Set cookie options - separate for each token
+      const accessTokenOptions = {
+        httpOnly: true,
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 30, // 30 seconds for testing
+      };
+
+      const refreshTokenOptions = {
         httpOnly: true,
         path: "/",
         secure: process.env.NODE_ENV === "production",
@@ -65,8 +73,12 @@ export async function POST(request) {
 
       // Get the cookie store and await it before using set
       const cookieStore = await cookies();
-      cookieStore.set("access_token", encryptedAccessToken, cookieOptions);
-      cookieStore.set("refresh_token", encryptedRefreshToken, cookieOptions);
+      cookieStore.set("access_token", encryptedAccessToken, accessTokenOptions);
+      cookieStore.set(
+        "refresh_token",
+        encryptedRefreshToken,
+        refreshTokenOptions
+      );
 
       return Response.json({ success: true }, { status: 200 });
     } catch (apiError) {
