@@ -9,13 +9,13 @@ function ChevronDown() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_644_2313)">
+      <g clipPath="url(#clip0_644_2313)">
         <path
           d="M19.5 9L12 16.5L4.5 9"
           stroke="black"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>

@@ -1,12 +1,9 @@
-import OnHold from "../ui/icon/OnHold";
 import Processing from "../ui/icon/Processing";
-import AwaitShipment from "../ui/icon/AwaitShipment";
 import Shipped from "../ui/icon/Shipped";
 import Delivered from "../ui/icon/Delivered";
 import AwaitReturn from "../ui/icon/AwaitReturn";
-import LiveBase from "../ui/icon/LiveBase";
 import Returned from "../ui/icon/Returned";
-import DatePicker from "../ui/icon/DatePicker";
+import { Calendar, PackageOpen, CirclePause, Radio } from "lucide-react";
 
 export default function DashboardOverview() {
   return (
@@ -18,13 +15,13 @@ export default function DashboardOverview() {
             01/08/2024 - 10/09/2024
           </span>
           <button className="text-gray-500 hover:text-[#616262]">
-            <DatePicker />
+            <Calendar />
           </button>
         </div>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card
-          icon={<OnHold />}
+          icon={<CirclePause width={30} height={30} color="#FFFFFF" />}
           title="Total Products"
           value="256"
           circleColor="bg-[#FF6869]"
@@ -36,7 +33,7 @@ export default function DashboardOverview() {
           circleColor="bg-[#41A1D3]"
         />
         <Card
-          icon={<AwaitShipment />}
+          icon={<PackageOpen width={30} height={30} color="#FFFFFF" />}
           title="Pending Orders"
           circleColor="bg-[#FD7F30]"
           value="12"
@@ -60,7 +57,7 @@ export default function DashboardOverview() {
           circleColor="bg-[#DBA362]"
         />
         <Card
-          icon={<LiveBase />}
+          icon={<Radio width={30} height={30} color="#FFFFFF" />}
           title="Low Stock"
           value="8"
           circleColor="bg-[#FFAA3A]"
