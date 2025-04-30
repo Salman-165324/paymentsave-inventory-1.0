@@ -8,9 +8,6 @@ import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { loginSchema } from "@/app/schemas/auth";
 
-
-
-
 export default function LoginPage() {
   const [serverError, setServerError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -82,20 +79,21 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="flex flex-col items-center justify-center w-1/2 bg-gray-50">
-        <div className="mb-6">
+    <div className="flex flex-col md:flex-row h-screen">
+      <div className="hidden md:flex md:flex-col md:items-center md:justify-center md:w-1/2 bg-gray-50">
+        <div className="mb-6 px-4">
           <Image
             src="/image/color-logo.png"
             alt="Paymentsave Logo"
             width={300}
             height={100}
             priority
+            className="max-w-full h-auto"
           />
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center w-1/2">
+      <div className="flex flex-col justify-center items-center w-full md:w-1/2 p-4 md:p-0">
         <div className="mb-6">
           <Image
             src="/image/color-icon-logo.png"
@@ -106,11 +104,11 @@ export default function LoginPage() {
           />
         </div>
 
-        <div className="w-full max-w-sm">
-          <h2 className="text-2xl font-bold text-center">
+        <div className="w-full max-w-sm px-4">
+          <h2 className="text-xl md:text-2xl font-bold text-center">
             Log in to your account
           </h2>
-          <p className="mt-2 text-center text-gray-500">
+          <p className="mt-2 text-center text-gray-500 text-sm md:text-base">
             Welcome back! Please enter your details.
           </p>
 
