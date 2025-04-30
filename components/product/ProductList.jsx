@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Pagination from "@/components/ui/Pagination";
 import ProductTable from "./ProductTable";
 import DateRangePicker from "../ui/DateRangePicker";
@@ -113,6 +113,11 @@ export default function ProductList() {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(5); // Adjust as needed
 
+  const dropdownRef = useRef(null);
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
+  const [filterByCondition, setFilterByCondition] = useState(false);
+  const [filterByStatus, setFilterByStatus] = useState(false);
+
   const totalItems = products.length;
   const currentPage = Math.floor(offset / limit) + 1;
   const totalPages = Math.ceil(totalItems / limit);
@@ -122,7 +127,18 @@ export default function ProductList() {
   const handlePageChange = (pageNumber) => {
     setOffset((pageNumber - 1) * limit);
   };
-
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setFilterMenuOpen(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <MainCard title={""} className="bg-white ">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
@@ -157,7 +173,54 @@ export default function ProductList() {
               </svg>
             </div>
           </div>
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setFilterMenuOpen((prev) => !prev)}
+              className="p-2 cursor-pointer rounded bg-primary hover:bg-blue-700 text-white focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707l-6.414 6.414A1 1 0 0114 13.414V20a1 1 0 01-1.447.894l-4-2A1 1 0 018 18.118V13.414a1 1 0 01-.293-.707L1.293 6.707A1 1 0 011 6V4z"
+                />
+              </svg>
+            </button>
 
+            {/* Dropdown Menu */}
+            {filterMenuOpen && (
+              <div className="absolute right-0 mt-2 z-10 w-48 bg-white border-md rounded shadow-2xl p-3 text-sm">
+                <div className="font-medium text-primary mb-2">
+                  Filter By Status
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer mb-1">
+                  <input
+                    type="checkbox"
+                    className="text-primary"
+                    checked={filterByCondition}
+                    onChange={(e) => setFilterByCondition(e.target.checked)}
+                  />
+                  Product Condition
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="text-primary"
+                    checked={filterByStatus}
+                    onChange={(e) => setFilterByStatus(e.target.checked)}
+                  />
+                  Order Status
+                </label>
+              </div>
+            )}
+          </div>
           {/* Date Range Picker */}
           
           {/* <DateRangePicker

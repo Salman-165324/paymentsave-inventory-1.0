@@ -12,7 +12,8 @@ export default function TextArea({
   name,
 }) {
   return (
-    <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full">
+    <div className="flex flex-col md:flex-col items-start md:items-left gap-2 md:gap-2 w-full">
+    {/* <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full"> */}
       <label className="w-full md:min-w-[160px] md:w-[160px] text-primary font-medium text-sm">
         {label}
         {required && <span className="text-red-500 ml-0.5">*</span>}

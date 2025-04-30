@@ -84,7 +84,7 @@ export default function Header() {
             </div>
             
             {showProfile && (
-              <div className="absolute right-4 top-full z-50 mt-1 w-56 rounded-md border bg-background shadow-lg">
+              <div className="absolute right-4 top-13 z-50 mt-1 w-56 rounded-md border bg-background shadow-lg">
                 <div className="p-2">
                   <div className="rounded-md p-2 hover:bg-muted cursor-pointer">
                     <div className="text-sm font-medium">Profile</div>

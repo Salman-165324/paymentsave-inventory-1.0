@@ -189,7 +189,7 @@ export default function ProductList() {
     <MainCard title="" className="bg-white ">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h1 className="text-xl font-semibold text-[#383E49]">
-          Single Terminals
+          Single Products
         </h1>
 
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
