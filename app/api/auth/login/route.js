@@ -3,7 +3,7 @@ import { encryptToken } from '@/lib/encrypt';
 export async function POST(request) {
   const { email, password } = await request.json();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_EXTERNAL_API_URL}/api/v1/auth/web/token/`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/v1/auth/web/token/`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -14,6 +14,8 @@ export async function POST(request) {
   }
 
   const data = await res.json();
+
+  console.log("Data from the API", data); 
 
   const encodedAccessToken = await encryptToken(data.data.access_token);
   const encodedRefreshToken = await encryptToken(data.data.refresh_token);
