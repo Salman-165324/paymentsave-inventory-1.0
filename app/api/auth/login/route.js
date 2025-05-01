@@ -56,7 +56,7 @@ export async function POST(request) {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 30, // 30 seconds for testing
+        maxAge: 900, // 15 minutes
       };
 
       const refreshTokenOptions = {
