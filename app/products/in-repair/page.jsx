@@ -9,7 +9,7 @@ export default function InRepair() {
     <AdminLayout>
       <div className="bg-[#F9F9F9] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] max-w-7xl mx-auto">
         {/* Table */}
-        <InRepairTable />
+        <InRepairTable tableTitle="In Repair" />
 
         {/* Pagination */}
         <div className="flex justify-between items-center mt-4 text-sm text-gray-600">

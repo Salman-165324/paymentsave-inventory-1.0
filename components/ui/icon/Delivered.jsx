@@ -1,10 +1,10 @@
 import React from "react";
 
-function Delivered() {
+function Delivered({ width = 33, height = 21 }) {
   return (
     <svg
-      width="33"
-      height="21"
+      width={width}
+      height={height}
       viewBox="0 0 33 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

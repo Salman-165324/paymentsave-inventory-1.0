@@ -48,10 +48,11 @@ const menuItems = [
       { title: "Add Category", href: "/products/add-catagory" },
       { title: "Add Supplier ", href: "/products/add-supplier " },
       {
-        title: "Damage / Lost Products",
+        title: "Lost / Damage",
         href: "/products/damage-lost-products",
       },
       { title: "In Repair", href: "/products/in-repair" },
+      { title: "Archive Products", href: "/products/archive-products" },
     ],
   },
   {

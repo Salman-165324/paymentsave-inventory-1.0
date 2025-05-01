@@ -14,7 +14,7 @@ const data = [
   { id: 5, name: "Charlie White", email: "charlie@example.com" },
 ];
 
-function DamageLostProductsTable() {
+function DamageLostProductsTable({ tableTitle }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const handleToggleDropdown = (id) => {
@@ -33,11 +33,11 @@ function DamageLostProductsTable() {
     <>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-[#383E49] mb-4">
-          Lost/Damage
+          {tableTitle}
         </h2>
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
-          <div className="flex items-center w-full md:w-auto gap-2">
+          <div className="flex items-center w-full md:w-auto gap-2 mr-8">
             <div className="relative w-full md:w-64">
               <input
                 type="text"
@@ -68,10 +68,10 @@ function DamageLostProductsTable() {
           />
         </div>
       </div>
-      <div className="overflow-auto rounded-md border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
-          <thead className="bg-gray-100 text-gray-600">
-            <tr>
+      <div className="relative overflow-visible rounded-md">
+        <table className="min-w-full text-sm text-left">
+          <thead className="bg-[#F5F5F5] text-gray-600">
+            <tr className="border-b border-[#D9D9D9]">
               <th className="px-4 py-2 font-medium">Action</th>
               <th className="px-4 py-2 font-medium flex items-center gap-1">
                 Date ⇅
@@ -86,7 +86,7 @@ function DamageLostProductsTable() {
           </thead>
           <tbody className="divide-y divide-gray-100 text-gray-700">
             {data.map((item, i) => (
-              <tr key={i}>
+              <tr key={i} className="border-b border-[#D9D9D9]">
                 <td className="px-4 py-2">
                   {/* <button className="text-blue-600 bg-[#19499A] rounded-full p-1">
                   <EllipsisVertical width={20} height={20} color="#FFFFFF" />

@@ -1,10 +1,10 @@
 import React from "react";
 
-function AwaitReturn() {
+function AwaitReturn({ width = 30, height = 31 }) {
   return (
     <svg
-      width="30"
-      height="31"
+      width={width}
+      height={height}
       viewBox="0 0 30 31"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

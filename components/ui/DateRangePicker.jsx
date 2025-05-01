@@ -48,7 +48,7 @@ export default function DateRangePicker({ onRangeChange }) {
   }, []);
 
   return (
-    <div className="relative w-full sm:w-52 md:w-64 border border-[#A0A0A0] rounded-md" ref={pickerRef}>
+    <div className="relative w-full sm:w-52 md:w-64 lg:w-72 border border-[#A0A0A0] rounded-sm" ref={pickerRef}>
       <input
         type="text"
         readOnly

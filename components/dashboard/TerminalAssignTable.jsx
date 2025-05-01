@@ -14,7 +14,7 @@ const data = [
   { id: 5, name: "Charlie White", email: "charlie@example.com" },
 ];
 
-function InRepairTable({ tableTitle }) {
+function TerminalAssignTable() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const handleToggleDropdown = (id) => {
@@ -33,16 +33,16 @@ function InRepairTable({ tableTitle }) {
     <>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold text-[#383E49] mb-4">
-          {tableTitle}
+          Terminal Assigned
         </h2>
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
-          <div className="flex items-center w-full md:w-auto gap-2 mr-8">
+          <div className="flex items-center w-full md:w-auto gap-2">
             <div className="relative w-full md:w-64">
               <input
                 type="text"
                 placeholder="Search"
-                className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border rounded-md px-4 py-2 pr-10 bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {/* 🔍 Search Icon Placeholder */}
               <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
@@ -50,27 +50,20 @@ function InRepairTable({ tableTitle }) {
                 <Search width={20} height={20} color="#C4C4C4" />
               </div>
             </div>
-            <div className="relative w-full md:w-64">
-              {/* <input
-                  type="text"
-                  placeholder="01/08/2024 - 10/09/2024"
-                  className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
-                  <Calendar width={20} height={20} color="#C4C4C4" />
-                </div> */}
+            {/* <div className="relative w-full md:w-64">
+              
               <DateRangePicker onRangeChange={handleRangeChange} />
-            </div>
+            </div> */}
           </div>
-          <FilterButton
+          {/* <FilterButton
             filterName="Product status"
             filterOptions={["Damaged", "Lost"]}
-          />
+          /> */}
         </div>
       </div>
       <div className="relative overflow-visible rounded-md">
         <table className="min-w-full text-sm text-left">
-          <thead className="bg-[#F5F5F5] text-gray-600">
+          <thead className="bg-[#41A1D333] text-gray-600">
             <tr className="border-b border-[#D9D9D9]">
               <th className="px-4 py-2 font-medium">Action</th>
               <th className="px-4 py-2 font-medium flex items-center gap-1">
@@ -89,7 +82,7 @@ function InRepairTable({ tableTitle }) {
               <tr key={i} className="border-b border-[#D9D9D9]">
                 <td className="px-4 py-2">
                   {/* <button className="text-blue-600 bg-[#19499A] rounded-full p-1">
-                    <EllipsisVertical width={20} height={20} color="#FFFFFF" />
+                  <EllipsisVertical width={20} height={20} color="#FFFFFF" />
                 </button> */}
                   <TableActionMenu
                     onView={() => console.log(`View item ${item.id}`)}
@@ -100,16 +93,22 @@ function InRepairTable({ tableTitle }) {
                     onClose={handleCloseDropdown}
                   />
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap">02/02/2025</td>
-                <td className="px-4 py-2">154782143241</td>
-                <td className="px-4 py-2">A92{i} PRO</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 whitespace-nowrap text-[#48505E] font-medium text-xs">
+                  02/02/2025
+                </td>
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs ">
+                  154782143241
+                </td>
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs     ">
+                  A92{i} PRO
+                </td>
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {i % 2 === 0 ? "Terminal" : "Accessories"}
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
                 </td>
                 <td className="px-4 py-2">
@@ -124,4 +123,4 @@ function InRepairTable({ tableTitle }) {
   );
 }
 
-export default InRepairTable;
+export default TerminalAssignTable;

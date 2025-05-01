@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Processing from "../ui/icon/Processing";
 import Shipped from "../ui/icon/Shipped";
 import Delivered from "../ui/icon/Delivered";
@@ -6,6 +6,11 @@ import AwaitReturn from "../ui/icon/AwaitReturn";
 import Returned from "../ui/icon/Returned";
 import { Calendar, PackageOpen, CirclePause, Radio } from "lucide-react";
 import DateRangePicker from "../ui/DateRangePicker";
+import OrderTrendTable from "./OrderTrendTable";
+import SummaryCard from "./SummaryCard";
+import QuantityCard from "./QuantityCard";
+import DamageLostProductsTable from "../product/damage-lost-products-table/DamageLostProductsTable";
+import TerminalAssignTable from "./TerminalAssignTable";
 
 export default function DashboardOverview() {
   const handleRangeChange = (formatted, startDate, endDate) => {
@@ -14,7 +19,7 @@ export default function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* date box */}
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-end mb-8">
         {/* <div className="bg-white shadow rounded p-4 w-auto max-w-sm flex items-center justify-between">
           <span className="text-[#616262] font-medium mr-4">
             01/08/2024 - 10/09/2024
@@ -25,59 +30,60 @@ export default function DashboardOverview() {
         </div> */}
         <DateRangePicker onRangeChange={handleRangeChange} />
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mb-8">
         <Card
-          icon={<CirclePause width={30} height={30} color="#FFFFFF" />}
-          title="Total Products"
-          value="256"
+          icon={<CirclePause width={52} height={52} color="#FFFFFF" />}
+          title="On Hold"
+          value="2565"
           circleColor="bg-[#FF6869]"
         />
         <Card
-          icon={<Processing />}
-          title="Total Orders"
-          value="45"
+          icon={<Processing width={52} height={52} color="#FFFFFF" />}
+          title="Processing"
+          value="450"
           circleColor="bg-[#41A1D3]"
         />
         <Card
-          icon={<PackageOpen width={30} height={30} color="#FFFFFF" />}
-          title="Pending Orders"
+          icon={<PackageOpen width={52} height={52} color="#FFFFFF" />}
+          title="Awaiting Shipment"
           circleColor="bg-[#FD7F30]"
-          value="12"
+          value="1200"
         />
         <Card
-          icon={<Shipped />}
-          title="Low Stock"
-          value="8"
+          icon={<Shipped width={52} height={52} color="#FFFFFF" />}
+          title="Shipped"
+          value="598"
           circleColor="bg-[#22C55E]"
         />
         <Card
-          icon={<Delivered />}
-          title="Low Stock"
-          value="8"
+          icon={<Delivered width={52} height={52} color="#FFFFFF" />}
+          title="Delivered"
+          value="328"
           circleColor="bg-[#3C50E0]"
         />
         <Card
-          icon={<AwaitReturn />}
-          title="Low Stock"
-          value="8"
-          circleColor="bg-[#DBA362]"
-        />
-        <Card
-          icon={<Radio width={30} height={30} color="#FFFFFF" />}
-          title="Low Stock"
-          value="8"
+          icon={<Radio width={52} height={52} color="#FFFFFF" />}
+          title="Live Base"
+          value="58"
           circleColor="bg-[#FFAA3A]"
         />
         <Card
-          icon={<Returned />}
-          title="Low Stock"
-          value="8"
+          icon={<AwaitReturn width={52} height={52} color="#FFFFFF" />}
+          title="Awaiting Return"
+          value="88"
+          circleColor="bg-[#DBA362]"
+        />
+        <Card
+          icon={<Returned width={52} height={52} color="#FFFFFF" />}
+          title="Returned"
+          value="80"
           circleColor="bg-[#006396]"
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 shadow-[0px_4px_20px_0px_#00000040]">
-        <div className="rounded-lg border bg-card p-6">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+        <SummaryCard />
+        <div className="rounded-lg shadow-[0px_4px_20px_0px_#00000040] border bg-card p-6">
           <h3 className="font-medium mb-4">Recent Orders</h3>
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
@@ -99,27 +105,13 @@ export default function DashboardOverview() {
           </div>
         </div>
 
-        <div className="rounded-lg border bg-card p-6">
-          <h3 className="font-medium mb-4">Low Stock Products</h3>
-          <div className="space-y-2">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between p-2 rounded-md hover:bg-muted"
-              >
-                <div>
-                  <div className="font-medium">Product {i}</div>
-                  <div className="text-sm text-muted-foreground">
-                    Quantity: {i * 2}
-                  </div>
-                </div>
-                <div className="text-sm font-medium text-destructive">
-                  Low Stock
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <QuantityCard />
+      </div>
+      <div className="bg-[#F9F9F9] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] mx-auto mb-8">
+        <OrderTrendTable className="bg-[#F9F9F9]" />
+      </div>
+      <div className="bg-[#41A1D333] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] mx-auto mb-8">
+        <TerminalAssignTable />
       </div>
     </div>
   );
@@ -127,17 +119,21 @@ export default function DashboardOverview() {
 
 function Card({ icon, title, value, circleColor }) {
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-xl overflow-hidden p-6 shadow-[0px_0px_14px_0px_#00000040] w-56">
-      <div className="text-center">
+    <div className="w-full max-w-sm mx-auto bg-white rounded-xl overflow-hidden p-6 shadow-[0px_0px_14px_0px_#00000040] hover:shadow-[0px_0px_20px_0px_#00000050] transition-all duration-300">
+      <div className="text-center flex flex-col items-center space-y-4">
         <div
-          className={`relative mx-auto mb-4 w-15 h-15 rounded-full flex items-center justify-center ${circleColor}`}
+          className={`relative w-16 sm:w-20 md:w-24 aspect-square rounded-full flex items-center justify-center ${circleColor}`}
         >
-          {icon}
+          <div className="text-xl sm:text-2xl md:text-3xl">{icon}</div>
         </div>
 
-        <div className="space-y-2">
-          <h3 className="text-[16px] font-medium text-[#616262]">{title}</h3>
-          <p className="text-2xl font-semibold text-[#19231F]">{value}</p>
+        <div className="space-y-1">
+          <h3 className="text-base sm:text-lg font-medium text-[#616262]">
+            {title}
+          </h3>
+          <p className="text-xl sm:text-2xl font-semibold text-[#19231F]">
+            {value}
+          </p>
         </div>
       </div>
     </div>

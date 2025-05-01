@@ -12,9 +12,14 @@ const data = [
   { id: 3, name: "Alice Johnson", email: "alice@example.com" },
   { id: 4, name: "Bob Brown", email: "bob@example.com" },
   { id: 5, name: "Charlie White", email: "charlie@example.com" },
+  { id: 6, name: "David Green", email: "david@example.com" },
+  { id: 7, name: "Eve Black", email: "eve@example.com" },
+  { id: 8, name: "Frank Blue", email: "frank@example.com" },
+  { id: 9, name: "George Yellow", email: "george@example.com" },
+  { id: 10, name: "Helen Purple", email: "helen@example.com" },
 ];
 
-function InRepairTable({ tableTitle }) {
+function OrderTrendTable({ className }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const handleToggleDropdown = (id) => {
@@ -29,28 +34,34 @@ function InRepairTable({ tableTitle }) {
     console.log(formatted, startDate, endDate);
   };
 
+  const count = 5030;
   return (
     <>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-[#383E49] mb-4">
-          {tableTitle}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+        <h2 className="text-[28px] font-medium text-[#41A1D3] mb-4">
+          Order Trend
         </h2>
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
-          <div className="flex items-center w-full md:w-auto gap-2 mr-8">
-            <div className="relative w-full md:w-64">
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              {/* 🔍 Search Icon Placeholder */}
-              <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
-                {/* Search Icon */}
-                <Search width={20} height={20} color="#C4C4C4" />
+          <div className="flex flex-col md:flex-row items-center w-full md:w-auto gap-2">
+            <div className="flex items-center w-full md:w-[400px] h-[40px] rounded-md overflow-hidden relative">
+              <div className="absolute inset-0 flex">
+                <div className="bg-[#41A1D3] w-[75%] h-full"></div>
+                <div className="bg-[#FF8A4C] w-[25%] h-full"></div>
+              </div>
+              <div className="absolute h-full w-12 left-[63%] overflow-hidden">
+                <div className="absolute top-0 left-0 h-full w-14 bg-[#FF8A4C] rounded-tl-full"></div>
+              </div>
+              <div className="relative z-10 flex w-full">
+                <div className="flex-1 p-4 text-[#F0F1F3] text-xl font-medium">
+                  Total Order Count
+                </div>
+                <div className="p-4 text-[#F0F1F3] text-xl font-bold">
+                  {count}
+                </div>
               </div>
             </div>
-            <div className="relative w-full md:w-64">
+            <div className="relative w-full md:w-64 mr-4 ml-4 lg:mr-10 lg:ml-4">
               {/* <input
                   type="text"
                   placeholder="01/08/2024 - 10/09/2024"
@@ -68,14 +79,11 @@ function InRepairTable({ tableTitle }) {
           />
         </div>
       </div>
-      <div className="relative overflow-visible rounded-md">
-        <table className="min-w-full text-sm text-left">
-          <thead className="bg-[#F5F5F5] text-gray-600">
+      <div className="rounded-md border border-gray-200 overflow-auto max-h-64">
+        <table className="min-w-full text-sm text-left border-separate border-spacing-0">
+          <thead className={`text-gray-600 sticky top-0 z-10 ${className}`}>
             <tr className="border-b border-[#D9D9D9]">
-              <th className="px-4 py-2 font-medium">Action</th>
-              <th className="px-4 py-2 font-medium flex items-center gap-1">
-                Date ⇅
-              </th>
+              <th className="px-4 py-2 font-medium">Date ⇅</th>
               <th className="px-4 py-2 font-medium">Product Serial Number</th>
               <th className="px-4 py-2 font-medium">Model</th>
               <th className="px-4 py-2 font-medium">Product Type</th>
@@ -87,29 +95,22 @@ function InRepairTable({ tableTitle }) {
           <tbody className="divide-y divide-gray-100 text-gray-700">
             {data.map((item, i) => (
               <tr key={i} className="border-b border-[#D9D9D9]">
-                <td className="px-4 py-2">
-                  {/* <button className="text-blue-600 bg-[#19499A] rounded-full p-1">
-                    <EllipsisVertical width={20} height={20} color="#FFFFFF" />
-                </button> */}
-                  <TableActionMenu
-                    onView={() => console.log(`View item ${item.id}`)}
-                    onEdit={() => console.log(`Edit item ${item.id}`)}
-                    onDelete={() => console.log(`Delete item ${item.id}`)}
-                    isOpen={openDropdownId === item.id}
-                    onToggle={() => handleToggleDropdown(item.id)}
-                    onClose={handleCloseDropdown}
-                  />
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                  02/02/2025
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap">02/02/2025</td>
-                <td className="px-4 py-2">154782143241</td>
-                <td className="px-4 py-2">A92{i} PRO</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                  154782143241
+                </td>
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                  A92{i} PRO
+                </td>
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {i % 2 === 0 ? "Terminal" : "Accessories"}
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
                 </td>
                 <td className="px-4 py-2">
@@ -124,4 +125,4 @@ function InRepairTable({ tableTitle }) {
   );
 }
 
-export default InRepairTable;
+export default OrderTrendTable;

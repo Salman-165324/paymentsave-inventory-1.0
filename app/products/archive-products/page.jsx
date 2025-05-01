@@ -1,17 +1,12 @@
 import AdminLayout from "@/components/layout/AdminLayout";
-// import Filter from "@/components/ui/icon/Filter";
-// import Search from "@/components/ui/icon/Search";
-import { Calendar, Search, Filter } from "lucide-react";
-import DamageLostProductsTable from "@/components/product/damage-lost-products-table/DamageLostProductsTable";
+import InRepairTable from "@/components/product/in-repair/InRepairTable";
 
-export default function DamageLostProducts() {
-  
+export default function ArchiveProducts() {
   return (
     <AdminLayout>
       <div className="bg-[#F9F9F9] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] max-w-7xl mx-auto">
-
         {/* Table */}
-        <DamageLostProductsTable tableTitle="Lost / Damage Products" />
+        <InRepairTable tableTitle="Archive Products" />
 
         {/* Pagination */}
         <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
