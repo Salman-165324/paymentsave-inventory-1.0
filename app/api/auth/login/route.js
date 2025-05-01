@@ -37,7 +37,6 @@ export async function POST(request) {
       const data = await res.json();
 
       if (!res.ok) {
-        console.error("API login error:", data);
 
         return Response.json(
           {
@@ -49,7 +48,6 @@ export async function POST(request) {
         );
       }
 
-      console.log("Data from the API", data);
 
       const encryptedAccessToken = await encryptToken(data.data.access_token);
       const encryptedRefreshToken = await encryptToken(data.data.refresh_token);

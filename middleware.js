@@ -35,7 +35,6 @@ export async function middleware(request) {
     try {
       // Call the refresh token API
 
-      console.log("I am in side the access token refreshment mechanism");
       const refreshResponse = await fetch(
         `${request.nextUrl.origin}/api/auth/refresh`,
         {

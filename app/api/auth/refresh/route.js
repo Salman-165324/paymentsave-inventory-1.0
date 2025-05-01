@@ -10,7 +10,6 @@ export async function POST() {
     // Get the refresh token from cookies
     const refreshToken = cookieStore.get("refresh_token");
 
-    console.log("Refresh token before decryption:", refreshToken);
 
     if (!refreshToken || !refreshToken.value) {
       return Response.json(
@@ -26,7 +25,6 @@ export async function POST() {
       // Decrypt the refresh token before sending it to the backend
       const decryptedRefreshToken = await decryptToken(refreshToken.value);
 
-      console.log("Decrypted refresh token:", decryptedRefreshToken);
 
       // Call the backend API to refresh the token
       const res = await fetch(
@@ -38,11 +36,8 @@ export async function POST() {
         }
       );
 
-      console.log("Response from the backend:", res);
-
       const data = await res.json();
 
-      console.log("Data from the backend:", data);
 
       if (!res.ok) {
         // If refresh token is invalid or expired, clear both tokens
