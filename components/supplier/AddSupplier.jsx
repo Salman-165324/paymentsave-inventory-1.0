@@ -23,7 +23,6 @@ const AddSupplier = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Supplier Data Submitted:", formData);
     // Handle API submission here
   };
 

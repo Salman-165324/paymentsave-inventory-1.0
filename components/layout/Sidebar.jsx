@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
@@ -17,14 +20,20 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { cn } from "../../lib/utils";
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
   {
     title: "Dashboard",
     href: "/dashboard",
+    title: "Dashboard",
+    href: "/dashboard",
     icon: <LayoutDashboard className="h-4 w-4 mr-2" />,
   },
   {
+    title: "Products",
+    href: "/products",
     title: "Products",
     href: "/products",
     icon: <Package className="h-4 w-4 mr-2" />,
@@ -81,9 +90,13 @@ const menuItems = [
   {
     title: "Live Base",
     href: "/live-base",
+    title: "Live Base",
+    href: "/live-base",
     icon: <Server className="h-4 w-4 mr-2" />,
   },
   {
+    title: "Businesses",
+    href: "/businesses",
     title: "Businesses",
     href: "/businesses",
     icon: <Briefcase className="h-4 w-4 mr-2" />,
@@ -91,9 +104,13 @@ const menuItems = [
   {
     title: "Orders to Supplier",
     href: "/orders-to-supplier",
+    title: "Orders to Supplier",
+    href: "/orders-to-supplier",
     icon: <ShoppingCart className="h-4 w-4 mr-2" />,
   },
   {
+    title: "Invoice",
+    href: "/invoice",
     title: "Invoice",
     href: "/invoice",
     icon: <FileText className="h-4 w-4 mr-2" />,
@@ -101,14 +118,20 @@ const menuItems = [
   {
     title: "Users",
     href: "/users",
+    title: "Users",
+    href: "/users",
     icon: <Users className="h-4 w-4 mr-2" />,
   },
   {
     title: "Account",
     href: "/account",
+    title: "Account",
+    href: "/account",
     icon: <Users className="h-4 w-4 mr-2" />,
   },
   {
+    title: "Settings",
+    href: "/settings",
     title: "Settings",
     href: "/settings",
     icon: <Settings className="h-4 w-4 mr-2" />,
@@ -117,7 +140,9 @@ const menuItems = [
 
 export default function Sidebar({ className }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [openIndex, setOpenIndex] = useState(null);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     // Keep submenu open if any sublink is active
@@ -132,11 +157,49 @@ export default function Sidebar({ className }) {
   }, [pathname]);
 
   const isActive = (href) => pathname === href || pathname.startsWith(href);
+  const isActive = (href) => pathname.startsWith(href);
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        // Redirect to login page
+        router.push("/login");
+        router.refresh();
+      } else {
+        console.error("Logout failed:", await res.json());
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
+    <div
+      className={cn(
+        "w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto",
+        className
+      )}
+    >
     <div className={cn("w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto", className)}>
       <div className="flex flex-col h-full p-4">
         {/* Logo Section */}
+        <div className="flex items-center px-4 py-5 justify-center ">
+          <img
+            src="/image/logo.png"
+            alt="Paymentsave"
+            className="h-10 w-auto"
+          />
+          {/* <div className="text-white font-bold text-sm">Paymentsave</div> */}
         <div className="flex items-center px-3 py-5">
           <img src="/image/logo.png" alt="Paymentsave" className="h-10 w-auto" />
         </div>
@@ -198,10 +261,14 @@ export default function Sidebar({ className }) {
 
         {/* Logout */}
         <div className="mt-auto pt-4 border-t border-white/10">
-          <div className="flex items-center px-3 py-2 text-sm font-medium cursor-pointer hover:bg-white/10 rounded-md transition-colors">
+          <button
+            className="w-full flex items-center px-3 py-2 text-sm font-medium cursor-pointer hover:bg-white/10 rounded-md transition-colors"
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+          >
             <LogOut className="h-4 w-4 mr-2" />
-            Logout
-          </div>
+            {isLoggingOut ? "Logging out..." : "Logout"}
+          </button>
         </div>
       </div>
     </div>

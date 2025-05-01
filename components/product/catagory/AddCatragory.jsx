@@ -26,7 +26,6 @@ export default function AddCategory() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting form data:", formData);
     // Handle API submission here
   };
 
