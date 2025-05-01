@@ -59,6 +59,7 @@ const menuItems = [
       { title: "Damage Products", href: "/lost-damage-products" },
     ],
   },
+  /*
   {
     title: "Orders",
     href: "/orders",
@@ -69,6 +70,7 @@ const menuItems = [
       { title: "Completed", href: "/orders/completed" },
     ],
   },
+  */
   {
     title: "Supplier",
     href: "/suppliers",
@@ -78,6 +80,7 @@ const menuItems = [
       { title: "Add Supplier", href: "/add-supplier" },
     ],
   },
+  /*
   {
     title: "Live Base",
     href: "/live-base",
@@ -113,6 +116,7 @@ const menuItems = [
     href: "/settings",
     icon: <Settings className="h-4 w-4 mr-2" />,
   },
+  */
 ];
 
 export default function Sidebar({ className }) {
