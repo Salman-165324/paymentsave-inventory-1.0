@@ -67,14 +67,12 @@ function TerminalAssignTable() {
             <tr className="border-b border-[#D9D9D9]">
               <th className="px-4 py-2 font-medium">Action</th>
               <th className="px-4 py-2 font-medium flex items-center gap-1">
-                Date ⇅
+                Username
               </th>
-              <th className="px-4 py-2 font-medium">Product Serial Number</th>
-              <th className="px-4 py-2 font-medium">Model</th>
-              <th className="px-4 py-2 font-medium">Product Type</th>
-              <th className="px-4 py-2 font-medium">Product Category</th>
-              <th className="px-4 py-2 font-medium">Reason</th>
-              <th className="px-4 py-2 font-medium">Product Status</th>
+              <th className="px-4 py-2 font-medium">Terminals Count</th>
+              <th className="px-4 py-2 font-medium">Phone</th>
+              <th className="px-4 py-2 font-medium">Email</th>
+              <th className="px-4 py-2 font-medium">Image</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 text-gray-700">
@@ -93,12 +91,7 @@ function TerminalAssignTable() {
                     onClose={handleCloseDropdown}
                   />
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap text-[#48505E] font-medium text-xs">
-                  02/02/2025
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs ">
-                  154782143241
-                </td>
+                
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs     ">
                   A92{i} PRO
                 </td>

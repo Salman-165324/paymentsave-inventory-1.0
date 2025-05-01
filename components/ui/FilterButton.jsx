@@ -27,7 +27,7 @@ export default function FilterButton({ filterName, filterOptions }) {
         <Filter width={20} height={20} color="#C4C4C4" />
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md">
+        <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50">
           <div className="p-4">
             <h5 className="text-sm font-medium text-gray-700">
               Filter by {filterName}

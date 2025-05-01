@@ -75,29 +75,23 @@ function OrderTrendTable({ className }) {
           </div>
           <FilterButton
             filterName="Product status"
-            filterOptions={["Damaged", "Lost"]}
+            filterOptions={["Accessories", "Terminal"]}
           />
         </div>
       </div>
-      <div className="rounded-md border border-gray-200 overflow-auto max-h-64">
-        <table className="min-w-full text-sm text-left border-separate border-spacing-0">
-          <thead className={`text-gray-600 sticky top-0 z-10 ${className}`}>
+      <div className="rounded-md border-y border-gray-200 overflow-auto max-h-64">
+        <table className="min-w-full text-sm text-center">
+          <thead className={`text-[#667085] font-semibold text-sm bg-[#F5F5F5] sticky top-0 z-10 py-4 ${className}`}>
             <tr className="border-b border-[#D9D9D9]">
-              <th className="px-4 py-2 font-medium">Date ⇅</th>
-              <th className="px-4 py-2 font-medium">Product Serial Number</th>
-              <th className="px-4 py-2 font-medium">Model</th>
+              <th className="px-4 py-2 font-medium">Product Model</th>
               <th className="px-4 py-2 font-medium">Product Type</th>
-              <th className="px-4 py-2 font-medium">Product Category</th>
-              <th className="px-4 py-2 font-medium">Reason</th>
-              <th className="px-4 py-2 font-medium">Product Status</th>
+              <th className="px-4 py-2 font-medium">Order Count</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 text-gray-700">
             {data.map((item, i) => (
-              <tr key={i} className="border-b border-[#D9D9D9]">
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  02/02/2025
-                </td>
+              <tr key={i} className="border-b border-[#D9D9D9] py-4 text-sm font-medium">
+                
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
                   154782143241
                 </td>
@@ -105,16 +99,7 @@ function OrderTrendTable({ className }) {
                   A92{i} PRO
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {i % 2 === 0 ? "Terminal" : "Accessories"}
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
-                </td>
-                <td className="px-4 py-2">
-                  {i % 2 === 0 ? "Damaged" : "Lost"}
+                  {i +1}
                 </td>
               </tr>
             ))}

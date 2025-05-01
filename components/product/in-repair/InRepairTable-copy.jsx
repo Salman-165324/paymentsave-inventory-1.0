@@ -6,7 +6,6 @@ import TableActionMenu from "@/components/ui/TableActionMenu";
 import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
-
 const data = [
   { id: 1, name: "John Doe", email: "john@example.com" },
   { id: 2, name: "Jane Smith", email: "jane@example.com" },
@@ -15,7 +14,7 @@ const data = [
   { id: 5, name: "Charlie White", email: "charlie@example.com" },
 ];
 
-function DamageLostProductsTable({ tableTitle }) {
+function InRepairTable({ tableTitle }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
 
   const handleToggleDropdown = (id) => {
@@ -72,23 +71,14 @@ function DamageLostProductsTable({ tableTitle }) {
       <div className="relative overflow-visible rounded-md">
         <table className="min-w-full text-sm text-left">
           <TableHead
-            heads={[
-              "Action",
-              "Date",
-              "Product Serial Number",
-              "Model",
-              "Product Type",
-              "Product Category",
-              "Reason",
-              "Product Status",
-            ]}
+            heads={["Action", "Date", "Product Category", "Model", "Product Name", "Serial Nymber", "Product Serial Number", "Product Condition", "Supplier Name", "Invoice Number", "Price"]}
           />
           <tbody className="divide-y divide-gray-100 text-gray-700">
             {data.map((item, i) => (
               <tr key={i} className="border-b border-[#D9D9D9]">
                 <td className="px-4 py-2">
                   {/* <button className="text-blue-600 bg-[#19499A] rounded-full p-1">
-                  <EllipsisVertical width={20} height={20} color="#FFFFFF" />
+                    <EllipsisVertical width={20} height={20} color="#FFFFFF" />
                 </button> */}
                   <TableActionMenu
                     onView={() => console.log(`View item ${item.id}`)}
@@ -99,23 +89,26 @@ function DamageLostProductsTable({ tableTitle }) {
                     onClose={handleCloseDropdown}
                   />
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap text-[#48505E] font-medium text-xs">
-                  02/02/2025
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs ">
-                  154782143241
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs     ">
-                  A92{i} PRO
-                </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                <td className="px-4 py-2 whitespace-nowrap">02/02/2025</td>
+                <td className="px-4 py-2">154782143241</td>
+                <td className="px-4 py-2">A92{i} PRO</td>
+                <td className="px-4 py-2">
                   {i % 2 === 0 ? "Terminal" : "Accessories"}
                 </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                <td className="px-4 py-2">
                   {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
                 </td>
-                <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
+                <td className="px-4 py-2">
                   {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
+                </td>
+                <td className="px-4 py-2">
+                  {i % 2 === 0 ? "Damaged" : "Lost"}
+                </td>
+                <td className="px-4 py-2">
+                  {i % 2 === 0 ? "Damaged" : "Lost"}
+                </td>
+                <td className="px-4 py-2">
+                  {i % 2 === 0 ? "Damaged" : "Lost"}
                 </td>
                 <td className="px-4 py-2">
                   {i % 2 === 0 ? "Damaged" : "Lost"}
@@ -129,4 +122,4 @@ function DamageLostProductsTable({ tableTitle }) {
   );
 }
 
-export default DamageLostProductsTable;
+export default InRepairTable;

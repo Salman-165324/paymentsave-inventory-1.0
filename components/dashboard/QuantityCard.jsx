@@ -18,7 +18,7 @@ const LowQuantityStock = () => {
   return (
     <div className="p-5 rounded-2xl w-full space-y-6 bg-white shadow-[0px_4px_20px_0px_#00000040]">
       {/* Card Header */}
-      <div className="flex justify-between items-center p-6 border-b">
+      <div className="flex justify-between items-center px-6 mb-2 pb-2 border-b">
         <h2 className="text-xl font-semibold text-gray-800">
           Low Quantity Stock
         </h2>

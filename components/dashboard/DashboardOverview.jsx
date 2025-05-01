@@ -11,6 +11,7 @@ import SummaryCard from "./SummaryCard";
 import QuantityCard from "./QuantityCard";
 import DamageLostProductsTable from "../product/damage-lost-products-table/DamageLostProductsTable";
 import TerminalAssignTable from "./TerminalAssignTable";
+import InStockTerminals from "./InStockTerminals";
 
 export default function DashboardOverview() {
   const handleRangeChange = (formatted, startDate, endDate) => {
@@ -30,51 +31,51 @@ export default function DashboardOverview() {
         </div> */}
         <DateRangePicker onRangeChange={handleRangeChange} />
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mb-8">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mb-8">
         <Card
-          icon={<CirclePause width={52} height={52} color="#FFFFFF" />}
+          icon={<CirclePause width={40} height={40} color="#FFFFFF" />}
           title="On Hold"
           value="2565"
           circleColor="bg-[#FF6869]"
         />
         <Card
-          icon={<Processing width={52} height={52} color="#FFFFFF" />}
+          icon={<Processing width={40} height={40} color="#FFFFFF" />}
           title="Processing"
           value="450"
           circleColor="bg-[#41A1D3]"
         />
         <Card
-          icon={<PackageOpen width={52} height={52} color="#FFFFFF" />}
+          icon={<PackageOpen width={40} height={40} color="#FFFFFF" />}
           title="Awaiting Shipment"
           circleColor="bg-[#FD7F30]"
           value="1200"
         />
         <Card
-          icon={<Shipped width={52} height={52} color="#FFFFFF" />}
+          icon={<Shipped width={40} height={40} color="#FFFFFF" />}
           title="Shipped"
           value="598"
           circleColor="bg-[#22C55E]"
         />
         <Card
-          icon={<Delivered width={52} height={52} color="#FFFFFF" />}
+          icon={<Delivered width={40} height={40} color="#FFFFFF" />}
           title="Delivered"
           value="328"
           circleColor="bg-[#3C50E0]"
         />
         <Card
-          icon={<Radio width={52} height={52} color="#FFFFFF" />}
+          icon={<Radio width={40} height={40} color="#FFFFFF" />}
           title="Live Base"
           value="58"
           circleColor="bg-[#FFAA3A]"
         />
         <Card
-          icon={<AwaitReturn width={52} height={52} color="#FFFFFF" />}
+          icon={<AwaitReturn width={40} height={40} color="#FFFFFF" />}
           title="Awaiting Return"
           value="88"
           circleColor="bg-[#DBA362]"
         />
         <Card
-          icon={<Returned width={52} height={52} color="#FFFFFF" />}
+          icon={<Returned width={40} height={40} color="#FFFFFF" />}
           title="Returned"
           value="80"
           circleColor="bg-[#006396]"
@@ -83,34 +84,13 @@ export default function DashboardOverview() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
         <SummaryCard />
-        <div className="rounded-lg shadow-[0px_4px_20px_0px_#00000040] border bg-card p-6">
-          <h3 className="font-medium mb-4">Recent Orders</h3>
-          <div className="space-y-2">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between p-2 rounded-md hover:bg-muted"
-              >
-                <div>
-                  <div className="font-medium">Order #{1000 + i}</div>
-                  <div className="text-sm text-muted-foreground">
-                    April 17, 2025
-                  </div>
-                </div>
-                <div className="text-sm font-medium">
-                  ${(100 * i).toFixed(2)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        <InStockTerminals />
         <QuantityCard />
       </div>
-      <div className="bg-[#F9F9F9] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] mx-auto mb-8">
-        <OrderTrendTable className="bg-[#F9F9F9]" />
+      <div className="bg-[#F9F9F9] p-6 rounded-md shadow-[0px_4px_20px_0px_#00000040] mx-auto mb-8">
+        <OrderTrendTable />
       </div>
-      <div className="bg-[#41A1D333] p-6 rounded-xl shadow-[0px_4px_20px_0px_#00000040] mx-auto mb-8">
+      <div className="bg-[#41A1D333] p-6 rounded-md shadow-[0px_4px_4px_0px_#00000040] mx-auto mb-8">
         <TerminalAssignTable />
       </div>
     </div>
@@ -122,7 +102,7 @@ function Card({ icon, title, value, circleColor }) {
     <div className="w-full max-w-sm mx-auto bg-white rounded-xl overflow-hidden p-6 shadow-[0px_0px_14px_0px_#00000040] hover:shadow-[0px_0px_20px_0px_#00000050] transition-all duration-300">
       <div className="text-center flex flex-col items-center space-y-4">
         <div
-          className={`relative w-16 sm:w-20 md:w-24 aspect-square rounded-full flex items-center justify-center ${circleColor}`}
+          className={`relative w-16 sm:w-18 md:w-20 aspect-square rounded-full flex items-center justify-center ${circleColor}`}
         >
           <div className="text-xl sm:text-2xl md:text-3xl">{icon}</div>
         </div>

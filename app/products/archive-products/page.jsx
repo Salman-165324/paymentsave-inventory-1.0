@@ -1,5 +1,5 @@
 import AdminLayout from "@/components/layout/AdminLayout";
-import InRepairTable from "@/components/product/in-repair/InRepairTable";
+import InRepairTable from "@/components/product/in-repair/InRepairTable-copy";
 
 export default function ArchiveProducts() {
   return (

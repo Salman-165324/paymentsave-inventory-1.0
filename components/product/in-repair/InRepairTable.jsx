@@ -5,7 +5,7 @@ import { EllipsisVertical, Search } from "lucide-react";
 import TableActionMenu from "@/components/ui/TableActionMenu";
 import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
-
+import TableHead from "@/components/ui/TableHead";
 const data = [
   { id: 1, name: "John Doe", email: "john@example.com" },
   { id: 2, name: "Jane Smith", email: "jane@example.com" },
@@ -70,20 +70,17 @@ function InRepairTable({ tableTitle }) {
       </div>
       <div className="relative overflow-visible rounded-md">
         <table className="min-w-full text-sm text-left">
-          <thead className="bg-[#F5F5F5] text-gray-600">
-            <tr className="border-b border-[#D9D9D9]">
-              <th className="px-4 py-2 font-medium">Action</th>
-              <th className="px-4 py-2 font-medium flex items-center gap-1">
-                Date ⇅
-              </th>
-              <th className="px-4 py-2 font-medium">Product Serial Number</th>
-              <th className="px-4 py-2 font-medium">Model</th>
-              <th className="px-4 py-2 font-medium">Product Type</th>
-              <th className="px-4 py-2 font-medium">Product Category</th>
-              <th className="px-4 py-2 font-medium">Reason</th>
-              <th className="px-4 py-2 font-medium">Product Status</th>
-            </tr>
-          </thead>
+          <TableHead
+            heads={[
+              "Action",
+              "Date",
+              "Product Serial Number",
+              "Product Type",
+              "Product Category",
+              "Model",
+              "Repair Reason",
+            ]}
+          />
           <tbody className="divide-y divide-gray-100 text-gray-700">
             {data.map((item, i) => (
               <tr key={i} className="border-b border-[#D9D9D9]">
