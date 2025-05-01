@@ -32,8 +32,8 @@ const menuItems = [
     href: "/products",
     icon: <Package className="h-4 w-4 mr-2" />,
     submenu: [
-      { title: "Add Product", href: "/add" },
-      { title: "All Products", href: "/model-wise" },
+      { title: "Add Product", href: "/add-product" },
+      { title: "All Products", href: "/model-wise-products" },
       { title: "Product Model Entry", href: "/add-model" },
       { title: "Product Model ", href: "/product-model" },
       { title: "Single Products", href: "/single-products" },
