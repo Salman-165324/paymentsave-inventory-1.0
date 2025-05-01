@@ -68,7 +68,7 @@ export async function POST(request) {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: remember ? 30 * 24 * 60 * 60 : 24 * 60 * 60, // 30 days if remember, 1 day otherwise
+        maxAge: 24 * 60 * 60, 
       };
 
       // Get the cookie store and await it before using set

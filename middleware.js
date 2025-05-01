@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-// import { decryptToken } from '@/lib/decrypt';
 
 // Routes that are publicly accessible
 const publicRoutes = ["/", "/login", "/register", "/forgot-password"];
@@ -35,6 +34,8 @@ export async function middleware(request) {
 
     try {
       // Call the refresh token API
+
+      console.log("I am in side the access token refreshment mechanism");
       const refreshResponse = await fetch(
         `${request.nextUrl.origin}/api/auth/refresh`,
         {
