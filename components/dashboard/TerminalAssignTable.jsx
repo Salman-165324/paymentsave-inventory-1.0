@@ -63,7 +63,7 @@ function TerminalAssignTable() {
       </div>
       <div className="relative overflow-visible rounded-md">
         <table className="min-w-full text-sm text-left">
-          <thead className="bg-[#41A1D333] text-gray-600">
+          <thead className="text-gray-600">
             <tr className="border-b border-[#D9D9D9]">
               <th className="px-4 py-2 font-medium">Action</th>
               <th className="px-4 py-2 font-medium flex items-center gap-1">
