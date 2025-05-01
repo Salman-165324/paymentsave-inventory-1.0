@@ -7,6 +7,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { loginSchema } from "@/app/schemas/auth";
+import logo from "@/public/image/color-logo.png";
+import iconLogo from "@/public/image/color-icon-logo.png";
 
 // Create a separate component that uses useSearchParams
 function LoginForm() {
@@ -232,7 +234,7 @@ export default function LoginPage() {
       <div className="hidden md:flex md:flex-col md:items-center md:justify-center md:w-1/2 bg-gray-50">
         <div className="mb-6 px-4">
           <Image
-            src="/image/color-logo.png"
+            src={logo}
             alt="Paymentsave Logo"
             width={300}
             height={100}
@@ -245,7 +247,7 @@ export default function LoginPage() {
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 p-4 md:p-0">
         <div className="mb-6">
           <Image
-            src="/image/color-icon-logo.png"
+            src={iconLogo}
             alt="Paymentsave Icon"
             width={48}
             height={48}
