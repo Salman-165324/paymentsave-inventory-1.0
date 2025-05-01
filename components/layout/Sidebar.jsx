@@ -15,6 +15,9 @@ import {
   Server,
   ChevronDown,
   ChevronRight,
+  UserCheck,
+  Film,
+  BadgeX,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -43,7 +46,7 @@ const menuItems = [
   {
     title: "Categories",
     href: "/list",
-    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    icon: <Film className="h-4 w-4 mr-2" />,
     submenu: [
       { title: "All Category", href: "/list" },
       { title: "Add Category", href: "/add-category" },
@@ -52,7 +55,7 @@ const menuItems = [
   {
     title: "Lost/Damage products",
     href: "/lost-damage-products",
-    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    icon: <BadgeX className="h-4 w-4 mr-2" />,
     submenu: [
       { title: "Add Damage/Lost Products", href: "/add-damage-lost" },
       { title: "Add Repair Products", href: "/add-repair" },
@@ -75,7 +78,7 @@ const menuItems = [
   {
     title: "Supplier",
     href: "/suppliers",
-    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    icon: <UserCheck className="h-4 w-4 mr-2" />,
     submenu: [
       { title: "Suppliers", href: "/suppliers" },
       { title: "Add Supplier", href: "/add-supplier" },
