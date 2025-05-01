@@ -49,10 +49,11 @@ export default function SearchableDropdown({
   return (
     <div
       ref={containerRef}
-      className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full"
+      className="flex flex-col md:flex-col items-start md:items-left gap-2 md:gap-2 w-full"
+      // className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 w-full"
     >
       {label && (
-        <label className="w-full md:min-w-[160px]  md:w-[160px] text-primary font-medium text-sm">
+        <label className=" text-[#48505E] font-medium text-sm">
           {label}
           {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
@@ -65,7 +66,7 @@ export default function SearchableDropdown({
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex items-center justify-between rounded-md border border-gray-200 bg-white py-2 px-3 text-sm text-gray-900  focus:outline-none"
         >
-          <span className="truncate text-secondary">{selected?.label || placeholder}</span>
+          <span className="truncate text-[#858D9D]">{selected?.label || placeholder}</span>
           <ChevronRight size={16} className="text-gray-400 rotate-90" />
         </button>
 

@@ -6,83 +6,93 @@ import InputField from "@/components/ui/InputField";
 import AppButton from "@/components/ui/AppButton";
 import SearchableDropdown from "@/components/ui/SearchableDropdown";
 import TextArea from "@/components/ui/TextArea";
-const serialOptions = [
-  { value: "1234565475", label: "SIM" },
-  { value: "1234565474", label: "Live Base" },
-  { value: "1234565477", label: "Terminal" },
+
+const categoryOptions = [
+  { value: "accessories", label: "Accessories" },
+  { value: "terminal", label: "Terminal" },
+  { value: "charging-base", label: "Charging Base" },
 ];
+
 const ProductModelEntry = () => {
   const [formData, setFormData] = useState({
     modelName: "",
-    modelDescription: "",
-    category: "",
     threshold: "",
+    category: "",
+    modelDescription: "",
   });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // handle submission logic
     console.log("Form submitted:", formData);
+    // Submit logic
+  };
+
+  const handleDiscard = () => {
+    setFormData({
+      modelName: "",
+      threshold: "",
+      category: "",
+      modelDescription: "",
+    });
   };
 
   return (
     <MainCard title="Product Model Entry" className="max-w-4xl mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-4 text-sm max-w-[500px]">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        {/* Left Column */}
         <InputField
-          label="Model Name"
+          label="Model Name*"
           name="modelName"
-          required
-          placeholder="Model Name"
           value={formData.modelName}
           onChange={handleChange}
-          showIcon
+          placeholder="Type Model Name"
+          required
         />
-       
         <SearchableDropdown
-          label="Product Category"
+          label="Product Category*"
           name="category"
-          placeholder="Select Category"
-          options={serialOptions}
+          options={categoryOptions}
           selected={formData.category}
           onChange={(val) => setFormData({ ...formData, category: val })}
+          placeholder="Select Category"
           required
         />
-        <SearchableDropdown
-          label="Low Stock Threshold"
+        <InputField
+          label="Low Stock Threshold*"
           name="threshold"
-          options={serialOptions}
-          selected={formData.threshold}
-          onChange={(val) => setFormData({ ...formData, threshold: val })}
+          type="number"
+          value={formData.threshold}
+          onChange={handleChange}
+          placeholder="Type Stock Threshold"
           required
         />
-      <TextArea
-          label="Model description (optional)"
+        <TextArea
+          label="Model Description (optional)"
           name="modelDescription"
-          placeholder="Model description"
           value={formData.modelDescription}
           onChange={handleChange}
+          placeholder="Type Description"
         />
 
-        {/* Bottom Buttons */}
-        <div className="flex justify-end gap-2 pt-4">
+        {/* Buttons */}
+        <div className="md:col-span-2 flex justify-end gap-2 pt-4">
           <AppButton
+            type="button"
             text="Discard"
+            onClick={handleDiscard}
             bg="bg-white"
             color="text-black"
-            onClick={() => setFormData({ modelName: "", modelDescription: "" })}
-            className="border border-white hover:bg-gray-200"
+            className="border border-gray-300 hover:bg-gray-100"
           />
           <AppButton
             type="submit"
             text="Add Product"
-            bg="bg-blue-600"
+            bg="bg-[#1366D9]"
             color="text-white"
             className="hover:bg-blue-700"
           />

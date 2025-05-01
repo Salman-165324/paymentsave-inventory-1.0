@@ -5,24 +5,24 @@ import AppButton from "@/components/ui/AppButton";
 import InputField from "@/components/ui/InputField";
 import MainCard from "@/components/ui/MainCard";
 import SearchableDropdown from "@/components/ui/SearchableDropdown";
-import TextArea from "@/components/ui/TextArea";
-// import SearchableDropdown from '@/components/ui/SearchableDropdown'; // optional
+
 const serialOptions = [
   { value: "1234565475", label: "SIM" },
   { value: "1234565474", label: "Live Base" },
   { value: "1234565477", label: "Terminal" },
 ];
+
 export default function AddProductForm() {
   const [hasSerial, setHasSerial] = useState(false);
   const [formData, setFormData] = useState({
     category: "",
     model: "",
+    name: "",
     serial: "",
     condition: "",
     supplier: "",
     invoice: "",
     price: "",
-    modelDescription: "",
   });
 
   const handleChange = (e) => {
@@ -33,13 +33,16 @@ export default function AddProductForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitting form data:", formData);
-    // Handle API submission here
+    // Call API to submit product
   };
 
   return (
-    <MainCard title="Add Product" className="max-w-4xl mx-auto">
-      <form className="space-y-4 text-sm max-w-[500px]" onSubmit={handleSubmit}>
-        {/* Category - dropdown or text */}
+    <MainCard title="Add Product" className="max-w-5xl mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm"
+      >
+        {/* Product Category */}
         <SearchableDropdown
           label="Product Category"
           name="category"
@@ -51,21 +54,39 @@ export default function AddProductForm() {
 
         {/* Product Model */}
         <InputField
-          label="Product Model"
+          label="Product Model*"
           name="model"
           value={formData.model}
           onChange={handleChange}
           placeholder="Enter product model"
           required
-          showIcon
         />
 
-        {/* Toggle for serial number */}
-        <div className="flex items-center justify-between">
-          <label className="min-w-[160px] text-primary font-medium">
-            Serial Number or Not <span className="text-red-500 ml-0.5">*</span>
+        {/* Product Name */}
+        <InputField
+          label="Product Name (optional)"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter product model"
+        />
+
+        {/* Serial Number */}
+        <InputField
+          label="Product Serial Number*"
+          name="serial"
+          value={formData.serial}
+          onChange={handleChange}
+          placeholder="Type Serial Number"
+          required
+        />
+
+        {/* Serial Toggle */}
+        <div className="flex items-center justify-between col-span-1">
+          <label className="font-medium text-[#48505E]">
+            Serial Number or Not <span className="text-red-500">*</span>
           </label>
-          <div className="flex-1 flex justify-start ml-4">
+          <div className="ml-4">
             <button
               type="button"
               onClick={() => setHasSerial(!hasSerial)}
@@ -82,45 +103,32 @@ export default function AddProductForm() {
           </div>
         </div>
 
-        {/* Serial Field (conditionally shown) */}
-        {hasSerial && (
-          <InputField
-            label="Product Serial Number"
-            name="serial"
-            value={formData.serial}
-            onChange={handleChange}
-            placeholder="Type Serial Number"
-            showIcon
-          />
-        )}
-
-        {/* Condition */}
+        {/* Product Condition */}
         <InputField
-          label="Product Condition"
+          label="Product Condition*"
           name="condition"
           value={formData.condition}
           onChange={handleChange}
           placeholder="Enter product condition"
           required
-          showIcon
         />
 
-        {/* Supplier (optional) */}
+        {/* Supplier Name */}
         <InputField
-          label="Supplier Name (optional)"
+          label="Supplier name (optional)"
           name="supplier"
           value={formData.supplier}
           onChange={handleChange}
           placeholder="Enter supplier name"
         />
 
-        {/* Invoice (optional) */}
+        {/* Invoice Number */}
         <InputField
-          label="Invoice No (optional)"
+          label="Invoice Number (optional)"
           name="invoice"
           value={formData.invoice}
           onChange={handleChange}
-          placeholder="Enter invoice number"
+          placeholder="Type Invoice No"
         />
 
         {/* Price */}
@@ -132,16 +140,9 @@ export default function AddProductForm() {
           onChange={handleChange}
           placeholder="0.00"
         />
-        <TextArea
-          label="Model description (optional)"
-          name="modelDescription"
-          placeholder="Model description"
-          value={formData.modelDescription}
-          onChange={handleChange}
-        />
 
         {/* Buttons */}
-        <div className="flex justify-end gap-2 pt-4">
+        <div className="md:col-span-2 flex justify-end gap-2 mt-4">
           <AppButton
             type="button"
             text="Discard"
@@ -149,6 +150,7 @@ export default function AddProductForm() {
               setFormData({
                 category: "",
                 model: "",
+                name: "",
                 serial: "",
                 condition: "",
                 supplier: "",
@@ -160,7 +162,6 @@ export default function AddProductForm() {
             color="text-black"
             className="border border-[#F0F1F3] hover:bg-gray-200"
           />
-
           <AppButton
             type="submit"
             text="Add Product"
