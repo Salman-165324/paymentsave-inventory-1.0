@@ -33,6 +33,7 @@ const menuItems = [
       { title: "All Products", href: "/model-wise" },
       { title: "Product Model Entry", href: "/add-model" },
       { title: "Single Products", href: "/single-products" },
+      { title: "Archive Products", href: "/archive-products" },
       { title: "Bulk Product Entry", href: "/bulk-entry" },
    
       // { title: "Add Supplier", href: "/add-supplier" },
