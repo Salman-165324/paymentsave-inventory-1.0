@@ -37,14 +37,14 @@ function OrderTrendTable({ className }) {
   const count = 5030;
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+      <div className="flex flex-col lg:flex-row justify-between items-center mb-4">
         <h2 className="text-[28px] font-medium text-[#41A1D3] mb-4">
           Order Trend
         </h2>
         {/* Filters */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
-          <div className="flex flex-col md:flex-row items-center w-full md:w-auto gap-2">
-            <div className="flex items-center w-full md:w-[400px] h-[40px] rounded-md overflow-hidden relative">
+        <div className="flex flex-col lg:flex-row justify-between items-center mb-4 gap-3">
+          <div className="flex flex-col lg:flex-row items-center w-full md:w-auto gap-2">
+            <div className="flex items-center w-full lg:w-96 h-[40px] rounded-md overflow-hidden relative">
               <div className="absolute inset-0 flex">
                 <div className="bg-[#41A1D3] w-[75%] h-full"></div>
                 <div className="bg-[#FF8A4C] w-[25%] h-full"></div>
@@ -53,10 +53,10 @@ function OrderTrendTable({ className }) {
                 <div className="absolute top-0 left-0 h-full w-14 bg-[#FF8A4C] rounded-tl-full"></div>
               </div>
               <div className="relative z-10 flex w-full">
-                <div className="flex-1 p-4 text-[#F0F1F3] text-xl font-medium">
+                <div className="flex-1 p-4 text-[#F0F1F3] text-sm md:text-xl font-medium">
                   Total Order Count
                 </div>
-                <div className="p-4 text-[#F0F1F3] text-xl font-bold">
+                <div className="p-4 text-[#F0F1F3] text-sm md:text-xl font-bold">
                   {count}
                 </div>
               </div>
