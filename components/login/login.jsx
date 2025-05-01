@@ -200,14 +200,7 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  name={fields.remember.name}
-                  className="border rounded"
-                />
-                <span>Remember me</span>
-              </label>
+              <div></div>
               <a href="#" className="text-blue-600 hover:underline">
                 Forgot password
               </a>

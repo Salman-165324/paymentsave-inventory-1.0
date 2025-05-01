@@ -21,7 +21,7 @@ export async function POST(request) {
       );
     }
 
-    const { email, password, remember } = result.data;
+    const { email, password } = result.data;
 
     try {
       const res = await fetch(
@@ -37,7 +37,6 @@ export async function POST(request) {
       const data = await res.json();
 
       if (!res.ok) {
-
         return Response.json(
           {
             success: false,
@@ -47,7 +46,6 @@ export async function POST(request) {
           { status: res.status }
         );
       }
-
 
       const encryptedAccessToken = await encryptToken(data.data.access_token);
       const encryptedRefreshToken = await encryptToken(data.data.refresh_token);
@@ -66,7 +64,7 @@ export async function POST(request) {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 24 * 60 * 60, 
+        maxAge: 24 * 60 * 60,
       };
 
       // Get the cookie store and await it before using set

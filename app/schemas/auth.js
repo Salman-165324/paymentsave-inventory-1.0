@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const loginSchema = z.object({
   email: z
@@ -7,8 +7,4 @@ export const loginSchema = z.object({
   password: z
     .string({ required_error: "Password is required" })
     .min(6, "Password must be at least 6 characters"),
-  remember: z
-    .boolean()
-    .optional()
-    .default(false),
-}); 
+});
