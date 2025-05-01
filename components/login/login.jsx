@@ -199,12 +199,7 @@ export default function LoginPage() {
               )}
             </div>
 
-            <div className="flex items-center justify-between text-sm">
-              <div></div>
-              <a href="#" className="text-blue-600 hover:underline">
-                Forgot password
-              </a>
-            </div>
+            <div className="h-4"></div>
 
             <button
               type="submit"
