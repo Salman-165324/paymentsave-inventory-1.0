@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import "react-date-range/dist/styles.css";
@@ -17,6 +17,7 @@ export default function DateRangePicker({ onRangeChange }) {
     },
   ]);
   const [selectedRangeText, setSelectedRangeText] = useState(""); // Initially empty
+  const pickerRef = useRef(null);
 
   const handleSelect = (ranges) => {
     const { startDate, endDate } = ranges.selection;
@@ -24,22 +25,40 @@ export default function DateRangePicker({ onRangeChange }) {
 
     const formatted = `${format(startDate, "dd/MM/yyyy")} - ${format(endDate, "dd/MM/yyyy")}`;
     setSelectedRangeText(formatted); // Set visual text
-    onRangeChange(formatted, startDate, endDate);
-    setShowPicker(false);
+    
+    // Only close the picker and trigger onChange when both dates are different
+    // This ensures picker stays open while selecting the range
+    if (startDate.getTime() !== endDate.getTime()) {
+      onRangeChange(formatted, startDate, endDate);
+      setShowPicker(false);
+    }
   };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+        setShowPicker(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full sm:w-52 md:w-56">
+    <div className="relative w-full sm:w-52 md:w-64 lg:w-72 border border-[#A0A0A0] rounded-sm" ref={pickerRef}>
       <input
         type="text"
         readOnly
         value={selectedRangeText}
         placeholder="Select date range"
         onClick={() => setShowPicker(!showPicker)}
-        className="w-full text-sm pl-3 pr-10 py-2 border border-[#A0A0A0] rounded focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer placeholder:text-gray-400"
+        className="w-full text-sm pl-3 pr-10 py-2 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer placeholder:text-gray-400"
       />
       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none">
-        <CalendarRange color="#141522" size={18} />
+        <CalendarRange color="#A0A0A0" size={18} />
       </div>
 
       {showPicker && (
