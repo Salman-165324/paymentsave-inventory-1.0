@@ -5,8 +5,8 @@ import DonutChart from "../ui/DonutChart";
 const InStockTerminals = () => {
   // Example data - replace with actual data source in a real application
   const terminalData = [
-    { name: 'Used Terminals', value: 80, color: '#41A1D3' },
-    { name: 'New Terminals', value: 20, color: '#FD7F30' },
+    { id: 1, name: 'Used Terminals', value: 80, color: '#41A1D3' },
+    { id: 2, name: 'New Terminals', value: 20, color: '#FD7F30' },
   ];
 
   return (
@@ -24,7 +24,7 @@ const InStockTerminals = () => {
         />
       </div>
       {terminalData.map((item, index) => (
-        <div className="flex flex-row items-center justify-between">
+        <div key={item.id} className="flex flex-row items-center justify-between">
           <div className= "flex flex-row items-center gap-2">
             <div className={`w-3 h-3 bg-[${item.color}] rounded-full`}></div>
           <p className="text-[#4B5563] text-sm font-medium">{item.name}</p>

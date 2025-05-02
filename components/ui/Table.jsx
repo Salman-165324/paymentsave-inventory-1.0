@@ -8,7 +8,7 @@ export function Table({
   ...props 
 }) {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-visible">
       <table className={cn('w-full table-standard', className)} {...props}>
         {children}
       </table>

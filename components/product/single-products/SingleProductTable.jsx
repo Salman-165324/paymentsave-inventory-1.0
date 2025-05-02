@@ -108,7 +108,7 @@ export default function ProductTable({ products }) {
     }
   };
   return (
-    <div className="overflow-x-auto">
+    <div className="">
       <Table>
         <TableHeader>
           <TableRow className="bg-[#F5F5F5]">

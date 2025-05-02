@@ -157,7 +157,7 @@ function MyTerminalTable() {
           />
         </div>
       </div>
-      <div className="overflow-auto rounded-md">
+      <div className="relative overflow-visible rounded-md">
         <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
           <TableHead heads={["Action", "Date", "Terminal Model", "Serial Number", "Status", "Delivery Address Type", "Priority", "Delivery Channel", "POD Ref", "Note"]} />
                 
