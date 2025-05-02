@@ -1,144 +1,169 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-} from "@/components/ui/Table";
-import { useState } from "react";
-import Swal from "sweetalert2";
+import React, { useState } from "react";
+import { EllipsisVertical, Search } from "lucide-react";
 import TableActionMenu from "@/components/ui/TableActionMenu";
-import SingleProductOverView from "../single-products/SingleProductOverview";
-// import SingleProductOverView from "./SingleProductOverview";
+import DateRangePicker from "@/components/ui/DateRangePicker";
+import FilterButton from "@/components/ui/FilterButton";
+import TableHead from "@/components/ui/TableHead";
+const data = [
+  { id: 1, name: "John Doe", email: "john@example.com" },
+  { id: 2, name: "Jane Smith", email: "jane@example.com" },
+  { id: 3, name: "Alice Johnson", email: "alice@example.com" },
+  { id: 4, name: "Bob Brown", email: "bob@example.com" },
+  { id: 5, name: "Charlie White", email: "charlie@example.com" },
+];
 
-// Badge component for product condition
-const getConditionBadge = (condition) => {
-  const base =
-    "inline-flex items-center justify-between gap-1 px-2 py-1 text-xs font-medium text-white rounded";
-  switch (condition) {
-    case "New":
-      return (
-        <span className={`${base} bg-green-500`}>
-          New <ChevronRight size={16} color="white" />
-        </span>
-      );
-    case "Use":
-    case "Used":
-      return (
-        <span className={`${base} bg-blue-500`}>
-          Used <ChevronRight size={16} />
-        </span>
-      );
-    default:
-      return (
-        <span className={`${base} bg-gray-400`}>
-          Unknown <ChevronRight size={16} />
-        </span>
-      );
-  }
-};
+function ArchiveProductTable({ tableTitle }) {
+  const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
 
-export default function ArchiveProductTable({ products }) {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-
-  const handleToggle = (index) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
+  const handleToggleDropdown = (id) => {
+    setOpenDropdownId(openDropdownId === id ? null : id); // Toggle dropdown for each row
   };
 
-  const handleDelete = async (product) => {
-    const result = await Swal.fire({
-      title: `Delete ${product.model}?`,
-      text: "This action cannot be undone.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    });
+  const handleCloseDropdown = () => {
+    setOpenDropdownId(null); // Close dropdown when clicking outside
+  };
 
-    if (result.isConfirmed) {
-      Swal.fire("Deleted!", `${product.model} has been deleted.`, "success");
+  const handleRangeChange = (formatted, startDate, endDate) => {
+    console.log(formatted, startDate, endDate);
+  };
+
+  const handleSelectAll = () => {
+    if (selectAll) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(data.map(item => item.id));
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const handleSelectItem = (id) => {
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+      setSelectAll(false);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+      if (selectedItems.length + 1 === data.length) {
+        setSelectAll(true);
+      }
     }
   };
 
   return (
-    <div className="overflow-x-auto">
-      <Table>
-        <TableHeader>
-          <TableRow className="bg-[#F5F5F5]">
-            {[
-              "Action",
-              "Date",
-              "Product Category",
-              "Product Model",
-              "Product Name",
-              "Serial Number",
-              "Product Serial Number",
-              "Product Condition",
-              "Supplier Name",
-              "Invoice Number",
-              "Price",
-            ].map((heading, idx) => (
-              <TableHead key={idx} className="text-center whitespace-nowrap">
-                {heading}
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {products.map((product, index) => (
-            <TableRow key={index}>
-              <TableCell className="text-center">
-                <TableActionMenu
-                  isOpen={openIndex === index}
-                  onToggle={() => handleToggle(index)}
-                  onView={() => {
-                    setSelectedProduct(product);
-                    setEditMode(false);
-                    setShowModal(true);
-                  }}
-                  onEdit={() => {
-                    setSelectedProduct(product);
-                    setEditMode(true);
-                    setShowModal(true);
-                  }}
-                  onDelete={() => handleDelete(product)}
-                  onClose={() => setOpenIndex(null)}
+    <>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold text-[#383E49] mb-4">
+          {tableTitle}
+        </h2>
+        {/* Filters */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
+          <div className="flex items-center w-full md:w-auto gap-2 mr-8">
+            <div className="relative w-full md:w-64">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {/* 🔍 Search Icon Placeholder */}
+              <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+                {/* Search Icon */}
+                <Search width={20} height={20} color="#C4C4C4" />
+              </div>
+            </div>
+            <div className="relative w-full md:w-64">
+              {/* <input
+                  type="text"
+                  placeholder="01/08/2024 - 10/09/2024"
+                  className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </TableCell>
-              <TableCell className="text-center">{product.date}</TableCell>
-              <TableCell className="text-center">{product.category}</TableCell>
-              <TableCell className="text-center">{product.model}</TableCell>
-              <TableCell className="text-center">{product.name}</TableCell>
-              <TableCell className="text-center">
-                {product.hasSerial ? "Yes" : "No"}
-              </TableCell>
-              <TableCell className="text-center">{product.serialNumber}</TableCell>
-              <TableCell className="text-center">
-                {getConditionBadge(product.condition)}
-              </TableCell>
-              <TableCell className="text-center">{product.supplier}</TableCell>
-              <TableCell className="text-center">{product.invoice}</TableCell>
-              <TableCell className="text-center">{product.price}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      <SingleProductOverView
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        product={selectedProduct}
-        initialEditMode={editMode}
-      />
-    </div>
+                <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+                  <Calendar width={20} height={20} color="#C4C4C4" />
+                </div> */}
+              <DateRangePicker onRangeChange={handleRangeChange} />
+            </div>
+          </div>
+          <FilterButton
+            filterName="Product status"
+            filterOptions={["Damaged", "Lost"]}
+          />
+        </div>
+      </div>
+      {selectedItems.length > 0 && (
+        <div className="mb-4 p-2 bg-gray-100 rounded-md">
+          <span className="font-medium">{selectedItems.length} items selected</span>
+          {/* <button className="ml-4 text-red-500 hover:text-red-700">Delete Selected</button> */}
+        </div>
+      )}
+      <div className="relative overflow-visible rounded-md">
+        <table className="min-w-full text-sm text-left">
+          <TableHead
+            heads={[
+              <div key="select-all" className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                />
+              </div>,
+              "Action", "Date", "Product Category", "Model", "Product Name", "Serial Nymber", "Product Serial Number", "Product Condition", "Supplier Name", "Invoice Number", "Price"
+            ]}
+          />
+          <tbody className="divide-y divide-gray-100 text-gray-700">
+            {data.map((item, i) => (
+              <tr key={i} className="border-b border-[#D9D9D9]">
+                <td className="px-4 py-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedItems.includes(item.id)}
+                    onChange={() => handleSelectItem(item.id)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                </td>
+                <td className="px-4 py-2">
+                  <TableActionMenu
+                    onView={() => console.log(`View item ${item.id}`)}
+                    onEdit={() => console.log(`Edit item ${item.id}`)}
+                    onDelete={() => console.log(`Delete item ${item.id}`)}
+                    isOpen={openDropdownId === item.id}
+                    onToggle={() => handleToggleDropdown(item.id)}
+                    onClose={handleCloseDropdown}
+                  />
+                </td>
+                <td className="px-4 py-2 whitespace-nowrap">02/02/2025</td>
+                <td className="px-4 py-2">154782143241</td>
+                <td className="px-4 py-2">A92{i} PRO</td>
+                <td className="px-4 py-2">
+                  {i % 2 === 0 ? "Terminal" : "Accessories"}
+                </td>
+                <td className="px-4 py-2">
+                  {`${i*10+1000}-AOS`}
+                </td>
+                <td className="px-4 py-2">
+                  {i*69+999}
+                </td>
+                <td className="px-4 py-2">
+                  {i % 2 === 0 ? "Damaged" : "Lost"}
+                </td>
+                <td className="px-4 py-2">
+                  {item.name}
+                </td>
+                <td className="px-4 py-2">
+                  {`INV-${i*10+1000}`}
+                </td>
+                <td className="px-4 py-2">
+                  {i*10+100}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
+
+export default ArchiveProductTable;

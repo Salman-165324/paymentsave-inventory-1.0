@@ -54,13 +54,13 @@ const menuItems = [
   },
   {
     title: "Lost/Damage products",
-    href: "/lost-damage-products",
+    href: "/damage-lost-products",
     icon: <BadgeX className="h-4 w-4 mr-2" />,
     submenu: [
       { title: "Add Damage/Lost Products", href: "/add-damage-lost" },
       { title: "Add Repair Products", href: "/add-repair" },
       { title: "Repair Products", href: "/in-repair" },
-      { title: "Damage Products", href: "/lost-damage-products" },
+      { title: "Damage Products", href: "/damage-lost-products" },
     ],
   },
   /*
@@ -75,6 +75,11 @@ const menuItems = [
     ],
   },
   */
+  {
+    title: "My Terminal",
+    href: "/my-terminal",
+    icon: <Package className="h-4 w-4 mr-2" />,
+  },
   {
     title: "Supplier",
     href: "/suppliers",
@@ -203,10 +208,12 @@ export default function Sidebar({ className }) {
                         : "hover:bg-white/10"
                     )}
                   >
-                    <div className="flex items-center">
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </div>
+                    <Link href={item.href}>
+                      <div className="flex items-center">
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </div>
+                    </Link>
                     {hasSubmenu &&
                       (isOpen ? (
                         <ChevronDown className="h-4 w-4" />

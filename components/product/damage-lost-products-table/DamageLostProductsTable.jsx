@@ -8,11 +8,86 @@ import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
 
 const data = [
-  { id: 1, name: "John Doe", email: "john@example.com" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com" },
-  { id: 3, name: "Alice Johnson", email: "alice@example.com" },
-  { id: 4, name: "Bob Brown", email: "bob@example.com" },
-  { id: 5, name: "Charlie White", email: "charlie@example.com" },
+  {
+    id: 1,
+    date: "12/05/2024",
+    serialNumber: "PS0123456789",
+    model: "A92 PRO",
+    type: "Terminal",
+    category: "SIM",
+    reason: "Display Issue",
+    status: "Damaged"
+  },
+  {
+    id: 2,
+    date: "15/05/2024",
+    serialNumber: "PS9876543210",
+    model: "A95 MAX",
+    type: "Accessories",
+    category: "Charging Base",
+    reason: "Battery Failure",
+    status: "Lost"
+  },
+  {
+    id: 3,
+    date: "20/05/2024",
+    serialNumber: "PS5432167890",
+    model: "A92 PRO",
+    type: "Terminal",
+    category: "Bluetooth Base",
+    reason: "Port Damage",
+    status: "Damaged"
+  },
+  {
+    id: 4,
+    date: "22/05/2024",
+    serialNumber: "PS1234098765",
+    model: "A95 MAX",
+    type: "Accessories",
+    category: "SIM",
+    reason: "Missing Component",
+    status: "Lost"
+  },
+  {
+    id: 5,
+    date: "25/05/2024",
+    serialNumber: "PS8765432109",
+    model: "A92 PRO",
+    type: "Terminal",
+    category: "Charging Base",
+    reason: "Water Damage",
+    status: "Damaged"
+  },
+  {
+    id: 6,
+    date: "28/05/2024",
+    serialNumber: "PS2345678901",
+    model: "A90 LITE",
+    type: "Accessories",
+    category: "Bluetooth Base",
+    reason: "Theft",
+    status: "Lost"
+  },
+  {
+    id: 7,
+    date: "30/05/2024",
+    serialNumber: "PS3456789012",
+    model: "A92 PRO",
+    type: "Terminal",
+    category: "SIM",
+    reason: "Screen Cracked",
+    status: "Damaged"
+  },
+  {
+    id: 8,
+    date: "02/06/2024",
+    serialNumber: "PS4567890123",
+    model: "A95 MAX",
+    type: "Accessories",
+    category: "Charging Base",
+    reason: "Misplaced",
+    status: "Lost"
+  }
 ];
 
 function DamageLostProductsTable({ tableTitle }) {
@@ -100,25 +175,25 @@ function DamageLostProductsTable({ tableTitle }) {
                   />
                 </td>
                 <td className="px-4 py-2 whitespace-nowrap text-[#48505E] font-medium text-xs">
-                  02/02/2025
+                  {item.date}
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs ">
-                  154782143241
+                  {item.serialNumber}
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs     ">
-                  A92{i} PRO
+                  {item.model}
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {i % 2 === 0 ? "Terminal" : "Accessories"}
+                  {item.type}
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
+                  {item.category}
                 </td>
                 <td className="px-4 py-2 text-[#48505E] font-medium text-xs">
-                  {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
+                  {item.reason}
                 </td>
                 <td className="px-4 py-2">
-                  {i % 2 === 0 ? "Damaged" : "Lost"}
+                  {item.status}
                 </td>
               </tr>
             ))}

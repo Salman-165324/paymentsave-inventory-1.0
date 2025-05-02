@@ -7,11 +7,86 @@ import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
 const data = [
-  { id: 1, name: "John Doe", email: "john@example.com" },
-  { id: 2, name: "Jane Smith", email: "jane@example.com" },
-  { id: 3, name: "Alice Johnson", email: "alice@example.com" },
-  { id: 4, name: "Bob Brown", email: "bob@example.com" },
-  { id: 5, name: "Charlie White", email: "charlie@example.com" },
+  {
+    id: 1,
+    date: "02/05/2024",
+    serialNumber: "154782143241",
+    productType: "A921 PRO",
+    productCategory: "Terminal",
+    model: "SIM",
+    repairReason: "Display Issue",
+    status: "Damaged"
+  },
+  {
+    id: 2,
+    date: "03/15/2024",
+    serialNumber: "987654321098",
+    productType: "A922 LITE",
+    productCategory: "Accessories",
+    model: "Charging Base",
+    repairReason: "Battery Failure",
+    status: "Lost"
+  },
+  {
+    id: 3,
+    date: "01/20/2024",
+    serialNumber: "456789012345",
+    productType: "B100 MAX",
+    productCategory: "Terminal",
+    model: "Bluetooth Base",
+    repairReason: "Port Damage",
+    status: "Damaged"
+  },
+  {
+    id: 4,
+    date: "04/10/2024",
+    serialNumber: "123456789012",
+    productType: "A925 MINI",
+    productCategory: "Accessories",
+    model: "SIM",
+    repairReason: "Screen Cracked",
+    status: "Lost"
+  },
+  {
+    id: 5,
+    date: "03/27/2024",
+    serialNumber: "567890123456",
+    productType: "C200 PRO",
+    productCategory: "Terminal",
+    model: "Charging Base",
+    repairReason: "Power Issue",
+    status: "Damaged"
+  },
+  {
+    id: 6,
+    date: "02/18/2024",
+    serialNumber: "345678901234",
+    productType: "B150 LITE",
+    productCategory: "Accessories",
+    model: "Bluetooth Base",
+    repairReason: "Button Malfunction",
+    status: "Lost"
+  },
+  {
+    id: 7,
+    date: "05/02/2024",
+    serialNumber: "234567890123",
+    productType: "A930 MAX",
+    productCategory: "Terminal",
+    model: "SIM",
+    repairReason: "Connectivity Problem",
+    status: "Damaged"
+  },
+  {
+    id: 8,
+    date: "04/15/2024",
+    serialNumber: "678901234567",
+    productType: "D300 PRO",
+    productCategory: "Accessories",
+    model: "Charging Base",
+    repairReason: "Software Issue",
+    status: "Lost"
+  }
 ];
 
 function InRepairTable({ tableTitle }) {
@@ -79,6 +154,7 @@ function InRepairTable({ tableTitle }) {
               "Product Category",
               "Model",
               "Repair Reason",
+              "Status"
             ]}
           />
           <tbody className="divide-y divide-gray-100 text-gray-700">
@@ -97,21 +173,13 @@ function InRepairTable({ tableTitle }) {
                     onClose={handleCloseDropdown}
                   />
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap">02/02/2025</td>
-                <td className="px-4 py-2">154782143241</td>
-                <td className="px-4 py-2">A92{i} PRO</td>
-                <td className="px-4 py-2">
-                  {i % 2 === 0 ? "Terminal" : "Accessories"}
-                </td>
-                <td className="px-4 py-2">
-                  {["SIM", "Charging Base", "Bluetooth Base"][i % 3]}
-                </td>
-                <td className="px-4 py-2">
-                  {["Display Issue", "Battery Failure", "Port Damage"][i % 3]}
-                </td>
-                <td className="px-4 py-2">
-                  {i % 2 === 0 ? "Damaged" : "Lost"}
-                </td>
+                <td className="px-4 py-2 whitespace-nowrap">{item.date}</td>
+                <td className="px-4 py-2">{item.serialNumber}</td>
+                <td className="px-4 py-2">{item.productType}</td>
+                <td className="px-4 py-2">{item.productCategory}</td>
+                <td className="px-4 py-2">{item.model}</td>
+                <td className="px-4 py-2">{item.repairReason}</td>
+                <td className="px-4 py-2">{item.status}</td>
               </tr>
             ))}
           </tbody>

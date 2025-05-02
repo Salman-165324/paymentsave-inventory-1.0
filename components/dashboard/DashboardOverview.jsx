@@ -82,7 +82,7 @@ export default function DashboardOverview() {
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mb-8">
         <SummaryCard />
         <InStockTerminals />
         <QuantityCard />

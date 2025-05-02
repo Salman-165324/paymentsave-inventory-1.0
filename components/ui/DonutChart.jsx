@@ -1,50 +1,52 @@
-"use client";
-import React from "react";
-import { cn } from "../../lib/utils";
+'use client';
 
-const DonutChart = ({ value, max, className, size = 200, thickness = 20, colors = ["#41A1D3", "#FD7F30"] }) => {
-  const percentage = (value / max) * 100 || 0;
-  const dashArray = 2 * Math.PI * (size / 2 - thickness / 2);
-  const dashOffset = dashArray - (dashArray * percentage) / 100;
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { useEffect, useState } from 'react';
+
+export default function DonutChart({
+  data,
+  width = 400,
+  height = 256,
+}) {
+  const [chartSize, setChartSize] = useState({ inner: 60, outer: 90 });
   
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1280) {
+        setChartSize({ inner: 80, outer: 110 });
+      } else if (width >= 1024) {
+        setChartSize({ inner: 70, outer: 100 });
+      } else {
+        setChartSize({ inner: 60, outer: 90 });
+      }
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className={cn("relative flex items-center justify-center", className)}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={size / 2 - thickness / 2}
-          fill="none"
-          stroke={colors[1]}
-          strokeWidth={thickness}
-          className="opacity-20"
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={size / 2 - thickness / 2}
-          fill="none"
-          stroke={colors[0]}
-          strokeWidth={thickness}
-          strokeDasharray={dashArray}
-          strokeDashoffset={dashOffset}
-          transform={`rotate(-90 ${size / 2} ${size / 2})`}
-          strokeLinecap="round"
-          className="transition-all duration-500 ease-in-out"
-        />
-        <text
-          x="50%"
-          y="50%"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          className="text-4xl font-bold"
-          fill="#1E293B"
-        >
-          {value}
-        </text>
-      </svg>
+    <div className="w-full h-full">
+      <ResponsiveContainer width="100%" height={height}>
+        <PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={chartSize.inner}
+            outerRadius={chartSize.outer}
+            paddingAngle={5}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
-};
-
-export default DonutChart; 
+}

@@ -31,7 +31,7 @@ const LowQuantityStock = () => {
       </div>
 
       {/* Scrollable Content Area */}
-      <div className="overflow-y-auto" style={{ height: "256px" }}>
+      <div className="overflow-y-auto h-90">
         {/* Stock Items List */}
         {stockItems.map((item, index) => (
           <div
