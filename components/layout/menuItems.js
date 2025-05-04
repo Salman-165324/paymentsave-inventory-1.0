@@ -19,12 +19,12 @@ const menuItems = [
   {
     title: "Dashboard",
     href: "/dashboard",
-    icon: <LayoutDashboard className="h-4 w-4 mr-2" />,
+    icon: <LayoutDashboard className="h-5 w-5" />,
   },
   {
     title: "Products",
     href: "/products",
-    icon: <Package className="h-4 w-4 mr-2" />,
+    icon: <Package className="h-5 w-5" />,
     submenu: [
       { title: "Add Product", href: "/add-product" },
       { title: "All Products", href: "/model-wise-products" },
@@ -38,7 +38,7 @@ const menuItems = [
   {
     title: "Categories",
     href: "/list",
-    icon: <Film className="h-4 w-4 mr-2" />,
+    icon: <Film className="h-5 w-5" />,
     submenu: [
       { title: "All Category", href: "/list" },
       { title: "Add Category", href: "/add-category" },
@@ -47,7 +47,7 @@ const menuItems = [
   {
     title: "Lost/Damage products",
     href: "/damage-lost-products",
-    icon: <BadgeX className="h-4 w-4 mr-2" />,
+    icon: <BadgeX className="h-5 w-5" />,
     submenu: [
       { title: "Add Damage/Lost Products", href: "/add-damage-lost" },
       { title: "Add Repair Products", href: "/add-repair" },
@@ -58,12 +58,12 @@ const menuItems = [
   {
     title: "My Terminal",
     href: "/my-terminal",
-    icon: <Package className="h-4 w-4 mr-2" />,
+    icon: <Package className="h-5 w-5" />,
   },
   {
     title: "Supplier",
     href: "/suppliers",
-    icon: <UserCheck className="h-4 w-4 mr-2" />,
+    icon: <UserCheck className="h-5 w-5" />,
     submenu: [
       { title: "Suppliers", href: "/suppliers" },
       { title: "Add Supplier", href: "/add-supplier" },
@@ -73,37 +73,37 @@ const menuItems = [
   {
     title: "Live Base",
     href: "/live-base",
-    icon: <Server className="h-4 w-4 mr-2" />,
+    icon: <Server className="h-5 w-5" />,
   },
   {
     title: "Businesses",
     href: "/businesses",
-    icon: <Briefcase className="h-4 w-4 mr-2" />,
+    icon: <Briefcase className="h-5 w-5" />,
   },
   {
     title: "Orders to Supplier",
     href: "/orders-to-supplier",
-    icon: <ShoppingCart className="h-4 w-4 mr-2" />,
+    icon: <ShoppingCart className="h-5 w-5" />,
   },
   {
     title: "Invoice",
     href: "/invoice",
-    icon: <FileText className="h-4 w-4 mr-2" />,
+    icon: <FileText className="h-5 w-5" />,
   },
   {
     title: "Users",
     href: "/users",
-    icon: <Users className="h-4 w-4 mr-2" />,
+    icon: <Users className="h-5 w-5" />,
   },
   {
     title: "Account",
     href: "/account",
-    icon: <Users className="h-4 w-4 mr-2" />,
+    icon: <Users className="h-5 w-5" />,
   },
   {
     title: "Settings",
     href: "/settings",
-    icon: <Settings className="h-4 w-4 mr-2" />,
+    icon: <Settings className="h-5 w-5" />,
   },
   */
 ];

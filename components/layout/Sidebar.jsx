@@ -39,18 +39,19 @@ export default function Sidebar({ className, isCollapsed = false }) {
         <div
           className={cn(
             "flex items-center justify-center py-5",
-            isCollapsed ? "px-2" : "px-4"
+            isCollapsed ? "px-1" : "px-4"
           )}
         >
           {/* Show different logos based on collapsed state */}
           {isCollapsed ? (
-            <div className="relative h-14 w-auto  flex items-center justify-center">
+            <div className="flex items-center justify-center w-full">
               <Image
                 src="/image/logo-icon-white.png"
                 alt="Paymentsave Icon"
-                width={40.8}
-                height={48}
-                className="w-auto h-auto"
+                width={71}
+                height={79}
+                className="w-auto h-auto object-contain"
+                priority
               />
             </div>
           ) : (
@@ -61,6 +62,7 @@ export default function Sidebar({ className, isCollapsed = false }) {
                 width={160}
                 height={40}
                 className="w-auto h-auto"
+                priority
               />
             </div>
           )}
@@ -87,10 +89,17 @@ export default function Sidebar({ className, isCollapsed = false }) {
                         : "hover:bg-white/10"
                     )}
                   >
-                    <Link href={item.href}>
-                      <div className="flex items-center">
+                    <Link href={item.href} className="w-full">
+                      <div
+                        className={cn(
+                          "flex items-center",
+                          isCollapsed && "justify-center"
+                        )}
+                      >
                         {item.icon}
-                        {!isCollapsed && <span>{item.title}</span>}
+                        {!isCollapsed && (
+                          <span className="ml-2">{item.title}</span>
+                        )}
                       </div>
                     </Link>
                     {hasSubmenu &&

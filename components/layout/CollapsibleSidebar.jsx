@@ -9,20 +9,20 @@ export default function CollapsibleSidebar() {
   return (
     <>
       {/* Desktop Sidebar - Collapsible */}
-      <div 
+      <div
         className={`hidden md:block fixed top-0 left-0 h-screen z-30 transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-16" : "w-64"
+          isCollapsed ? "w-20" : "w-64"
         }`}
       >
         <Sidebar isCollapsed={isCollapsed} />
       </div>
-      
+
       {/* Adjust main content padding when sidebar state changes */}
-      <div 
+      <div
         className={`hidden md:block transition-all duration-300 ease-in-out ${
-          isCollapsed ? "w-16" : "w-64"
+          isCollapsed ? "w-20" : "w-64"
         }`}
       />
     </>
   );
-} 
+}
