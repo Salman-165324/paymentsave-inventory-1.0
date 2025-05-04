@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import menuItems from "./menuItems";
+import LogoutButton from "./LogoutButton";
 
 export default function Sidebar({ className }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [openIndex, setOpenIndex] = useState(null);
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   useEffect(() => {
     // Keep submenu open if any sublink is active
@@ -26,30 +25,6 @@ export default function Sidebar({ className }) {
   }, [pathname]);
 
   const isActive = (href) => pathname === href || pathname.startsWith(href);
-
-  const handleLogout = async () => {
-    try {
-      setIsLoggingOut(true);
-      const res = await fetch("/api/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (res.ok) {
-        // Redirect to login page
-        router.push("/login");
-        router.refresh();
-      } else {
-        console.error("Logout failed:", await res.json());
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-    } finally {
-      setIsLoggingOut(false);
-    }
-  };
 
   return (
     <div
@@ -129,14 +104,7 @@ export default function Sidebar({ className }) {
 
         {/* Logout */}
         <div className="mt-auto pt-4 border-t border-white/10">
-          <button
-            className="w-full flex items-center px-3 py-2 text-sm font-medium cursor-pointer hover:bg-white/10 rounded-md transition-colors"
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-          >
-            <LogOut className="h-4 w-4 mr-2" />
-            {isLoggingOut ? "Logging out..." : "Logout"}
-          </button>
+          <LogoutButton />
         </div>
       </div>
     </div>
