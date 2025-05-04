@@ -38,7 +38,7 @@ export default function Sidebar({ className, isCollapsed = false }) {
         {/* Logo Section */}
         <div
           className={cn(
-            "flex items-center justify-center py-5",
+            "flex items-center justify-center pb-5",
             isCollapsed ? "px-1" : "px-4"
           )}
         >
