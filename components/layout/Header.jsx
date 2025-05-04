@@ -1,8 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Bell, User, Menu } from "lucide-react";
+import { ChevronDown, Bell } from "lucide-react";
+import MobileSidebar from "./MobileSidebar";
 
-export default function Header({ onMenuToggle }) {
+export default function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
@@ -33,15 +34,7 @@ export default function Header({ onMenuToggle }) {
     <header className="border-b bg-[#f9f9f9]">
       <div className="flex h-16 items-center justify-between px-6 shadow-[0px_4px_10px_#00000040]">
         <div className="flex items-center gap-4">
-          <div className="md:hidden">
-            <button
-              className="p-2 text-muted-foreground hover:text-foreground"
-              onClick={onMenuToggle}
-              aria-label="Toggle menu"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-          </div>
+          <MobileSidebar />
         </div>
 
         <div className="flex items-center gap-4">

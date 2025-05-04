@@ -54,7 +54,7 @@ export default function Sidebar({ className }) {
   return (
     <div
       className={cn(
-        "w-64 bg-[#0F3B69] text-white h-screen overflow-y-auto",
+        "w-64 bg-primary text-primary-foreground h-screen overflow-y-auto",
         className
       )}
     >
