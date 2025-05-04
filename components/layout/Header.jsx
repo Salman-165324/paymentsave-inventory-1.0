@@ -1,11 +1,19 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Bell } from "lucide-react";
+import {
+  ChevronDown,
+  Bell,
+  Menu,
+  PanelLeftClose,
+  PanelLeft,
+} from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
+import { useSidebar } from "../../context/SidebarContext";
 
 export default function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const { isCollapsed, toggleCollapsed } = useSidebar();
 
   const profileRef = useRef(null);
   const notificationRef = useRef(null);
@@ -35,6 +43,19 @@ export default function Header() {
       <div className="flex h-16 items-center justify-between px-6 shadow-[0px_4px_10px_#00000040]">
         <div className="flex items-center gap-4">
           <MobileSidebar />
+
+          {/* Desktop Sidebar Toggle */}
+          <button
+            className="hidden md:flex items-center justify-center p-2 text-muted-foreground hover:text-foreground"
+            onClick={toggleCollapsed}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {isCollapsed ? (
+              <PanelLeft className="h-5 w-5" />
+            ) : (
+              <PanelLeftClose className="h-5 w-5" />
+            )}
+          </button>
         </div>
 
         <div className="flex items-center gap-4">
