@@ -1,65 +1,59 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Bell, User } from "lucide-react";
+import { ChevronDown, Bell, User, Menu } from "lucide-react";
 
-export default function Header() {
+export default function Header({ onMenuToggle }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   const profileRef = useRef(null);
+  const notificationRef = useRef(null);
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (
-      profileRef.current &&
-      !profileRef.current.contains(event.target)
-    ) {
-      setShowProfile(false);
-    }
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowProfile(false);
+      }
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="border-b bg-[#f9f9f9]">
       <div className="flex h-16 items-center justify-between px-6 shadow-[0px_4px_10px_#00000040]">
         <div className="flex items-center gap-4">
           <div className="md:hidden">
-            <button className="p-2 text-muted-foreground hover:text-foreground">
-              <span className="sr-only">Toggle menu</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
-              >
-                <line x1="4" x2="20" y1="12" y2="12"></line>
-                <line x1="4" x2="20" y1="6" y2="6"></line>
-                <line x1="4" x2="20" y1="18" y2="18"></line>
-              </svg>
+            <button
+              className="p-2 text-muted-foreground hover:text-foreground"
+              onClick={onMenuToggle}
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <button
-            className="p-2 text-muted-foreground hover:text-foreground relative"
-            onClick={() => setShowNotifications(!showNotifications)}
-          >
-            <span className="sr-only">Notifications</span>
-            <Bell />
-            <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
+          <div className="relative" ref={notificationRef}>
+            <button
+              className="p-2 text-muted-foreground hover:text-foreground relative"
+              onClick={() => setShowNotifications(!showNotifications)}
+            >
+              <span className="sr-only">Notifications</span>
+              <Bell />
+              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary"></span>
+            </button>
 
             {showNotifications && (
               <div className="absolute right-0 top-full z-50 mt-1 w-80 rounded-md border bg-background shadow-lg">
@@ -82,7 +76,7 @@ useEffect(() => {
                 </div>
               </div>
             )}
-          </button>
+          </div>
           <div className="h-6 w-px bg-gray-300" />
           <div className="relative" ref={profileRef}>
             <button
