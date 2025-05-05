@@ -112,9 +112,6 @@ export default function Header() {
                   <div className="rounded-md p-2 hover:bg-muted cursor-pointer">
                     <div className="text-sm font-medium">Settings</div>
                   </div>
-                  <div className="rounded-md p-2 hover:bg-muted cursor-pointer">
-                    <div className="text-sm font-medium">Logout</div>
-                  </div>
                 </div>
               </div>
             )}
