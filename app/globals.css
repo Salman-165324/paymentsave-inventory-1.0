@@ -45,25 +45,42 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
+  --color-info: var(--color-info);
+  --color-rose: var(--color-rose);
+  --color-success: var(--color-success);
+  --color-red: var(--color-red);
+  --color-tan: var(--color-tan);
+  --color-dark-teal: var(--color-dark-teal);
+  --color-yellow: var(--color-yellow);
+  --color-light-blue: var(--color-light-blue);
+  --color-blue: var(--color-blue);
+  --color-indigo: var(--color-indigo);
 }
 
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
+  --background-light: oklch(97% 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(42.32% 0.1424 260.35);
+  --primary: oklch(0.42 0.1424 260.35);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(67.69% 0.141064 233.6828);
+  --secondary: oklch(0.67 0.1155 235.03);
   --secondary-foreground: oklch(0.205 0 0);
+  --accent: oklch(73% 0.1764 48.36);
+  --accent-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* --accent: oklch(0.97 0 0);
+
+
+  --accent-foreground: oklch(0.205 0 0); */
+  /* Above accent came default from Shadcn we are overwriting this.  */
+
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -82,9 +99,23 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --table-header: #667085;
-  --table-cell: #48505E;
-  --text-primary: #48505E;
-  --text-title: #383E49;
+  --table-cell: #48505e;
+  --text-primary: #48505e;
+  --text-title: #383e49;
+
+  /* ——  “other” colors —— */
+  --color-info: oklch(
+    67% 0.1155 235.03
+  ); /* same as secondary – use for “info” */
+  --color-rose: oklch(71% 0.1847 22.67);
+  --color-success: oklch(72% 0.192 149.58);
+  --color-red: oklch(62% 0.2293 31.04);
+  --color-tan: oklch(75% 0.1057 69.19);
+  --color-dark-teal: oklch(48% 0.1123 241.44);
+  --color-yellow: oklch(80% 0.1557 68.81);
+  --color-light-blue: oklch(67% 0.1793 251.69);
+  --color-blue: oklch(53% 0.1918 258.78);
+  --color-indigo: #354096;
 }
 
 .dark {
@@ -119,8 +150,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --table-header: #A0ABBB;
-  --table-cell: #E4E7ED;
+  --table-header: #a0abbb;
+  --table-cell: #e4e7ed;
 }
 
 @layer base {
@@ -142,14 +173,14 @@
     color: var(--table-cell);
     font-size: 14px;
   }
-   /* Primary text color */
-   .text-primary {
-    color: #48505E !important;
+  /* Primary text color */
+  .text-primary {
+    color: #48505e !important;
   }
-   .text-secondary {
-    color: #858D9D !important;
+  .text-secondary {
+    color: #858d9d !important;
   }
-   /* .text {
+  /* .text {
     color: var(--text-title) ;
   } */
 }
