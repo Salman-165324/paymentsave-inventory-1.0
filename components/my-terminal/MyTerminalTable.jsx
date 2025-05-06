@@ -6,6 +6,8 @@ import TableActionMenu from "@/components/ui/TableActionMenu";
 import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
+import { useRouter } from "next/navigation";
+
 const data = [
   {
     id: 1,
@@ -107,7 +109,7 @@ const data = [
 
 function MyTerminalTable() {
   const [openDropdownId, setOpenDropdownId] = useState(null);
-
+  const router = useRouter();
   const handleToggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id); // Toggle dropdown for each row
   };
@@ -170,7 +172,7 @@ function MyTerminalTable() {
                 </button> */}
                   <TableActionMenu
                     onView={() => console.log(`View item ${item.id}`)}
-                    onEdit={() => console.log(`Edit item ${item.id}`)}
+                    onEdit={() => router.push(`/configure-terminal/${item.id}`)}
                     onDelete={() => console.log(`Delete item ${item.id}`)}
                     isOpen={openDropdownId === item.id}
                     onToggle={() => handleToggleDropdown(item.id)}
