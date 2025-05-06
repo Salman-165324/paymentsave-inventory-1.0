@@ -159,14 +159,14 @@ function MyTerminalTable() {
           />
         </div>
       </div>
-      <div className="relative overflow-visible rounded-md">
+      <div className="relative overflow-auto rounded-md">
         <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
           <TableHead heads={["Action", "Date", "Terminal Model", "Serial Number", "Status", "Delivery Address Type", "Priority", "Delivery Channel", "POD Ref", "Note"]} />
                 
-          <tbody className="divide-y divide-gray-100 text-gray-700">
+          <tbody className="divide-y divide-gray-100 text-gray-700 text-center">
             {data.map((item, i) => (
               <tr key={i} className="border-b border-[#D9D9D9]">
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 flex justify-center">
                   {/* <button className="text-blue-600 bg-[#19499A] rounded-full p-1">
                   <EllipsisVertical width={20} height={20} color="#FFFFFF" />
                 </button> */}

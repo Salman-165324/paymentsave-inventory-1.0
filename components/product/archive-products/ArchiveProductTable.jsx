@@ -97,7 +97,7 @@ function ArchiveProductTable({ tableTitle }) {
           {/* <button className="ml-4 text-red-500 hover:text-red-700">Delete Selected</button> */}
         </div>
       )}
-      <div className="relative overflow-visible rounded-md">
+      <div className="relative overflow-auto rounded-md">
         <table className="min-w-full text-sm text-left">
           <TableHead
             heads={[
@@ -112,10 +112,10 @@ function ArchiveProductTable({ tableTitle }) {
               "Action", "Date", "Product Category", "Model", "Product Name", "Serial Nymber", "Product Serial Number", "Product Condition", "Supplier Name", "Invoice Number", "Price"
             ]}
           />
-          <tbody className="divide-y divide-gray-100 text-gray-700">
+          <tbody className="divide-y divide-gray-100 text-gray-700 text-center">
             {data.map((item, i) => (
               <tr key={i} className="border-b border-[#D9D9D9]">
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 flex justify-center">
                   <input
                     type="checkbox"
                     checked={selectedItems.includes(item.id)}

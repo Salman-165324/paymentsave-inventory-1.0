@@ -69,6 +69,15 @@ const menuItems = [
       { title: "Add Supplier", href: "/add-supplier" },
     ],
   },
+  {
+    title: "Orders",
+    href: "/all-orders",
+    icon: <ShoppingCart className="h-5 w-5" />,
+    submenu: [
+      { title: "All Orders", href: "/all-orders" },
+      { title: "Add Order", href: "/add-order" },
+    ],
+  },
   /*
   {
     title: "Live Base",
@@ -79,11 +88,6 @@ const menuItems = [
     title: "Businesses",
     href: "/businesses",
     icon: <Briefcase className="h-5 w-5" />,
-  },
-  {
-    title: "Orders to Supplier",
-    href: "/orders-to-supplier",
-    icon: <ShoppingCart className="h-5 w-5" />,
   },
   {
     title: "Invoice",
