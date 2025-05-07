@@ -1,4 +1,5 @@
 // components/AppSelect.js
+"use client";
 import React from "react";
 import Select from "react-select";
 import { ChevronRight } from "lucide-react";
@@ -83,7 +84,7 @@ export default function AppSelect({
   );
 
   return (
-    <div className={`flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center ${className}`}>
+    <div className={`flex flex-col gap-2 md:gap-4 items-start ${className}`}>
       {label && (
         <label className="w-full md:w-[160px] text-primary font-medium text-sm">
           {label}
