@@ -59,7 +59,7 @@ export default function AddOrderForm() {
               required
             />
           </div>
-          <button className="text-sm px-3 py-1 border border-[#D0D5DD] text-[#383E49] rounded-md">
+          <button className="text-sm px-3 py-1 border border-[#D0D5DD] text-[#383E49] rounded-md float-right">
             + Add Accessories
           </button>
           <AppSelect label="Accessories Model" />
@@ -105,8 +105,8 @@ export default function AddOrderForm() {
       {/* Auto Batch Settings */}
       <div className="space-y-4">
         <h3 className="font-medium text-lg">Auto Batch Settings</h3>
-        <AppSelect label="Auto Batch" required />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <AppSelect label="Auto Batch" className="w-1/2" required />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <InputField label="Till Roll Text 1" required />
           <InputField label="Till Roll Text 2" required />
           <InputField label="Till Roll Text 3" />
