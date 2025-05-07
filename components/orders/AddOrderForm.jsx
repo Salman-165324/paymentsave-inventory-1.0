@@ -4,7 +4,7 @@ import AppSelect from "@/components/ui/AppSelect";
 export default function AddOrderForm() {
   return (
     <div className="p-8 lg:max-w-4xl xl:max-w-6xl mx-auto bg-white shadow-[0px_4px_20px_0px_#00000040] rounded-xl space-y-6">
-      <h2 className="text-[#383E49] text-xl font-medium">Create New Order</h2>
+      <h2 className="text-[#383E49] text-xl font-bold font-lato">Create New Order</h2>
 
       {/* Top Form Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-15 text-base font-medium text-[#48505E]">

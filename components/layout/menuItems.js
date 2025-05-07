@@ -76,6 +76,7 @@ const menuItems = [
     submenu: [
       { title: "All Orders", href: "/all-orders" },
       { title: "Add Order", href: "/add-order" },
+      { title: "Single Orders", href: "/single-orders" },
     ],
   },
   /*

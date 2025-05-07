@@ -97,6 +97,18 @@ const getPriorityBadgeColor = (priority) => {
       return "bg-[#858D9D] text-white";
   }
 };
+// const getStatusBadgeColor = (status) => {
+//   switch (status) {
+//     case "Pending":
+//       return "bg-[#FD7F30] text-white";
+//     case "Processing":
+//       return "bg-[#22C55E] text-white";
+//     case "Completed":
+//       return "bg-[#FF6869] text-white";
+//     default:
+//       return "bg-gray-100 text-gray-800";
+//   }
+// };
 
 export default function AllOrdersTable({ tableTitle }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
