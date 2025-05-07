@@ -134,18 +134,16 @@ export default function AllOrdersTable({ tableTitle }) {
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
           <div className="flex items-center w-full md:w-auto gap-2 mr-8">
-            <div className="relative w-full md:w-64">
+            {/* <div className="relative w-full md:w-64">
               <input
                 type="text"
                 placeholder="Search"
                 className="w-full border rounded-md px-4 py-2 pr-10 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              {/* 🔍 Search Icon Placeholder */}
               <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
-                {/* Search Icon */}
                 <Search width={20} height={20} color="#C4C4C4" />
               </div>
-            </div>
+            </div> */}
             <div className="relative w-full md:w-64">
               {/* <input
                   type="text"
