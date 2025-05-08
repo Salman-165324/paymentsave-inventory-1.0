@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,8 +25,9 @@ export default function RootLayout({ children }) {
         data-new-gr-c-s-check-loaded="14.1233.0"
         data-gr-ext-installed=""
       >
+        <Toaster position="top-right" />
         {children}
       </body>
-      </html >
+    </html>
   );
 }
