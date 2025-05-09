@@ -7,6 +7,7 @@ import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
 import OrderViewModal from "./OrderViewModal";
+import OrderEditModal from "./OrderEditModal";
 
 const data = [
   {
@@ -417,6 +418,7 @@ export default function SingleOrdersTable({ tableTitle }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const handleToggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id);
@@ -433,6 +435,16 @@ export default function SingleOrdersTable({ tableTitle }) {
   const handleViewOrder = (order) => {
     setSelectedOrder(order);
     setShowModal(true);
+  };
+
+  const handleEditOrder = (order) => {
+    setSelectedOrder(order);
+    setShowEditModal(true);
+  };
+
+  const handleSaveOrder = (updatedOrder) => {
+    console.log("Saving updated order:", updatedOrder);
+    // Here you would typically update the order in your data source
   };
 
   return (
@@ -483,7 +495,7 @@ export default function SingleOrdersTable({ tableTitle }) {
                   <td className="px-4 py-2 flex justify-center relative z-10">
                     <TableActionMenu
                       onView={() => handleViewOrder(item)}
-                      onEdit={() => console.log(`Edit item ${item.id}`)}
+                      onEdit={() => handleEditOrder(item)}
                       onDelete={() => console.log(`Delete item ${item.id}`)}
                       isOpen={openDropdownId === item.id}
                       onToggle={() => handleToggleDropdown(item.id)}
@@ -545,6 +557,12 @@ export default function SingleOrdersTable({ tableTitle }) {
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         order={selectedOrder}
+      />
+      <OrderEditModal 
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        order={selectedOrder}
+        onSave={handleSaveOrder}
       />
     </>
   );

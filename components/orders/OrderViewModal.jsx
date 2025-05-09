@@ -94,121 +94,132 @@ const OrderViewModal = ({ isOpen, onClose, order }) => {
                 <h3 className="font-medium text-lg mb-4">
                   Terminal Information
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-8 gap-x-6 text-sm text-gray-800 border border-[#D9D9D9] rounded-md p-4">
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">TID</div>
-                    <div className="text-[#858D9D]">{order.tid}</div>
+                <div className="border border-[#D9D9D9] rounded-md p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-8 gap-x-6 text-sm text-gray-800">
+                    <div>
+                      <div className="font-medium text-[#48505E] mb-2">TID</div>
+                      <div className="text-[#858D9D]">{order.tid}</div>
+                    </div>
+                    <div>
+                      <div className="font-medium text-[#48505E] mb-2">
+                        Terminal Model
+                      </div>
+                      <div className="text-[#858D9D]">
+                        {order.terminalModel}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-medium text-[#48505E] mb-2">
+                        Terminal Condition
+                      </div>
+                      <div className="text-[#858D9D]">
+                        {order.terminalCondition}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-medium text-[#48505E] mb-2">
+                        Accessories Model
+                      </div>
+                      <div className="text-[#858D9D]">
+                        {order.accessoriesModel}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Terminal Model
-                    </div>
-                    <div className="text-[#858D9D]">{order.terminalModel}</div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Terminal Condition
-                    </div>
-                    <div className="text-[#858D9D]">
-                      {order.terminalCondition}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Accessories Model
-                    </div>
-                    <div className="text-[#858D9D]">
-                      {order.accessoriesModel}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  {/* Software Add-ons */}
+                  <div className="mt-8">
+                    <h3 className="font-medium text-lg mb-4">
+                      Software Add-ons
+                    </h3>
 
-              {/* Software Add-ons */}
-              <div>
-                <h3 className="font-medium text-lg mb-4">Software Add-ons</h3>
+                    <div className="text-sm text-gray-800">
+                      <div className="font-semibold">Items</div>
+                      <div className="grid grid-cols-4 gap-x-6 gap-y-2 lg:gap-y-5">
+                        {/* Divider */}
+                        <div className="col-span-4 border-b border-gray-300 my-2"></div>
 
-                <div className="text-sm text-gray-800">
-                  <div className="font-semibold">Items</div>
-                  <div className="grid grid-cols-4 gap-x-6 gap-y-2 lg:gap-y-5">
-                    {/* Divider */}
-                    <div className="col-span-4 border-b border-gray-300 my-2"></div>
-
-                    {/* Data Rows */}
-                    {[
-                      "psApp",
-                      "weblink",
-                      "amex",
-                      "diners",
-                      "cashBack",
-                      "gratuity",
-                      "preAuth",
-                      "motoCnp",
-                    ]
-                      .reduce((rows, label, i, arr) => {
-                        if (i % 2 === 0) {
-                          rows.push([label, arr[i + 1]]);
-                        }
-                        return rows;
-                      }, [])
-                      .map(([label1, label2], i) => (
-                        <React.Fragment key={i}>
-                          <div className="font-medium text-[#48505E]">
-                            {label1.replace(/([A-Z])/g, " $1").trim()}
-                          </div>
-                          <div className="text-[#858D9D]">
-                            {order?.[label1] ? "Yes" : "No"}
-                          </div>
-                          {label2 ? (
-                            <>
+                        {/* Data Rows */}
+                        {[
+                          "psApp",
+                          "weblink",
+                          "amex",
+                          "diners",
+                          "cashBack",
+                          "gratuity",
+                          "preAuth",
+                          "motoCnp",
+                        ]
+                          .reduce((rows, label, i, arr) => {
+                            if (i % 2 === 0) {
+                              rows.push([label, arr[i + 1]]);
+                            }
+                            return rows;
+                          }, [])
+                          .map(([label1, label2], i) => (
+                            <React.Fragment key={i}>
                               <div className="font-medium text-[#48505E]">
-                                {label2.replace(/([A-Z])/g, " $1").trim()}
+                                {label1.replace(/([A-Z])/g, " $1").trim()}
                               </div>
                               <div className="text-[#858D9D]">
-                                {order?.[label2] ? "Yes" : "No"}
+                                {order?.[label1] ? "Yes" : "No"}
                               </div>
-                            </>
-                          ) : (
-                            <>
-                              <div></div>
-                              <div></div>
-                            </>
-                          )}
-                        </React.Fragment>
-                      ))}
+                              {label2 ? (
+                                <>
+                                  <div className="font-medium text-[#48505E]">
+                                    {label2.replace(/([A-Z])/g, " $1").trim()}
+                                  </div>
+                                  <div className="text-[#858D9D]">
+                                    {order?.[label2] ? "Yes" : "No"}
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div></div>
+                                  <div></div>
+                                </>
+                              )}
+                            </React.Fragment>
+                          ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Auto Batch Settings */}
-              <div>
-                <h3 className="font-medium text-lg mb-4">
-                  Auto Batch Settings
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-8 gap-x-6 text-sm text-gray-800">
-                  <div className="col-span-1 md:col-span-2 lg:col-span-3">
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Auto Batch
+                  {/* Auto Batch Settings */}
+                  <div className="mt-8">
+                    <h3 className="font-medium text-lg mb-4">
+                      Auto Batch Settings
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-8 gap-x-6 text-sm text-gray-800">
+                      <div className="col-span-1 md:col-span-2 lg:col-span-3">
+                        <div className="font-medium text-[#48505E] mb-2">
+                          Auto Batch
+                        </div>
+                        <div className="text-[#858D9D]">{order.autoBatch}</div>
+                      </div>
+                      <div>
+                        <div className="font-medium text-[#48505E] mb-2">
+                          Till Roll Text 1
+                        </div>
+                        <div className="text-[#858D9D]">
+                          {order.tillRollText1}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-medium text-[#48505E] mb-2">
+                          Till Roll Text 2
+                        </div>
+                        <div className="text-[#858D9D]">
+                          {order.tillRollText2}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-medium text-[#48505E] mb-2">
+                          Till Roll Text 3
+                        </div>
+                        <div className="text-[#858D9D]">
+                          {order.tillRollText3}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-[#858D9D]">{order.autoBatch}</div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Till Roll Text 1
-                    </div>
-                    <div className="text-[#858D9D]">{order.tillRollText1}</div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Till Roll Text 2
-                    </div>
-                    <div className="text-[#858D9D]">{order.tillRollText2}</div>
-                  </div>
-                  <div>
-                    <div className="font-medium text-[#48505E] mb-2">
-                      Till Roll Text 3
-                    </div>
-                    <div className="text-[#858D9D]">{order.tillRollText3}</div>
                   </div>
                 </div>
               </div>

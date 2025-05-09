@@ -6,6 +6,86 @@ import TableActionMenu from "@/components/ui/TableActionMenu";
 import DateRangePicker from "@/components/ui/DateRangePicker";
 import FilterButton from "@/components/ui/FilterButton";
 import TableHead from "@/components/ui/TableHead";
+import OrderViewModal from "./AllOrderViewModal";
+import AllOrderEditModal from "./AllOrderEditModal";
+
+// Sample order data with multiple terminals and accessories
+const sampleOrderDetails = {
+  id: 1,
+  orderId: "ORD-0123456",
+  orderDate: "12/05/2024",
+  mid: "MID1234567",
+  tradingName: "ABC Electronics",
+  merchantName: "John Smith",
+  merchantMobile: "07700 900123",
+  merchantAltMobile: "07700 900124",
+  merchantEmail: "john@abcelectronics.com",
+  bdmEmail: "bdm1@example.com",
+  priority: "Urgent",
+  status: "Pending",
+  
+  // Array of terminals
+  terminals: [
+    {
+      id: "t1",
+      tid: "TID001",
+      terminalModel: "Ingenico Move 5000",
+      terminalCondition: "New",
+      autoBatch: "Yes - 22:00",
+      tillRollText1: "ABC Electronics",
+      tillRollText2: "123 Main Street",
+      tillRollText3: "Thank you for your business",
+      psApp: true,
+      weblink: true,
+      amex: true,
+      diners: false,
+      cashBack: true,
+      gratuity: true,
+      preAuth: false,
+      motoCnp: false,
+      
+      // Accessories for this terminal
+      accessories: [
+        { model: "Charging Base", quantity: 1 },
+        { model: "Car Charger", quantity: 1 }
+      ]
+    },
+    {
+      id: "t2",
+      tid: "TID002",
+      terminalModel: "Ingenico Desk 3500",
+      terminalCondition: "New",
+      autoBatch: "Yes - 23:00",
+      tillRollText1: "ABC Electronics",
+      tillRollText2: "123 Main Street",
+      tillRollText3: "Come again soon",
+      psApp: false,
+      weblink: true,
+      amex: true,
+      diners: true,
+      cashBack: false,
+      gratuity: true,
+      preAuth: true,
+      motoCnp: true,
+      
+      // Accessories for this terminal
+      accessories: [
+        { model: "Ethernet Cable", quantity: 1 },
+        { model: "Privacy Shield", quantity: 1 },
+        { model: "Extra Roll Paper", quantity: 5 }
+      ]
+    }
+  ],
+  
+  // Delivery info
+  deliveryAddressType: "Business",
+  firstLine: "123 Main Street",
+  secondLine: "City Center",
+  deliveryContactName: "John Smith",
+  postcode: "AB12 3CD",
+  phoneNumber: "07700 900123",
+  orderNote: "Please deliver during business hours 9-5"
+};
 
 const data = [
   {
@@ -112,6 +192,9 @@ const getPriorityBadgeColor = (priority) => {
 
 export default function AllOrdersTable({ tableTitle }) {
   const [openDropdownId, setOpenDropdownId] = useState(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const handleToggleDropdown = (id) => {
     setOpenDropdownId(openDropdownId === id ? null : id); // Toggle dropdown for each row
@@ -123,6 +206,21 @@ export default function AllOrdersTable({ tableTitle }) {
 
   const handleRangeChange = (formatted, startDate, endDate) => {
     console.log(formatted, startDate, endDate);
+  };
+
+  const handleViewOrder = () => {
+    setSelectedOrder(sampleOrderDetails);
+    setIsViewModalOpen(true);
+  };
+
+  const handleEditOrder = () => {
+    setSelectedOrder(sampleOrderDetails);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveOrder = (updatedOrder) => {
+    console.log("Order updated:", updatedOrder);
+    // Here you would implement your save logic
   };
 
   return (
@@ -181,8 +279,8 @@ export default function AllOrdersTable({ tableTitle }) {
                 <tr key={i} className="border-b border-[#D9D9D9]">
                   <td className="px-4 py-2 flex justify-center relative z-10">
                     <TableActionMenu
-                      onView={() => console.log(`View item ${item.id}`)}
-                      onEdit={() => console.log(`Edit item ${item.id}`)}
+                      onView={handleViewOrder}
+                      onEdit={handleEditOrder}
                       onDelete={() => console.log(`Delete item ${item.id}`)}
                       isOpen={openDropdownId === item.id}
                       onToggle={() => handleToggleDropdown(item.id)}
@@ -215,6 +313,21 @@ export default function AllOrdersTable({ tableTitle }) {
           </table>
         </div>
       </div>
+      
+      {/* Order View Modal */}
+      <OrderViewModal 
+        isOpen={isViewModalOpen} 
+        onClose={() => setIsViewModalOpen(false)} 
+        order={selectedOrder} 
+      />
+      
+      {/* Order Edit Modal */}
+      <AllOrderEditModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        order={selectedOrder}
+        onSave={handleSaveOrder}
+      />
     </>
   );
 }
